@@ -16,35 +16,41 @@ namespace libLSD.Types
     /// </code>
     /// Where S is sign bit, I are integral bits, and M are mantissa bits
     /// </summary>
-    public class FixedPoint
+    public struct FixedPoint
     {
         public int IntegralPart
         {
-            get => (this._value & INTEGRAL_MASK) >> 12;
-            set => this._value = _value ^ ((_value ^ (value << 12)) & INTEGRAL_MASK);
+            get => (this._value & INTEGRAL_MASK) >> DECIMAL_BITS;
+            set => this._value = _value ^ ((_value ^ (value << DECIMAL_BITS)) & INTEGRAL_MASK);
         }
 
         public int DecimalPart
         {
-            get => (this._value & MANTISSA_MASK);
-            set => this._value = _value ^ ((_value ^ value) & MANTISSA_MASK);
+            get => (this._value & DECIMAL_MASK);
+            set => this._value = _value ^ ((_value ^ value) & DECIMAL_MASK);
         }
 
         public bool IsNegative
         {
-            get => (this._value & SIGN_MASK) >> 15 == 1;
-            set => this._value = _value ^ ((_value ^ ((value ? 1 : 0) << 15)) & SIGN_MASK);
+            get => (this._value & SIGN_MASK) >> (DECIMAL_BITS + INTEGRAL_BITS) == 1;
+            set => this._value = _value ^ ((_value ^ ((value ? 1 : 0) << (DECIMAL_BITS + INTEGRAL_BITS))) & SIGN_MASK);
         }
 
         private int _value;
 
-        const int SIGN_MASK = 0x8000;
-        const int INTEGRAL_MASK = 0x7000;
-        const int MANTISSA_MASK = 0xFFF;
+        private const int SIGN_MASK = 0x8000;
+        private const int INTEGRAL_MASK = 0x7000;
+        private const int DECIMAL_MASK = 0xFFF;
+        private const int DECIMAL_BITS = 12;
+        private const int INTEGRAL_BITS = 3;
+        private const float FIXED_BITVALUE = 1.0f / (1 << DECIMAL_BITS);
 
-        public FixedPoint()
+        public FixedPoint(int integralPart, int decimalPart, bool isNegative = false)
         {
             _value = 0;
+            IntegralPart = integralPart;
+            DecimalPart = decimalPart;
+            IsNegative = isNegative;
         }
 
         public FixedPoint(byte[] data)
@@ -62,7 +68,14 @@ namespace libLSD.Types
 
         public static implicit operator float(FixedPoint p)
         {
-            return p._value / 65536.0f;
+            if (~p._value < p._value)
+            {
+                // negative
+                p.IsNegative = false;
+                return -FIXED_BITVALUE * p._value;
+            }
+            else
+                return FIXED_BITVALUE * p._value;
         }
     }
 }
