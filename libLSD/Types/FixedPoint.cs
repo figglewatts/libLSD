@@ -80,8 +80,6 @@ namespace libLSD.Types
         {
             if (p.IsNegative)
             {
-                // negative
-                //p.IsNegative = false;
                 return -FIXED_BITVALUE * -(~p.IntegralAndDecimalPart + 1);
             }
             else
