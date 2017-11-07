@@ -36,6 +36,11 @@ namespace libLSD.Types
             set => this._value = _value ^ ((_value ^ ((value ? 1 : 0) << (DECIMAL_BITS + INTEGRAL_BITS))) & SIGN_MASK);
         }
 
+        public int IntegralAndDecimalPart
+        {
+            get => (this._value & (DECIMAL_MASK | INTEGRAL_MASK));
+        }
+
         private int _value;
 
         private const int SIGN_MASK = 0x8000;
@@ -44,6 +49,11 @@ namespace libLSD.Types
         private const int DECIMAL_BITS = 12;
         private const int INTEGRAL_BITS = 3;
         private const float FIXED_BITVALUE = 1.0f / (1 << DECIMAL_BITS);
+
+        public FixedPoint(int value)
+        {
+            this._value = value;
+        }
 
         public FixedPoint(int integralPart, int decimalPart, bool isNegative = false)
         {
@@ -68,11 +78,11 @@ namespace libLSD.Types
 
         public static implicit operator float(FixedPoint p)
         {
-            if (~p._value < p._value)
+            if (p.IsNegative)
             {
                 // negative
-                p.IsNegative = false;
-                return -FIXED_BITVALUE * p._value;
+                //p.IsNegative = false;
+                return -FIXED_BITVALUE * -(~p.IntegralAndDecimalPart + 1);
             }
             else
                 return FIXED_BITVALUE * p._value;

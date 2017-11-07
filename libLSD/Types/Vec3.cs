@@ -12,7 +12,7 @@ namespace libLSD.Types
         public float Y;
         public float Z;
 
-        public Vec3(int x, int y, int z)
+        public Vec3(float x, float y, float z)
         {
             X = x;
             Y = y;
@@ -92,6 +92,11 @@ namespace libLSD.Types
         public static Vec3 Normalize(Vec3 a)
         {
             return a / Magnitude(a);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Vec3: ({0}, {1}, {2})", X, Y, Z);
         }
     }
 }
