@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using libLSD.Util;
 
 namespace libLSD.Types
 {
@@ -21,19 +22,20 @@ namespace libLSD.Types
         public int IntegralPart
         {
             get => (this._value & INTEGRAL_MASK) >> DECIMAL_BITS;
-            set => this._value = _value ^ ((_value ^ (value << DECIMAL_BITS)) & INTEGRAL_MASK);
+            set => this._value = BitTwiddling.Merge<int>(_value, value, INTEGRAL_MASK, DECIMAL_BITS);
         }
 
         public int DecimalPart
         {
             get => (this._value & DECIMAL_MASK);
-            set => this._value = _value ^ ((_value ^ value) & DECIMAL_MASK);
+            set => this._value = BitTwiddling.Merge<int>(_value, value, DECIMAL_MASK);
         }
 
         public bool IsNegative
         {
             get => (this._value & SIGN_MASK) >> (DECIMAL_BITS + INTEGRAL_BITS) == 1;
-            set => this._value = _value ^ ((_value ^ ((value ? 1 : 0) << (DECIMAL_BITS + INTEGRAL_BITS))) & SIGN_MASK);
+            set => this._value =
+                BitTwiddling.Merge<int>(_value, value ? 1 : 0, SIGN_MASK, DECIMAL_BITS + INTEGRAL_BITS);
         }
 
         public int IntegralAndDecimalPart
@@ -57,10 +59,10 @@ namespace libLSD.Types
 
         public FixedPoint(int integralPart, int decimalPart, bool isNegative = false)
         {
-            _value = 0;
-            IntegralPart = integralPart;
-            DecimalPart = decimalPart;
-            IsNegative = isNegative;
+            this._value = 0;
+            this.IntegralPart = integralPart;
+            this.DecimalPart = decimalPart;
+            this.IsNegative = isNegative;
         }
 
         public FixedPoint(byte[] data)
@@ -73,7 +75,7 @@ namespace libLSD.Types
 
         public override string ToString()
         {
-            return (IsNegative ? "-" : "") + IntegralPart + "." + DecimalPart;
+            return ((float)this).ToString();
         }
 
         public static implicit operator float(FixedPoint p)

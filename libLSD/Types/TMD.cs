@@ -10,7 +10,9 @@ namespace libLSD.Types
     {
         public TMDHeader Header;
         public TMDObject[] ObjectTable;
-
+        public TMDPrimitive[] Primitives;
+        public Vec3[] Vertices;
+        public TMDNormal[] Normals;
     }
 
     public struct TMDHeader
@@ -33,11 +35,30 @@ namespace libLSD.Types
 
     public struct TMDPrimitive
     {
-        public byte Mode;
+        public enum Types
+        {
+            POLYGON = 0b1,
+            LINE = 0b10,
+            SPRITE = 0b11
+        }
+
+        public Types Type
+        {
+            get => (TMDPrimitive.Types)((_mode & TYPE_MASK) >> 5);
+            //set => this._mode = _mode ^ ((_mode ^ ))
+        }
+
+        
+
+
+
         public byte Flag;
         public byte ILen; // length (in words) of packet data
         public byte OLen; // length (words) of 2D drawing primitives
 
+        private byte _mode;
+
+        private const uint TYPE_MASK = 0b11100000;
     }
 
     // TODO: figure out way of implementing GPU packets

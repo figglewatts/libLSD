@@ -45,6 +45,7 @@
     <Compile Include="Types\FixedPoint.cs" />
     <Compile Include="Types\TMD.cs" />
     <Compile Include="Types\Vec3.cs" />
+    <Compile Include="Util\BitTwiddling.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
