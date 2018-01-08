@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,14 @@ namespace libLSD.Types
             X = x;
             Y = y;
             Z = z;
+        }
+
+        public Vec3(BinaryReader br)
+        {
+            X = br.ReadInt16();
+            Y = br.ReadInt16();
+            Z = br.ReadInt16();
+            br.ReadInt16();
         }
 
         public static Vec3 operator +(Vec3 a, Vec3 b)

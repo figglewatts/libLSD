@@ -87,5 +87,7 @@ namespace libLSD.Types
             else
                 return FIXED_BITVALUE * p._value;
         }
+
+        public static implicit operator FixedPoint(byte[] bytes) { return new FixedPoint(bytes); }
     }
 }
