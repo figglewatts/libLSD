@@ -80,6 +80,8 @@ namespace libLSD.Formats
             Vertices = new Vec3[NumVertices];
             Normals = new TMDNormal[NumNormals];
 
+            uint cachedEndPos = (uint) b.BaseStream.Position;
+
             b.BaseStream.Seek(fixp ? PrimitivesAddress : PrimitivesAddress + ObjectAddress, SeekOrigin.Begin);
             for (int i = 0; i < NumPrimitives; i++)
             {
@@ -97,6 +99,8 @@ namespace libLSD.Formats
             {
                 Normals[i] = new TMDNormal(b);
             }
+
+            b.BaseStream.Seek(cachedEndPos, SeekOrigin.Begin);
         }
     }
 
@@ -181,10 +185,10 @@ namespace libLSD.Formats
 
         public TMDPrimitivePacket(BinaryReader b)
         {
-            _mode = b.ReadByte();
-            _flag = b.ReadByte();
-            ILen = b.ReadByte();
             OLen = b.ReadByte();
+            ILen = b.ReadByte();
+            _flag = b.ReadByte();
+            _mode = b.ReadByte();
             int identifier = (_mode << 8) + _flag;
             PacketType = TMDPrimitivePacketDataFactory.GetPacketType((ushort) identifier);
             _packetData = TMDPrimitivePacketDataFactory.Create((ushort)identifier, b);
