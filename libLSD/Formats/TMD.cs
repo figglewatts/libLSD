@@ -2,6 +2,7 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -82,19 +83,19 @@ namespace libLSD.Formats
 
             uint cachedEndPos = (uint) b.BaseStream.Position;
 
-            b.BaseStream.Seek(fixp ? PrimitivesAddress : PrimitivesAddress + ObjectAddress, SeekOrigin.Begin);
+            b.BaseStream.Seek(fixp ? PrimitivesAddress : PrimitivesAddress + 0xC, SeekOrigin.Begin);
             for (int i = 0; i < NumPrimitives; i++)
             {
                 Primitives[i] = new TMDPrimitivePacket(b);
             }
 
-            b.BaseStream.Seek(fixp ? VerticesAddress : VerticesAddress + ObjectAddress, SeekOrigin.Begin);
+            b.BaseStream.Seek(fixp ? VerticesAddress : VerticesAddress + 0xC, SeekOrigin.Begin);
             for (int i = 0; i < NumVertices; i++)
             {
                 Vertices[i] = new Vec3(b);
             }
 
-            b.BaseStream.Seek(fixp ? NormalsAddress : NormalsAddress + ObjectAddress, SeekOrigin.Begin);
+            b.BaseStream.Seek(fixp ? NormalsAddress : NormalsAddress + 0xC, SeekOrigin.Begin);
             for (int i = 0; i < NumNormals; i++)
             {
                 Normals[i] = new TMDNormal(b);
@@ -189,15 +190,16 @@ namespace libLSD.Formats
             ILen = b.ReadByte();
             _flag = b.ReadByte();
             _mode = b.ReadByte();
-            int identifier = (_mode << 8) + _flag;
-            PacketType = TMDPrimitivePacketDataFactory.GetPacketType((ushort) identifier);
+            int identifierMode = _mode & ~(1 << 1); // unset the AlphaBlend bit, as it doesn't affect packet layout
+            int identifier = (identifierMode << 8) + _flag;
+            PacketType = TMDPrimitivePacketDataFactory.GetPacketType((ushort) identifier, OLen, ILen, _flag, _mode);
             _packetData = TMDPrimitivePacketDataFactory.Create((ushort)identifier, b);
         }
     }
 
     internal static class TMDPrimitivePacketDataFactory
     {
-        internal static Type GetPacketType(ushort identifier)
+        internal static Type GetPacketType(ushort identifier, byte olen, byte ilen, byte flag, byte mode)
         {
             switch (identifier)
             {
@@ -249,7 +251,12 @@ namespace libLSD.Formats
                     return typeof(LineGrad);
             }
 
-            throw new BadFormatException($"Unknown packet identifier: {identifier:X}");
+            string dbg = $"OLen: 0x{olen:X}, ILen: 0x{ilen:X}, flag: 0x{flag:X}, mode: 0x{mode:X}";
+            string err = $"Unknown packet identifier: 0x{identifier:X}";
+            //throw new BadFormatException(err);
+            Console.WriteLine(err);
+            Console.WriteLine("\t" + dbg);
+            return null;
         }
 
         internal static TMDPrimitivePacketData Create(ushort identifier, BinaryReader br)
@@ -304,7 +311,10 @@ namespace libLSD.Formats
                     return new LineGrad(br);
             }
 
-            throw new BadFormatException($"Unknown packet identifier: {identifier:X}");
+            string err = $"Unknown packet identifier: 0x{identifier:X}";
+            //throw new BadFormatException(err);
+            Console.WriteLine(err);
+            return null;
         }
     }
 
