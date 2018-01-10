@@ -61,7 +61,7 @@ namespace libLSD.Formats
         public readonly uint NumPrimitives;
         public readonly int Scale; // 2^Scale is the scale factor of the TMD
 
-        public readonly TMDPrimitivePacket<>[] Primitives;
+        public readonly TMDPrimitivePacket[] Primitives;
         public readonly Vec3[] Vertices;
         public readonly TMDNormal[] Normals;
 
@@ -105,7 +105,7 @@ namespace libLSD.Formats
         }
     }
 
-    public class TMDPrimitivePacket<T> where T : TMDPrimitivePacketData
+    public class TMDPrimitivePacket
     {
         public enum Types
         {
@@ -178,19 +178,17 @@ namespace libLSD.Formats
         private const uint FLAGS_MASK = 0b111;
         private const uint SPRITE_SIZE_MASK = 0b11000;
 
-        private dynamic _packetData;
+        public TMDPrimitivePacketData PacketData;
 
-        public dynamic PacketData { get => Convert.ChangeType(_packetData, PacketType); }
-
-        private readonly Type PacketType;
-
-        public TMDPrimitivePacket(BinaryReader b, byte ilen, byte olen, byte flag, byte mode)
+        public TMDPrimitivePacket(BinaryReader b)
         {
-            
+            OLen = b.ReadByte();
+            ILen = b.ReadByte();
+            _flag = b.ReadByte();
+            _mode = b.ReadByte();
             int identifierMode = _mode & ~(1 << 1); // unset the AlphaBlend bit, as it doesn't affect packet layout
             int identifier = (identifierMode << 8) + _flag;
-            PacketType = TMDPrimitivePacketDataFactory.GetPacketType((ushort) identifier, OLen, ILen, _flag, _mode);
-            _packetData = TMDPrimitivePacketDataFactory.Create((ushort)identifier, b);
+            PacketData = TMDPrimitivePacketDataFactory.Create((ushort)identifier, b);
         }
     }
 

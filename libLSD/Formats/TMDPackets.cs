@@ -20,9 +20,9 @@ namespace libLSD.Formats
         int[] Normals { get; }
     }
 
-    public interface IColouredPacket
+    public interface IColoredPacket
     {
-        Vec3[] Colours { get; }
+        Vec3[] Colors { get; }
     }
 
     public interface ITexturedPacket
@@ -39,14 +39,14 @@ namespace libLSD.Formats
     #region 3 Vertex Poly with No Light Source Calculation
     // Flat, no texture
     // mode=0x21, flag=0x1, ilen=0x3, olen=0x4
-    public class TriFlatUnlit : TMDPrimitivePacketData, IPacket, IColouredPacket
+    public class TriFlatUnlit : TMDPrimitivePacketData, IPacket, IColoredPacket
     {
         public byte r, g, b;
         public ushort p0, p1, p2;
 
         public int[] Vertices => new int[] { p0, p1, p2 };
 
-        public Vec3[] Colours => new [] { new Vec3(r / 255f, g / 255f, b / 255f) };
+        public Vec3[] Colors => new [] { new Vec3(r / 255f, g / 255f, b / 255f) };
 
         public TriFlatUnlit(BinaryReader br)
         {
@@ -63,7 +63,7 @@ namespace libLSD.Formats
 
     // flat, texture
     // mode=0x25, flag=0x1, ilen=0x6, olen=0x7
-    public class TriFlatTexUnlit : TMDPrimitivePacketData, IPacket, ITexturedPacket, IColouredPacket
+    public class TriFlatTexUnlit : TMDPrimitivePacketData, IPacket, ITexturedPacket, IColoredPacket
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -77,7 +77,7 @@ namespace libLSD.Formats
         public TMDTexture Texture => tsb;
         public TMDColorLookup ColorLookup => cba;
         public int[] UVs => new int[] {u0, v0, u1, v1, u2, v2};
-        public Vec3[] Colours => new[] {new Vec3(r / 255f, g / 255f, b / 255f)};
+        public Vec3[] Colors => new[] {new Vec3(r / 255f, g / 255f, b / 255f)};
 
         public TriFlatTexUnlit(BinaryReader br)
         {
@@ -103,7 +103,7 @@ namespace libLSD.Formats
 
     // gradation, no texture
     // mode=0x31, flag=0x1, ilen=0x5, olen=0x6
-    public class TriGradUnlit : TMDPrimitivePacketData, IPacket, IColouredPacket
+    public class TriGradUnlit : TMDPrimitivePacketData, IPacket, IColoredPacket
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -112,7 +112,7 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2};
 
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
             new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
@@ -142,7 +142,7 @@ namespace libLSD.Formats
 
     // gradation, texture
     // mode=0x35, flag=0x1, ilen=0x8, mode=0x9
-    public class TriGradTexUnlit : TMDPrimitivePacketData, IPacket, ITexturedPacket, IColouredPacket
+    public class TriGradTexUnlit : TMDPrimitivePacketData, IPacket, ITexturedPacket, IColoredPacket
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -158,7 +158,7 @@ namespace libLSD.Formats
         public TMDColorLookup ColorLookup => cba;
         public TMDTexture Texture => tsb;
         public int[] UVs => new int[] { u0, v0, u1, v1, u2, v2};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
             new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
@@ -200,7 +200,7 @@ namespace libLSD.Formats
 
     // flat, no texture (solid)
     // mode=0x20, flag=0x0, ilen=0x3, olen=0x4
-    public class TriFlatLit : TMDPrimitivePacketData, IPacket, IColouredPacket, ILitPacket
+    public class TriFlatLit : TMDPrimitivePacketData, IPacket, IColoredPacket, ILitPacket
     {
         private readonly byte r, g, b;
         private readonly ushort n0;
@@ -208,7 +208,7 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2};
         public int[] Normals => new int[] {n0};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r / 255f, g / 255f, b / 255f)
         };
@@ -228,7 +228,7 @@ namespace libLSD.Formats
 
     // flat, no texture (grad)
     // mode=0x20, flag=0x4, ilen=0x5, olen=0x6
-    public class TriFlatGradLit : TMDPrimitivePacketData, IPacket, IColouredPacket, ILitPacket
+    public class TriFlatGradLit : TMDPrimitivePacketData, IPacket, IColoredPacket, ILitPacket
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -238,7 +238,7 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2};
         public int[] Normals => new int[] {n0};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
             new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
@@ -304,7 +304,7 @@ namespace libLSD.Formats
 
     // gouraud, no texture (solid)
     // mode=0x30, flag=0x0, ilen=0x4, olen=0x6
-    public class TriShadedLit : TMDPrimitivePacketData, IPacket, ILitPacket, IColouredPacket
+    public class TriShadedLit : TMDPrimitivePacketData, IPacket, ILitPacket, IColoredPacket
     {
         private readonly byte r, g, b;
         private readonly ushort n0, n1, n2;
@@ -312,7 +312,7 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2};
         public int[] Normals => new int[] {n0, n1, n2};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r / 255f, g / 255f, b / 255f)
         };
@@ -334,7 +334,7 @@ namespace libLSD.Formats
 
     // gouraud, no texture (grad)
     // mode=0x30, flag=0x4, ilen=0x6, olen=0x6
-    public class TriShadedGradLit : TMDPrimitivePacketData, IPacket, IColouredPacket, ILitPacket
+    public class TriShadedGradLit : TMDPrimitivePacketData, IPacket, IColoredPacket, ILitPacket
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -344,7 +344,7 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2};
         public int[] Normals => new int[] {n0, n1, n2};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
             new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
@@ -418,13 +418,13 @@ namespace libLSD.Formats
 
     // flat, no texture
     // mode=0x29, flag=0x1, ilen=0x3, olen=0x5
-    public class QuadFlatUnlit : TMDPrimitivePacketData, IPacket, IColouredPacket
+    public class QuadFlatUnlit : TMDPrimitivePacketData, IPacket, IColoredPacket
     {
         private readonly byte r, g, b;
         private readonly ushort p0, p1, p2, p3;
 
         public int[] Vertices => new int[] {p0, p1, p2, p3};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r / 255f, g / 255f, b / 255f)
         };
@@ -444,7 +444,7 @@ namespace libLSD.Formats
 
     // flat, texture
     // mode=0x2D, flag=0x1, ilen=0x7, olen=0x9
-    public class QuadFlatTexUnlit : TMDPrimitivePacketData, IPacket, ITexturedPacket, IColouredPacket
+    public class QuadFlatTexUnlit : TMDPrimitivePacketData, IPacket, ITexturedPacket, IColoredPacket
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -459,7 +459,7 @@ namespace libLSD.Formats
         public TMDColorLookup ColorLookup => cba;
         public TMDTexture Texture => tsb;
         public int[] UVs => new int[] {u0, v0, u1, v1, u2, v2, u3, v3};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r / 255f, g / 255f, b / 255f)
         };
@@ -491,7 +491,7 @@ namespace libLSD.Formats
 
     // grad, no texture
     // mode=0x39, flag=0x1, ilen=0x6, olen=0x8
-    public class QuadGradUnlit : TMDPrimitivePacketData, IPacket, IColouredPacket
+    public class QuadGradUnlit : TMDPrimitivePacketData, IPacket, IColoredPacket
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -500,7 +500,7 @@ namespace libLSD.Formats
         private readonly ushort p0, p1, p2, p3;
 
         public int[] Vertices => new int[] {p0, p1, p2, p3};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
             new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
@@ -535,7 +535,7 @@ namespace libLSD.Formats
 
     // grad, texture
     // mode=0x3D, flag=0x1, ilen=0xA, olen=0xC
-    public class QuadGradTexUnlit : TMDPrimitivePacketData, IPacket, ITexturedPacket, IColouredPacket
+    public class QuadGradTexUnlit : TMDPrimitivePacketData, IPacket, ITexturedPacket, IColoredPacket
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -553,7 +553,7 @@ namespace libLSD.Formats
         public TMDColorLookup ColorLookup => cba;
         public TMDTexture Texture => tsb;
         public int[] UVs => new int[] {u0, v0, u1, v1, u2, v2, u3, v3};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
             new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
@@ -604,7 +604,7 @@ namespace libLSD.Formats
 
     // flat, no texture (solid)
     // mode=0x28, flag=0x0, ilen=0x4, olen=0x5
-    public class QuadFlatLit : TMDPrimitivePacketData, IPacket, IColouredPacket, ILitPacket
+    public class QuadFlatLit : TMDPrimitivePacketData, IPacket, IColoredPacket, ILitPacket
     {
         private readonly byte r, g, b;
         private readonly ushort n0;
@@ -613,7 +613,7 @@ namespace libLSD.Formats
         public int[] Vertices => new int[] {p0, p1, p2, p3};
         public int[] Normals => new int[] {n0};
 
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r / 255f, g / 255f, b / 255f)
         };
@@ -635,7 +635,7 @@ namespace libLSD.Formats
 
     // flat, no texture (grad)
     // mode=0x28, flag=0x4, ilen=0x7, olen=0x8
-    public class QuadFlatGradLit : TMDPrimitivePacketData, IPacket, IColouredPacket, ILitPacket
+    public class QuadFlatGradLit : TMDPrimitivePacketData, IPacket, IColoredPacket, ILitPacket
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -646,7 +646,7 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2, p3};
         public int[] Normals => new int[] {n0};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
             new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
@@ -725,7 +725,7 @@ namespace libLSD.Formats
 
     // gouraud, no texture (solid)
     // mode=0x38, flag=0x0, ilen=0x5, olen=0x8
-    public class QuadShadedLit : TMDPrimitivePacketData, IPacket, IColouredPacket, ILitPacket
+    public class QuadShadedLit : TMDPrimitivePacketData, IPacket, IColoredPacket, ILitPacket
     {
         private readonly byte r, g, b;
         private readonly ushort n0, n1, n2, n3;
@@ -733,7 +733,7 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2, p3};
         public int[] Normals => new int[] {n0, n1, n2, n3};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r / 255f, g / 255f, b / 255f)
         };
@@ -757,7 +757,7 @@ namespace libLSD.Formats
 
     // gouraud, no texture (grad)
     // mode=0x38, flag=0x4, ilen=0x8, olen=0x8
-    public class QuadShadedGradLit : TMDPrimitivePacketData, IPacket, IColouredPacket, ILitPacket
+    public class QuadShadedGradLit : TMDPrimitivePacketData, IPacket, IColoredPacket, ILitPacket
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -768,7 +768,7 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2, p3};
         public int[] Normals => new int[] {n0, n1, n2, n3};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
             new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
@@ -854,13 +854,13 @@ namespace libLSD.Formats
     #region Straight Line
 
     // mode=0x40, flag=0x1, ilen=0x2, olen=0x3
-    public class LineFlat : TMDPrimitivePacketData, IPacket, IColouredPacket
+    public class LineFlat : TMDPrimitivePacketData, IPacket, IColoredPacket
     {
         private readonly byte r, g, b;
         private readonly ushort p0, p1;
 
         public int[] Vertices => new int[] {p0, p1};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r / 255f, g / 255f, b / 255f)
         };
@@ -877,14 +877,14 @@ namespace libLSD.Formats
     }
 
     // mode=0x50, flag=0x1, ilen=0x3, olen=0x4
-    public class LineGrad : TMDPrimitivePacketData, IPacket, IColouredPacket
+    public class LineGrad : TMDPrimitivePacketData, IPacket, IColoredPacket
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
         private readonly ushort p0, p1;
 
         public int[] Vertices => new int[] {p0, p1};
-        public Vec3[] Colours => new[]
+        public Vec3[] Colors => new[]
         {
             new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
             new Vec3(r1 / 255f, g1 / 255f, b1 / 255f)
