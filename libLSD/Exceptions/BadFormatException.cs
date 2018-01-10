@@ -10,7 +10,7 @@ namespace libLSD.Exceptions
     /// Thrown when a file that was loaded was in an incorrect format,
     /// i.e. an incorrect magic number in the header
     /// </summary>
-    class BadFormatException : Exception
+    public class BadFormatException : Exception
     {
         public BadFormatException() { }
 
