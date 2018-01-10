@@ -19,6 +19,8 @@ namespace libLSD.Formats
         public TMDHeader Header;
         public TMDObject[] ObjectTable;
 
+        public readonly uint NumberOfVertices = 0;
+
         public TMD(BinaryReader b)
         {
             Header = new TMDHeader(b);
@@ -27,6 +29,7 @@ namespace libLSD.Formats
             for (int i = 0; i < Header.NumObjects; i++)
             {
                 ObjectTable[i] = new TMDObject(b, Header.FixP);
+                NumberOfVertices += ObjectTable[i].NumVertices;
             }
         }
     }
