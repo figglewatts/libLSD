@@ -178,7 +178,7 @@ namespace libLSD.Formats
         private const uint FLAGS_MASK = 0b111;
         private const uint SPRITE_SIZE_MASK = 0b11000;
 
-        public TMDPrimitivePacketData PacketData;
+        public readonly IPrimitivePacket PacketData;
 
         public TMDPrimitivePacket(BinaryReader b)
         {
@@ -188,11 +188,11 @@ namespace libLSD.Formats
             _mode = b.ReadByte();
             int identifierMode = _mode & ~(1 << 1); // unset the AlphaBlend bit, as it doesn't affect packet layout
             int identifier = (identifierMode << 8) + _flag;
-            PacketData = TMDPrimitivePacketDataFactory.Create((ushort)identifier, b);
+            PacketData = IPrimitivePacketFactory.Create((ushort)identifier, b);
         }
     }
 
-    internal static class TMDPrimitivePacketDataFactory
+    internal static class IPrimitivePacketFactory
     {
         internal static Type GetPacketType(ushort identifier, byte olen, byte ilen, byte flag, byte mode)
         {
@@ -207,17 +207,17 @@ namespace libLSD.Formats
                 case 0x3501:
                     return typeof(TriGradTexUnlit);
                 case 0x2000:
-                    return typeof(TriFlatLit);
+                    return typeof(TriFlatLitPrimitive);
                 case 0x2004:
-                    return typeof(TriFlatGradLit);
+                    return typeof(TriFlatGradLitPrimitive);
                 case 0x2400:
-                    return typeof(TriFlatTexLit);
+                    return typeof(TriFlatTexLitPrimitive);
                 case 0x3000:
-                    return typeof(TriShadedLit);
+                    return typeof(TriShadedLitPrimitive);
                 case 0x3004:
-                    return typeof(TriShadedGradLit);
+                    return typeof(TriShadedGradLitPrimitive);
                 case 0x3400:
-                    return typeof(TriShadedTexLit);
+                    return typeof(TriShadedTexLitPrimitive);
 
                 case 0x2901:
                     return typeof(QuadFlatUnlit);
@@ -228,17 +228,17 @@ namespace libLSD.Formats
                 case 0x3D01:
                     return typeof(QuadGradTexUnlit);
                 case 0x2800:
-                    return typeof(QuadFlatLit);
+                    return typeof(QuadFlatLitPrimitive);
                 case 0x2804:
-                    return typeof(QuadFlatGradLit);
+                    return typeof(QuadFlatGradLitPrimitive);
                 case 0x2C00:
-                    return typeof(QuadFlatTexLit);
+                    return typeof(QuadFlatTexLitPrimitive);
                 case 0x3800:
-                    return typeof(QuadShadedLit);
+                    return typeof(QuadShadedLitPrimitive);
                 case 0x3804:
-                    return typeof(QuadShadedGradLit);
+                    return typeof(QuadShadedGradLitPrimitive);
                 case 0x3C00:
-                    return typeof(QuadShadedTexLit);
+                    return typeof(QuadShadedTexLitPrimitive);
 
                 case 0x4001:
                     return typeof(LineFlat);
@@ -254,7 +254,7 @@ namespace libLSD.Formats
             return null;
         }
 
-        internal static TMDPrimitivePacketData Create(ushort identifier, BinaryReader br)
+        internal static IPrimitivePacket Create(ushort identifier, BinaryReader br)
         {
             switch (identifier)
             {
@@ -267,17 +267,17 @@ namespace libLSD.Formats
                 case 0x3501:
                     return new TriGradTexUnlit(br);
                 case 0x2000:
-                    return new TriFlatLit(br);
+                    return new TriFlatLitPrimitive(br);
                 case 0x2004:
-                    return new TriFlatGradLit(br);
+                    return new TriFlatGradLitPrimitive(br);
                 case 0x2400:
-                    return new TriFlatTexLit(br);
+                    return new TriFlatTexLitPrimitive(br);
                 case 0x3000:
-                    return new TriShadedLit(br);
+                    return new TriShadedLitPrimitive(br);
                 case 0x3004:
-                    return new TriShadedGradLit(br);
+                    return new TriShadedGradLitPrimitive(br);
                 case 0x3400:
-                    return new TriShadedTexLit(br);
+                    return new TriShadedTexLitPrimitive(br);
 
                 case 0x2901:
                     return new QuadFlatUnlit(br);
@@ -288,17 +288,17 @@ namespace libLSD.Formats
                 case 0x3D01:
                     return new QuadGradTexUnlit(br);
                 case 0x2800:
-                    return new QuadFlatLit(br);
+                    return new QuadFlatLitPrimitive(br);
                 case 0x2804:
-                    return new QuadFlatGradLit(br);
+                    return new QuadFlatGradLitPrimitive(br);
                 case 0x2C00:
-                    return new QuadFlatTexLit(br);
+                    return new QuadFlatTexLitPrimitive(br);
                 case 0x3800:
-                    return new QuadShadedLit(br);
+                    return new QuadShadedLitPrimitive(br);
                 case 0x3804:
-                    return new QuadShadedGradLit(br);
+                    return new QuadShadedGradLitPrimitive(br);
                 case 0x3C00:
-                    return new QuadShadedTexLit(br);
+                    return new QuadShadedTexLitPrimitive(br);
 
                 case 0x4001:
                     return new LineFlat(br);
