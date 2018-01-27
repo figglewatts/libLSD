@@ -135,8 +135,8 @@ namespace libLSD.Formats
                 int g1 = data3 & 0xFF;
                 int b1 = (data3 >> 8) & 0xFF;
 
-                image[x1, y1] = new Color24Bit((ushort)r0, (ushort)g0, (ushort)b0); 
-                image[x2, y2] = new Color24Bit((ushort)r1, (ushort)g1, (ushort)b1);
+                image[x1, y1] = new Color24Bit((byte)r0, (byte)g0, (byte)b0); 
+                image[x2, y2] = new Color24Bit((byte)r1, (byte)g1, (byte)b1);
             }
             return image;
         }

@@ -8,8 +8,9 @@ namespace libLSD.Types
 {
     public interface IColor
     {
-        uint Red { get; }
-        uint Green { get; }
-        uint Blue { get; }
+        float Red { get; }
+        float Green { get; }
+        float Blue { get; }
+        float Alpha { get; }
     }
 }

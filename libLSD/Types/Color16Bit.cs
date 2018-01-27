@@ -9,10 +9,14 @@ namespace libLSD.Types
 {
     public struct Color16Bit : IColor
     {
-        public uint Red => _colorData & 0b11111;
-        public uint Green => (_colorData >> 5) & 0b11111;
-        public uint Blue => (_colorData >> 10) & 0b11111;
-        public bool Transparency => ((_colorData >> 15) & 0x1) == 1;
+        public float Red => _red / 31f;
+        public float Green => _green / 31f;
+        public float Blue => _blue / 31f;
+        public float Alpha => (_colorData >> 15) & 0x1;
+
+        private byte _red => (byte)(_colorData & 0b11111);
+        private byte _green => (byte)((_colorData >> 5) & 0b11111);
+        private byte _blue => (byte)((_colorData >> 10) & 0b11111);
 
         private readonly uint _colorData;
 

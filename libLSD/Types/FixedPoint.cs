@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using libLSD.Exceptions;
 using libLSD.Util;
 
 namespace libLSD.Types
@@ -67,7 +68,9 @@ namespace libLSD.Types
 
         public FixedPoint(byte[] data)
         {
-            if (data.Length != 2) { throw new ArgumentException("data must be 2 bytes", nameof(data)); }
+            if (data.Length != 2)
+            {
+                throw new BadFormatException("FixedPoint data must be 2 bytes long!"); }
             if (BitConverter.IsLittleEndian)
                 Array.Reverse(data);
             _value = BitConverter.ToUInt16(data, 0);
