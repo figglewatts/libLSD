@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace libLSD
+namespace libLSD.Types
 {
-    public class Class1
+    public interface IColor
     {
+        uint Red { get; }
+        uint Green { get; }
+        uint Blue { get; }
     }
 }
