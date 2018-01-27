@@ -64,7 +64,8 @@ namespace libLSD.Formats
         {
             int imageWidth = PixelData.Width * 4;
             int imageHeight = PixelData.Height;
-            IColor[,] image = new IColor[imageWidth, imageHeight];
+            IColor[,] image = new IColor[imageHeight, imageWidth];
+
             for (int i = 0; i < PixelData.Data.Length; i++)
             {
                 ushort data = PixelData.Data[i];
@@ -73,7 +74,7 @@ namespace libLSD.Formats
                 for (int j = 0; j < 4; j++)
                 {
                     int clutLocation = data >> (4 * j) & 0xF;
-                    image[x + j, y] = ColorLookup?.Data[clutLocation];
+                    image[y, x + j] = ColorLookup?.Data[clutLocation];
                 }
             }
             return image;
@@ -83,7 +84,7 @@ namespace libLSD.Formats
         {
             int imageWidth = PixelData.Width * 2;
             int imageHeight = PixelData.Height;
-            IColor[,] image = new IColor[imageWidth, imageHeight];
+            IColor[,] image = new IColor[imageHeight, imageWidth];
             for (int i = 0; i < PixelData.Data.Length; i++)
             {
                 ushort data = PixelData.Data[i];
@@ -92,7 +93,7 @@ namespace libLSD.Formats
                 for (int j = 0; j < 2; j++)
                 {
                     int clutLocation = data >> (8 * j) & 0xFF;
-                    image[x + j, y] = ColorLookup?.Data[clutLocation];
+                    image[y, x + j] = ColorLookup?.Data[clutLocation];
                 }
             }
             return image;
@@ -102,12 +103,12 @@ namespace libLSD.Formats
         {
             int imageWidth = PixelData.Width;
             int imageHeight = PixelData.Height;
-            IColor[,] image = new IColor[imageWidth, imageHeight];
+            IColor[,] image = new IColor[imageHeight, imageWidth];
             for (int i = 0; i < PixelData.Data.Length; i++)
             {
                 int x = i % imageWidth;
                 int y = i / imageWidth;
-                image[x, y] = new Color16Bit(PixelData.Data[i]);
+                image[y, x] = new Color16Bit(PixelData.Data[i]);
             }
             return image;
         }
@@ -116,7 +117,7 @@ namespace libLSD.Formats
         {
             int imageWidth = (PixelData.Width / 3) * 2;
             int imageHeight = PixelData.Height;
-            IColor[,] image = new IColor[imageWidth, imageHeight];
+            IColor[,] image = new IColor[imageHeight, imageWidth];
             for (int i = 0; i < PixelData.Data.Length; i += 3)
             {
                 int x1 = ((i / 3) * 2) % imageWidth;
@@ -135,8 +136,8 @@ namespace libLSD.Formats
                 int g1 = data3 & 0xFF;
                 int b1 = (data3 >> 8) & 0xFF;
 
-                image[x1, y1] = new Color24Bit((byte)r0, (byte)g0, (byte)b0); 
-                image[x2, y2] = new Color24Bit((byte)r1, (byte)g1, (byte)b1);
+                image[y1, x1] = new Color24Bit((byte)r0, (byte)g0, (byte)b0); 
+                image[y2, x2] = new Color24Bit((byte)r1, (byte)g1, (byte)b1);
             }
             return image;
         }
