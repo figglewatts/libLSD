@@ -6,7 +6,7 @@ namespace libLSD.Formats
     {
         public enum TransparencyRates
         {
-            RATE_50BACK_PLUS_50POLY = 0,    // 100% back + 50% poly
+            RATE_50BACK_PLUS_50POLY = 0,    // 50% back + 50% poly
             RATE_100BACK_PLUS_100POLY = 1,  // 100% back + 100% poly
             RATE_100BACK_MINUS_100POLY = 2, // 100% back - 100% poly
             RATE_100BACK_MINUS_25POLY = 3   // 100% back - 25% poly
