@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\BadFormatException.cs" />
     <Compile Include="Formats\TIM.cs" />
+    <Compile Include="Formats\TIX.cs" />
     <Compile Include="Formats\TMD.cs" />
     <Compile Include="Formats\TMDColorLookup.cs" />
     <Compile Include="Formats\TMDPackets.cs" />
