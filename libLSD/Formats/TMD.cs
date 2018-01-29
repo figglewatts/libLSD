@@ -14,17 +14,17 @@ using libLSD.Util;
 
 namespace libLSD.Formats
 {
-    public class TMD
+    public struct TMD
     {
         public TMDHeader Header;
         public TMDObject[] ObjectTable;
 
-        public readonly uint NumberOfVertices = 0;
+	    public readonly uint NumberOfVertices;
 
         public TMD(BinaryReader b)
         {
             Header = new TMDHeader(b);
-
+	        NumberOfVertices = 0;
             ObjectTable = new TMDObject[Header.NumObjects];
             for (int i = 0; i < Header.NumObjects; i++)
             {
@@ -318,9 +318,9 @@ namespace libLSD.Formats
 
     public struct TMDNormal
     {
-        public FixedPoint X;
-        public FixedPoint Y;
-        public FixedPoint Z;
+        public FixedPoint16Bit X;
+        public FixedPoint16Bit Y;
+        public FixedPoint16Bit Z;
 
         public TMDNormal(BinaryReader br)
         {

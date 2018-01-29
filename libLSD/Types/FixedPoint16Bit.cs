@@ -18,7 +18,7 @@ namespace libLSD.Types
     /// </code>
     /// Where S is sign bit, I are integral bits, and M are mantissa bits
     /// </summary>
-    public struct FixedPoint
+    public struct FixedPoint16Bit
     {
         public int IntegralPart
         {
@@ -53,12 +53,12 @@ namespace libLSD.Types
         private const int INTEGRAL_BITS = 3;
         private const float FIXED_BITVALUE = 1.0f / (1 << DECIMAL_BITS);
 
-        public FixedPoint(int value)
+        public FixedPoint16Bit(int value)
         {
             this._value = value;
         }
 
-        public FixedPoint(int integralPart, int decimalPart, bool isNegative = false)
+        public FixedPoint16Bit(int integralPart, int decimalPart, bool isNegative = false)
         {
             this._value = 0;
             this.IntegralPart = integralPart;
@@ -66,11 +66,11 @@ namespace libLSD.Types
             this.IsNegative = isNegative;
         }
 
-        public FixedPoint(byte[] data)
+        public FixedPoint16Bit(byte[] data)
         {
             if (data.Length != 2)
             {
-                throw new BadFormatException("FixedPoint data must be 2 bytes long!"); }
+                throw new BadFormatException("FixedPoint16Bit data must be 2 bytes long!"); }
             if (BitConverter.IsLittleEndian)
                 Array.Reverse(data);
             _value = BitConverter.ToUInt16(data, 0);
@@ -81,7 +81,7 @@ namespace libLSD.Types
             return ((float)this).ToString();
         }
 
-        public static implicit operator float(FixedPoint p)
+        public static implicit operator float(FixedPoint16Bit p)
         {
             if (p.IsNegative)
             {
@@ -91,6 +91,6 @@ namespace libLSD.Types
                 return FIXED_BITVALUE * p._value;
         }
 
-        public static implicit operator FixedPoint(byte[] bytes) { return new FixedPoint(bytes); }
+        public static implicit operator FixedPoint16Bit(byte[] bytes) { return new FixedPoint16Bit(bytes); }
     }
 }
