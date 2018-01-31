@@ -26,9 +26,10 @@ namespace libLSD.Formats
             Header = new TMDHeader(b);
 	        NumberOfVertices = 0;
             ObjectTable = new TMDObject[Header.NumObjects];
+	        uint objTableTop = (uint)b.BaseStream.Position;
             for (int i = 0; i < Header.NumObjects; i++)
             {
-                ObjectTable[i] = new TMDObject(b, Header.FixP);
+                ObjectTable[i] = new TMDObject(b, Header.FixP, objTableTop);
                 NumberOfVertices += ObjectTable[i].NumVertices;
             }
         }
@@ -70,7 +71,7 @@ namespace libLSD.Formats
 
         private uint ObjectAddress;
 
-        public TMDObject(BinaryReader b, bool fixp)
+        public TMDObject(BinaryReader b, bool fixp, uint objTableTop)
         {
             ObjectAddress = (uint)b.BaseStream.Position;
             VerticesAddress = b.ReadUInt32();
@@ -86,19 +87,19 @@ namespace libLSD.Formats
 
             uint cachedEndPos = (uint) b.BaseStream.Position;
 
-            b.BaseStream.Seek(fixp ? PrimitivesAddress : PrimitivesAddress + 0xC, SeekOrigin.Begin);
+            b.BaseStream.Seek(fixp ? PrimitivesAddress: PrimitivesAddress + objTableTop, SeekOrigin.Begin);
             for (int i = 0; i < NumPrimitives; i++)
             {
                 Primitives[i] = new TMDPrimitivePacket(b);
             }
 
-            b.BaseStream.Seek(fixp ? VerticesAddress : VerticesAddress + 0xC, SeekOrigin.Begin);
+            b.BaseStream.Seek(fixp ? VerticesAddress : VerticesAddress + objTableTop, SeekOrigin.Begin);
             for (int i = 0; i < NumVertices; i++)
             {
                 Vertices[i] = new Vec3(b);
             }
 
-            b.BaseStream.Seek(fixp ? NormalsAddress : NormalsAddress + 0xC, SeekOrigin.Begin);
+            b.BaseStream.Seek(fixp ? NormalsAddress : NormalsAddress + objTableTop, SeekOrigin.Begin);
             for (int i = 0; i < NumNormals; i++)
             {
                 Normals[i] = new TMDNormal(b);
@@ -247,14 +248,16 @@ namespace libLSD.Formats
                     return typeof(LineFlat);
                 case 0x5001:
                     return typeof(LineGrad);
-            }
+				default:
+					string dbg = $"OLen: 0x{olen:X}, ILen: 0x{ilen:X}, flag: 0x{flag:X}, mode: 0x{mode:X}";
+					string err = $"Unknown packet identifier: 0x{identifier:X}";
+					//throw new BadFormatException(err);
+					Console.WriteLine(err);
+					Console.WriteLine("\t" + dbg);
+					return null;
+			}
 
-            string dbg = $"OLen: 0x{olen:X}, ILen: 0x{ilen:X}, flag: 0x{flag:X}, mode: 0x{mode:X}";
-            string err = $"Unknown packet identifier: 0x{identifier:X}";
-            //throw new BadFormatException(err);
-            Console.WriteLine(err);
-            Console.WriteLine("\t" + dbg);
-            return null;
+            
         }
 
         internal static IPrimitivePacket Create(ushort identifier, BinaryReader br)
@@ -307,12 +310,15 @@ namespace libLSD.Formats
                     return new LineFlat(br);
                 case 0x5001:
                     return new LineGrad(br);
-            }
 
-            string err = $"Unknown packet identifier: 0x{identifier:X}";
-            //throw new BadFormatException(err);
-            Console.WriteLine(err);
-            return null;
+				default:
+					string err = $"Unknown packet identifier: 0x{identifier:X}";
+					//throw new BadFormatException(err);
+					Console.WriteLine(err);
+					return null;
+			}
+
+            
         }
     }
 

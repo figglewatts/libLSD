@@ -24,14 +24,14 @@ namespace libLSD.Formats
 			{
 				for (int x = 0; x < Header.TileWidth; x++)
 				{
-					TileLayout[x, y] = new LBDTile(br);
+					TileLayout[x, y] = new LBDTile(br, Header.AddressOffset, Header.ExtraTilesOffset);
 				}
 			}
 
 			ExtraTiles = new LBDTile[Header.NumberOfExtraTiles];
 			for (int i = 0; i < Header.NumberOfExtraTiles; i++)
 			{
-				ExtraTiles[i] = new LBDTile(br);
+				ExtraTiles[i] = new LBDTile(br, Header.AddressOffset);
 			}
 
 			br.BaseStream.Seek(Header.TilesTMDOffset + Header.AddressOffset, SeekOrigin.Begin);
@@ -59,6 +59,9 @@ namespace libLSD.Formats
 		public readonly ushort NumberOfExtraTiles;
 		public readonly ushort TileWidth;
 		public readonly ushort TileHeight;
+		public readonly int ExtraTilesOffset; // this is a calculated value
+
+		public const int Length = 0x20;
 
 		public LBDHeader(BinaryReader br)
 		{
@@ -73,6 +76,7 @@ namespace libLSD.Formats
 			NumberOfExtraTiles = br.ReadUInt16();
 			TileWidth = br.ReadUInt16();
 			TileHeight = br.ReadUInt16();
+			ExtraTilesOffset = LBDHeader.Length + (TileWidth * TileHeight) * LBDTile.Length;
 		}
 	}
 
@@ -92,9 +96,11 @@ namespace libLSD.Formats
 		public readonly byte FootstepSoundAndCollision;
 		public readonly TileDirections TileDirection;
 		public readonly short TileHeight;
-		public readonly uint ExtraTileOffset;
+		public readonly int ExtraTileIndex;
 
-		public LBDTile(BinaryReader br)
+		public const int Length = 0xC;
+
+		public LBDTile(BinaryReader br, uint addressOffset, int extraTilesTop = 0)
 		{
 			DrawTile = br.ReadByte() == 1;
 			UnknownFlag = br.ReadByte();
@@ -102,7 +108,16 @@ namespace libLSD.Formats
 			FootstepSoundAndCollision = br.ReadByte();
 			TileDirection = (TileDirections) br.ReadByte();
 			TileHeight = br.ReadInt16();
-			ExtraTileOffset = br.ReadUInt32();
+			uint rawExtraTileOffset = br.ReadUInt32();
+
+			if (rawExtraTileOffset == 0)
+			{
+				ExtraTileIndex = -1;
+			}
+			else
+			{
+				ExtraTileIndex = (int)((rawExtraTileOffset + addressOffset) - extraTilesTop) / LBDTile.Length;
+			}
 		}
 	}
 }

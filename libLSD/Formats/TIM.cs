@@ -9,7 +9,7 @@ using libLSD.Types;
 
 namespace libLSD.Formats
 {
-    public class TIM
+    public struct TIM
     {
         public readonly TIMHeader Header;
         public readonly TIMColorLookup? ColorLookup;
