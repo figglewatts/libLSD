@@ -202,12 +202,12 @@ namespace libLSD.Formats
 		public bool HasScale => ((Flag >> 2) & 0x1) == 1;
 		public bool HasTranslation => ((Flag >> 3) & 0x1) == 1;
 
-		public readonly FixedPoint32Bit RotX;
-		public readonly FixedPoint32Bit RotY;
-		public readonly FixedPoint32Bit RotZ;
-		public readonly FixedPoint16Bit ScaleX;
-		public readonly FixedPoint16Bit ScaleY;
-		public readonly FixedPoint16Bit ScaleZ;
+	    public readonly int RotX;
+	    public readonly int RotY;
+	    public readonly int RotZ;
+	    public readonly short ScaleX;
+	    public readonly short ScaleY;
+	    public readonly short ScaleZ;
 		public readonly int TransX;
 		public readonly int TransY;
 		public readonly int TransZ;
@@ -217,16 +217,16 @@ namespace libLSD.Formats
 		{
 			if (HasRotation)
 			{
-				RotX = new FixedPoint32Bit(br.ReadBytes(4));
-				RotY = new FixedPoint32Bit(br.ReadBytes(4));
-				RotZ = new FixedPoint32Bit(br.ReadBytes(4));
+			    RotX = br.ReadInt32();
+			    RotY = br.ReadInt32();
+			    RotZ = br.ReadInt32();
 			}
 
 			if (HasScale)
 			{
-				ScaleX = new FixedPoint16Bit(br.ReadBytes(2));
-				ScaleY = new FixedPoint16Bit(br.ReadBytes(2));
-				ScaleZ = new FixedPoint16Bit(br.ReadBytes(2));
+			    ScaleX = br.ReadInt16();
+			    ScaleY = br.ReadInt16();
+			    ScaleZ = br.ReadInt16();
 				br.ReadBytes(2); // skip 2 bytes
 			}
 
@@ -268,7 +268,7 @@ namespace libLSD.Formats
 					Rotation[y, x] = new FixedPoint16Bit(br.ReadBytes(2));
 				}
 			}
-			// TODO: check if skipping 2 bytes here is correct
+
 			br.ReadBytes(2); // skip 2 bytes
 
 			Translation = new FixedPoint32Bit[3];

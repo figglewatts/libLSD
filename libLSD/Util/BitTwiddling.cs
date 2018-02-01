@@ -18,7 +18,7 @@ namespace libLSD.Util
         /// <param name="mask">Which bits to overwrite.</param>
         /// <param name="shift">How far to shift the value to overwrite.</param>
         /// <returns>The overwritten (merged) value.</returns>
-        public static T Merge<T>(dynamic original, dynamic overwrite, uint mask, int shift = 0)
+        public static T Merge<T>(dynamic original, dynamic overwrite, long mask, int shift = 0)
         {
             return (T)(original ^ ((original ^ (overwrite << shift)) & mask));
         }

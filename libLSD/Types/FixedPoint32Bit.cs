@@ -20,45 +20,45 @@ namespace libLSD.Types
 	/// </summary>
 	public struct FixedPoint32Bit
 	{
-		public int IntegralPart
+		public long IntegralPart
 		{
-			get => (int)(this._value & INTEGRAL_MASK) >> (int)DECIMAL_BITS;
-			set => this._value = BitTwiddling.Merge<uint>(_value, value, INTEGRAL_MASK, (int)DECIMAL_BITS);
+			get => (this._value & INTEGRAL_MASK) >> DECIMAL_BITS;
+			set => this._value = BitTwiddling.Merge<long>(_value, value, INTEGRAL_MASK, DECIMAL_BITS);
 		}
 
-		public int DecimalPart
+		public long DecimalPart
 		{
-			get => (int)(this._value & DECIMAL_MASK);
-			set => this._value = BitTwiddling.Merge<uint>(_value, value, DECIMAL_MASK);
+			get => (this._value & DECIMAL_MASK);
+			set => this._value = BitTwiddling.Merge<long>(_value, value, DECIMAL_MASK);
 		}
 
 		public bool IsNegative
 		{
-			get => (int)(this._value & SIGN_MASK) >> (int)(DECIMAL_BITS + INTEGRAL_BITS) == 1;
+			get => (this._value & SIGN_MASK) >> (int)(DECIMAL_BITS + INTEGRAL_BITS) == 1;
 			set => this._value =
-				BitTwiddling.Merge<uint>(_value, value ? 1 : 0, SIGN_MASK, (int)(DECIMAL_BITS + INTEGRAL_BITS));
+				BitTwiddling.Merge<long>(_value, value ? 1 : 0, SIGN_MASK, (int)(DECIMAL_BITS + INTEGRAL_BITS));
 		}
 
-		public int IntegralAndDecimalPart
+		public long IntegralAndDecimalPart
 		{
-			get => (int)(this._value & (DECIMAL_MASK | INTEGRAL_MASK));
+			get => (this._value & (DECIMAL_MASK | INTEGRAL_MASK));
 		}
 
-		private uint _value;
+		private long _value;
 
-		private const uint SIGN_MASK = 0x80000000;
-		private const uint INTEGRAL_MASK = 0x7FFFF000;
-		private const uint DECIMAL_MASK = 0xFFF;
-		private const uint DECIMAL_BITS = 12;
-		private const uint INTEGRAL_BITS = 19;
-		private const float FIXED_BITVALUE = 1.0f / (1 << (int)DECIMAL_BITS);
+		private const long SIGN_MASK = 0x80000000;
+		private const long INTEGRAL_MASK = 0x7FFFF000;
+		private const long DECIMAL_MASK = 0xFFF;
+		private const int DECIMAL_BITS = 12;
+		private const int INTEGRAL_BITS = 19;
+		private const float FIXED_BITVALUE = 1.0f / (1 << DECIMAL_BITS);
 
 		public FixedPoint32Bit(uint value)
 		{
 			this._value = value;
 		}
 
-		public FixedPoint32Bit(int integralPart, int decimalPart, bool isNegative = false)
+		public FixedPoint32Bit(uint integralPart, uint decimalPart, bool isNegative = false)
 		{
 			this._value = 0;
 			this.IntegralPart = integralPart;
@@ -70,11 +70,11 @@ namespace libLSD.Types
 		{
 			if (data.Length != 4)
 			{
-				throw new BadFormatException("FixedPoint16Bit data must be 4 bytes long!");
+				throw new BadFormatException("FixedPoint32Bit data must be 4 bytes long!");
 			}
-			if (BitConverter.IsLittleEndian)
-				Array.Reverse(data);
-			_value = BitConverter.ToUInt32(data, 0);
+			//if (BitConverter.IsLittleEndian)
+				//Array.Reverse(data);
+			_value = BitConverter.ToInt32(data, 0);
 		}
 
 		public override string ToString()

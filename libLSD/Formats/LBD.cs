@@ -31,7 +31,7 @@ namespace libLSD.Formats
 			ExtraTiles = new LBDTile[Header.NumberOfExtraTiles];
 			for (int i = 0; i < Header.NumberOfExtraTiles; i++)
 			{
-				ExtraTiles[i] = new LBDTile(br, Header.AddressOffset);
+				ExtraTiles[i] = new LBDTile(br, Header.AddressOffset, Header.ExtraTilesOffset);
 			}
 
 			br.BaseStream.Seek(Header.TilesTMDOffset + Header.AddressOffset, SeekOrigin.Begin);
@@ -100,7 +100,7 @@ namespace libLSD.Formats
 
 		public const int Length = 0xC;
 
-		public LBDTile(BinaryReader br, uint addressOffset, int extraTilesTop = 0)
+		public LBDTile(BinaryReader br, uint addressOffset, int extraTilesTop)
 		{
 			DrawTile = br.ReadByte() == 1;
 			UnknownFlag = br.ReadByte();
