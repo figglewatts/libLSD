@@ -9,12 +9,13 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using libLSD.Exceptions;
+using libLSD.Interfaces;
 using libLSD.Types;
 using libLSD.Util;
 
 namespace libLSD.Formats
 {
-    public struct TMD
+    public struct TMD : IWriteable
     {
         public TMDHeader Header;
         public TMDObject[] ObjectTable;
@@ -33,9 +34,14 @@ namespace libLSD.Formats
                 NumberOfVertices += ObjectTable[i].NumVertices;
             }
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            
+        }
     }
 
-    public struct TMDHeader
+    public struct TMDHeader : IWriteable
     {
         public readonly uint ID;
         public readonly uint NumObjects;
@@ -53,9 +59,14 @@ namespace libLSD.Formats
             if (ID != 0x41)
                 throw new BadFormatException("TMD file did not have correct magic number");
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            
+        }
     }
 
-    public struct TMDObject
+    public struct TMDObject : IWriteable
     {
         public readonly uint VerticesAddress;
         public readonly uint NumVertices;
@@ -69,11 +80,8 @@ namespace libLSD.Formats
         public readonly Vec3[] Vertices;
         public readonly TMDNormal[] Normals;
 
-        private uint ObjectAddress;
-
         public TMDObject(BinaryReader b, bool fixp, uint objTableTop)
         {
-            ObjectAddress = (uint)b.BaseStream.Position;
             VerticesAddress = b.ReadUInt32();
             NumVertices = b.ReadUInt32();
             NormalsAddress = b.ReadUInt32();
@@ -107,9 +115,14 @@ namespace libLSD.Formats
 
             b.BaseStream.Seek(cachedEndPos, SeekOrigin.Begin);
         }
+
+        public void Write(BinaryWriter bw)
+        {
+
+        }
     }
 
-    public class TMDPrimitivePacket
+    public class TMDPrimitivePacket : IWriteable
     {
         public enum Types
         {
@@ -193,6 +206,11 @@ namespace libLSD.Formats
             int identifierMode = _mode & ~(1 << 1); // unset the AlphaBlend bit, as it doesn't affect packet layout
             int identifier = (identifierMode << 8) + _flag;
             PacketData = IPrimitivePacketFactory.Create((ushort)identifier, b);
+        }
+
+        public void Write(BinaryWriter bw)
+        {
+
         }
     }
 
@@ -322,7 +340,7 @@ namespace libLSD.Formats
         }
     }
 
-    public struct TMDNormal
+    public struct TMDNormal : IWriteable
     {
         public FixedPoint16Bit X;
         public FixedPoint16Bit Y;
@@ -334,6 +352,11 @@ namespace libLSD.Formats
             Y = br.ReadBytes(2);
             Z = br.ReadBytes(2);
             br.ReadInt16();
+        }
+
+        public void Write(BinaryWriter bw)
+        {
+
         }
     }
 }

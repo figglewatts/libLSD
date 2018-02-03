@@ -1,8 +1,11 @@
-﻿using libLSD.Util;
+﻿using System.Diagnostics.Contracts;
+using System.IO;
+using libLSD.Interfaces;
+using libLSD.Util;
 
 namespace libLSD.Formats
 {
-    public struct TMDColorLookup
+    public struct TMDColorLookup : IWriteable
     {
         public int XPosition
         {
@@ -26,5 +29,10 @@ namespace libLSD.Formats
         public static explicit operator ushort(TMDColorLookup cl) { return cl._cba; }
 
         public static implicit operator TMDColorLookup(ushort cba) { return new TMDColorLookup(cba); }
+
+        public void Write(BinaryWriter bw)
+        {
+
+        }
     }
 }

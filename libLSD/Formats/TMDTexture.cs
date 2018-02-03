@@ -1,8 +1,10 @@
-﻿using libLSD.Util;
+﻿using System.IO;
+using libLSD.Interfaces;
+using libLSD.Util;
 
 namespace libLSD.Formats
 {
-    public struct TMDTexture
+    public struct TMDTexture : IWriteable
     {
         public enum TransparencyRates
         {
@@ -48,5 +50,10 @@ namespace libLSD.Formats
         public static explicit operator ushort(TMDTexture tex) { return tex._tsb; }
 
         public static implicit operator TMDTexture(ushort tsb) { return new TMDTexture(tsb); }
+
+        public void Write(BinaryWriter bw)
+        {
+
+        }
     }
 }
