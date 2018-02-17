@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using libLSD.Exceptions;
+using libLSD.Interfaces;
 using libLSD.Util;
 
 namespace libLSD.Types
@@ -18,7 +20,7 @@ namespace libLSD.Types
     /// </code>
     /// Where S is sign bit, I are integral bits, and M are mantissa bits
     /// </summary>
-    public struct FixedPoint16Bit
+    public struct FixedPoint16Bit : IWriteable
     {
         public int IntegralPart
         {
@@ -92,5 +94,10 @@ namespace libLSD.Types
         }
 
         public static implicit operator FixedPoint16Bit(byte[] bytes) { return new FixedPoint16Bit(bytes); }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(_value);
+        }
     }
 }

@@ -53,7 +53,7 @@ namespace libLSD.Formats
 
         public void Write(BinaryWriter bw)
         {
-
+            bw.Write(_tsb);
         }
     }
 }

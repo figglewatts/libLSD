@@ -37,7 +37,35 @@ namespace libLSD.Formats
 
         public void Write(BinaryWriter bw)
         {
-            
+            Header.Write(bw);
+            foreach (var obj in ObjectTable)
+            {
+                obj.Write(bw);
+            }
+
+            foreach (var obj in ObjectTable)
+            {
+                foreach (var prim in obj.Primitives)
+                {
+                    prim.Write(bw);
+                }
+            }
+
+            foreach (var obj in ObjectTable)
+            {
+                foreach (var vert in obj.Vertices)
+                {
+                    vert.Write(bw);
+                }
+            }
+
+            foreach (var obj in ObjectTable)
+            {
+                foreach (var norm in obj.Normals)
+                {
+                    norm.Write(bw);
+                }
+            }
         }
     }
 
@@ -62,7 +90,9 @@ namespace libLSD.Formats
 
         public void Write(BinaryWriter bw)
         {
-            
+            bw.Write(ID);
+            bw.Write(_flags);
+            bw.Write(NumObjects);
         }
     }
 
@@ -118,7 +148,13 @@ namespace libLSD.Formats
 
         public void Write(BinaryWriter bw)
         {
-
+            bw.Write(VerticesAddress);
+            bw.Write(NumVertices);
+            bw.Write(NormalsAddress);
+            bw.Write(NumNormals);
+            bw.Write(PrimitivesAddress);
+            bw.Write(NumPrimitives);
+            bw.Write(Scale);
         }
     }
 
@@ -210,7 +246,20 @@ namespace libLSD.Formats
 
         public void Write(BinaryWriter bw)
         {
-
+            bw.Write(OLen);
+            bw.Write(ILen);
+            bw.Write(_flag);
+            bw.Write(_mode);
+            IWriteable w = PacketData as IWriteable;
+            if (PacketData != null)
+            {
+                w.Write(bw);
+            }
+            else
+            {
+                throw new UnwriteableException($"Cannot write packet data with OLen {OLen}, ILen {ILen}, Flag {_flag:X}, " +
+                                               $"and Mode {_mode:X}, packet data did not implement IWriteable");
+            }
         }
     }
 
@@ -356,7 +405,10 @@ namespace libLSD.Formats
 
         public void Write(BinaryWriter bw)
         {
-
+            X.Write(bw);
+            Y.Write(bw);
+            Z.Write(bw);
+            bw.Write((short) 0);
         }
     }
 }

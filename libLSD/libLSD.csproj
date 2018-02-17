@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\BadFormatException.cs" />
+    <Compile Include="Exceptions\UnwriteableException.cs" />
     <Compile Include="Formats\LBD.cs" />
     <Compile Include="Formats\MML.cs" />
     <Compile Include="Formats\MOM.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Formats\TMDPackets.cs" />
     <Compile Include="Formats\TMDTexture.cs" />
     <Compile Include="Formats\TOD.cs" />
+    <Compile Include="Interfaces\IWriteable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Types\Color16Bit.cs" />
     <Compile Include="Types\Color24Bit.cs" />

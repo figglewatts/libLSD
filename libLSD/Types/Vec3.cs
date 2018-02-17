@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using libLSD.Interfaces;
 
 namespace libLSD.Types
 {
-    public struct Vec3
+    public struct Vec3 : IWriteable
     {
         public float X;
         public float Y;
@@ -106,6 +107,14 @@ namespace libLSD.Types
         public override string ToString()
         {
             return string.Format("Vec3: ({0}, {1}, {2})", X, Y, Z);
+        }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(X);
+            bw.Write(Y);
+            bw.Write(Z);
+            bw.Write((short)0);
         }
     }
 }

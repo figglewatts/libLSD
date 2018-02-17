@@ -259,7 +259,7 @@ namespace libLSD.Formats
 
     // flat, no texture (solid)
     // mode=0x20, flag=0x0, ilen=0x3, olen=0x4
-    public class TriFlatLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket
+    public class TriFlatLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort n0;
@@ -283,11 +283,23 @@ namespace libLSD.Formats
             p1 = br.ReadUInt16();
             p2 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(r);
+            bw.Write(g);
+            bw.Write(b);
+            bw.Write((byte)0);
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(p1);
+            bw.Write(p2);
+        }
     }
 
     // flat, no texture (grad)
     // mode=0x20, flag=0x4, ilen=0x5, olen=0x6
-    public class TriFlatGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket
+    public class TriFlatGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -323,11 +335,20 @@ namespace libLSD.Formats
             p1 = br.ReadUInt16();
             p2 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0 });
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(p1);
+            bw.Write(p2);
+        }
     }
 
     // flat, texture
     // mode=0x24, flag=0x0, ilen=0x5, olen=0x7
-    public class TriFlatTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket
+    public class TriFlatTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -359,11 +380,28 @@ namespace libLSD.Formats
             p1 = br.ReadUInt16();
             p2 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(u0);
+            bw.Write(v0);
+            cba.Write(bw);
+            bw.Write(u1);
+            bw.Write(v1);
+            tsb.Write(bw);
+            bw.Write(u2);
+            bw.Write(v2);
+            bw.Write((ushort)0);
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(p1);
+            bw.Write(p2);
+        }
     }
 
     // gouraud, no texture (solid)
     // mode=0x30, flag=0x0, ilen=0x4, olen=0x6
-    public class TriShadedLitPrimitive : IPrimitivePacket, ILitPrimitivePacket, IColoredPrimitivePacket
+    public class TriShadedLitPrimitive : IPrimitivePacket, ILitPrimitivePacket, IColoredPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort n0, n1, n2;
@@ -389,11 +427,22 @@ namespace libLSD.Formats
             n2 = br.ReadUInt16();
             p2 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(new byte[] {r, g, b, 0});
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(n1);
+            bw.Write(p1);
+            bw.Write(n2);
+            bw.Write(p2);
+        }
     }
 
     // gouraud, no texture (grad)
     // mode=0x30, flag=0x4, ilen=0x6, olen=0x6
-    public class TriShadedGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket
+    public class TriShadedGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -431,11 +480,22 @@ namespace libLSD.Formats
             n2 = br.ReadUInt16();
             p2 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0 });
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(n1);
+            bw.Write(p1);
+            bw.Write(n2);
+            bw.Write(p2);
+        }
     }
 
     // gouraud, texture
     // mode=0x34, flag=0x0, ilen=0x6, olen=0x9
-    public class TriShadedTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket
+    public class TriShadedTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -469,6 +529,25 @@ namespace libLSD.Formats
             n2 = br.ReadUInt16();
             p2 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(u0);
+            bw.Write(v0);
+            cba.Write(bw);
+            bw.Write(u1);
+            bw.Write(v1);
+            tsb.Write(bw);
+            bw.Write(u2);
+            bw.Write(v2);
+            bw.Write((ushort)0);
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(n1);
+            bw.Write(p1);
+            bw.Write(n2);
+            bw.Write(p2);
+        }
     }
 
     #endregion
@@ -477,7 +556,7 @@ namespace libLSD.Formats
 
     // flat, no texture
     // mode=0x29, flag=0x1, ilen=0x3, olen=0x5
-    public class QuadFlatUnlit : IPrimitivePacket, IColoredPrimitivePacket
+    public class QuadFlatUnlit : IPrimitivePacket, IColoredPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort p0, p1, p2, p3;
@@ -499,11 +578,20 @@ namespace libLSD.Formats
             p2 = br.ReadUInt16();
             p3 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(new byte[] {r, g, b, 0});
+            bw.Write(p0);
+            bw.Write(p1);
+            bw.Write(p2);
+            bw.Write(p3);
+        }
     }
 
     // flat, texture
     // mode=0x2D, flag=0x1, ilen=0x7, olen=0x9
-    public class QuadFlatTexUnlit : IPrimitivePacket, ITexturedPrimitivePacket, IColoredPrimitivePacket
+    public class QuadFlatTexUnlit : IPrimitivePacket, ITexturedPrimitivePacket, IColoredPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -546,11 +634,33 @@ namespace libLSD.Formats
             p2 = br.ReadUInt16();
             p3 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(u0);
+            bw.Write(v0);
+            cba.Write(bw);
+            bw.Write(u1);
+            bw.Write(v1);
+            tsb.Write(bw);
+            bw.Write(u2);
+            bw.Write(v2);
+            bw.Write((ushort)0);
+            bw.Write(u3);
+            bw.Write(v3);
+            bw.Write((ushort)0);
+
+            bw.Write(new byte[] { r, g, b, 0 });
+            bw.Write(p0);
+            bw.Write(p1);
+            bw.Write(p2);
+            bw.Write(p3);
+        }
     }
 
     // grad, no texture
     // mode=0x39, flag=0x1, ilen=0x6, olen=0x8
-    public class QuadGradUnlit : IPrimitivePacket, IColoredPrimitivePacket
+    public class QuadGradUnlit : IPrimitivePacket, IColoredPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -590,11 +700,20 @@ namespace libLSD.Formats
             p2 = br.ReadUInt16();
             p3 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0});
+            bw.Write(p0);
+            bw.Write(p1);
+            bw.Write(p2);
+            bw.Write(p3);
+        }
     }
 
     // grad, texture
     // mode=0x3D, flag=0x1, ilen=0xA, olen=0xC
-    public class QuadGradTexUnlit : IPrimitivePacket, ITexturedPrimitivePacket, IColoredPrimitivePacket
+    public class QuadGradTexUnlit : IPrimitivePacket, ITexturedPrimitivePacket, IColoredPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -655,6 +774,28 @@ namespace libLSD.Formats
             p2 = br.ReadUInt16();
             p3 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(u0);
+            bw.Write(v0);
+            cba.Write(bw);
+            bw.Write(u1);
+            bw.Write(v1);
+            tsb.Write(bw);
+            bw.Write(u2);
+            bw.Write(v2);
+            bw.Write((ushort)0);
+            bw.Write(u3);
+            bw.Write(v3);
+            bw.Write((ushort)0);
+
+            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0 });
+            bw.Write(p0);
+            bw.Write(p1);
+            bw.Write(p2);
+            bw.Write(p3);
+        }
     }
 
     #endregion
@@ -663,7 +804,7 @@ namespace libLSD.Formats
 
     // flat, no texture (solid)
     // mode=0x28, flag=0x0, ilen=0x4, olen=0x5
-    public class QuadFlatLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket
+    public class QuadFlatLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort n0;
@@ -690,11 +831,25 @@ namespace libLSD.Formats
             p3 = br.ReadUInt16();
             br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(r);
+            bw.Write(g);
+            bw.Write(b);
+            bw.Write((byte)0);
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(p1);
+            bw.Write(p2);
+            bw.Write(p3);
+            bw.Write((ushort)0);
+        }
     }
 
     // flat, no texture (grad)
     // mode=0x28, flag=0x4, ilen=0x7, olen=0x8
-    public class QuadFlatGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket
+    public class QuadFlatGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -738,11 +893,22 @@ namespace libLSD.Formats
             p3 = br.ReadUInt16();
             br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0 });
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(p1);
+            bw.Write(p2);
+            bw.Write(p3);
+            bw.Write((ushort)0);
+        }
     }
 
     // flat, texture
     // mode=0x2C, flag=0x0, ilen=0x7, olen=0x9
-    public class QuadFlatTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket
+    public class QuadFlatTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -780,11 +946,33 @@ namespace libLSD.Formats
             p3 = br.ReadUInt16();
             br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(u0);
+            bw.Write(v0);
+            cba.Write(bw);
+            bw.Write(u1);
+            bw.Write(v1);
+            tsb.Write(bw);
+            bw.Write(u2);
+            bw.Write(v2);
+            bw.Write((ushort)0);
+            bw.Write(u3);
+            bw.Write(v3);
+            bw.Write((ushort)0);
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(p1);
+            bw.Write(p2);
+            bw.Write(p3);
+            bw.Write((ushort)0);
+        }
     }
 
     // gouraud, no texture (solid)
     // mode=0x38, flag=0x0, ilen=0x5, olen=0x8
-    public class QuadShadedLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket
+    public class QuadShadedLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort n0, n1, n2, n3;
@@ -812,11 +1000,24 @@ namespace libLSD.Formats
             n3 = br.ReadUInt16();
             p3 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(new byte[] {r, g, b, 0});
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(n1);
+            bw.Write(p1);
+            bw.Write(n2);
+            bw.Write(p2);
+            bw.Write(n3);
+            bw.Write(p3);
+        }
     }
 
     // gouraud, no texture (grad)
     // mode=0x38, flag=0x4, ilen=0x8, olen=0x8
-    public class QuadShadedGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket
+    public class QuadShadedGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -862,11 +1063,24 @@ namespace libLSD.Formats
             n3 = br.ReadUInt16();
             p3 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0 });
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(n1);
+            bw.Write(p1);
+            bw.Write(n2);
+            bw.Write(p2);
+            bw.Write(n3);
+            bw.Write(p3);
+        }
     }
 
     // gouraud, texture
     // mode=0x3C, flag=0x0, ilen=0x8, olen=0xC
-    public class QuadShadedTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket
+    public class QuadShadedTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -906,6 +1120,31 @@ namespace libLSD.Formats
             n3 = br.ReadUInt16();
             p3 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(u0);
+            bw.Write(v0);
+            cba.Write(bw);
+            bw.Write(u1);
+            bw.Write(v1);
+            tsb.Write(bw);
+            bw.Write(u2);
+            bw.Write(v2);
+            bw.Write((ushort)0);
+            bw.Write(u3);
+            bw.Write(v3);
+            bw.Write((ushort)0);
+
+            bw.Write(n0);
+            bw.Write(p0);
+            bw.Write(n1);
+            bw.Write(p1);
+            bw.Write(n2);
+            bw.Write(p2);
+            bw.Write(n3);
+            bw.Write(p3);
+        }
     }
 
     #endregion
@@ -913,7 +1152,7 @@ namespace libLSD.Formats
     #region Straight Line
 
     // mode=0x40, flag=0x1, ilen=0x2, olen=0x3
-    public class LineFlat : IPrimitivePacket, IColoredPrimitivePacket
+    public class LineFlat : IPrimitivePacket, IColoredPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort p0, p1;
@@ -933,10 +1172,17 @@ namespace libLSD.Formats
             p0 = br.ReadUInt16();
             p1 = br.ReadUInt16();
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(new byte[] {r, g, b, 0});
+            bw.Write(p0);
+            bw.Write(p1);
+        }
     }
 
     // mode=0x50, flag=0x1, ilen=0x3, olen=0x4
-    public class LineGrad : IPrimitivePacket, IColoredPrimitivePacket
+    public class LineGrad : IPrimitivePacket, IColoredPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -961,6 +1207,13 @@ namespace libLSD.Formats
             br.ReadByte();
             p0 = br.ReadUInt16();
             p1 = br.ReadUInt16();
+        }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(new byte[] {r0, g0, b0, 0, r1, g1, b1, 0});
+            bw.Write(p0);
+            bw.Write(p1);
         }
     }
 
