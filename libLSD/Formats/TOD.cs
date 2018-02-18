@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using libLSD.Exceptions;
+using libLSD.Interfaces;
 using libLSD.Types;
 
 namespace libLSD.Formats
 {
-	public struct TOD
+	public struct TOD : IWriteable
 	{
 		public readonly TODHeader Header;
 		public readonly TODFrame[] Frames;
@@ -23,9 +24,18 @@ namespace libLSD.Formats
 				Frames[i] = new TODFrame(br);
 			}
 		}
+
+	    public void Write(BinaryWriter bw)
+	    {
+	        Header.Write(bw);
+	        foreach (var frame in Frames)
+	        {
+	            frame.Write(bw);
+	        }
+	    }
 	}
 
-	public struct TODHeader
+	public struct TODHeader : IWriteable
 	{
 		public readonly byte ID;
 		public readonly byte Version;
@@ -49,9 +59,17 @@ namespace libLSD.Formats
 			Resolution = br.ReadUInt16();
 			NumberOfFrames = br.ReadUInt32();
 		}
+
+	    public void Write(BinaryWriter bw)
+	    {
+	        bw.Write(ID);
+            bw.Write(Version);
+            bw.Write(Resolution);
+            bw.Write(NumberOfFrames);
+	    }
 	}
 
-	public struct TODFrame
+	public struct TODFrame : IWriteable
 	{
 		public readonly ushort FrameSize;
 		public readonly ushort NumberOfPackets;
@@ -69,9 +87,20 @@ namespace libLSD.Formats
 				Packets[i] = new TODPacket(br);
 			}
 		}
+
+	    public void Write(BinaryWriter bw)
+	    {
+	        bw.Write(FrameSize);
+            bw.Write(NumberOfPackets);
+            bw.Write(FrameNumber);
+	        foreach (var packet in Packets)
+	        {
+	            packet.Write(bw);
+	        }
+	    }
 	}
 
-	public struct TODPacket
+	public struct TODPacket : IWriteable
 	{
 		public enum PacketTypes
 		{
@@ -145,11 +174,19 @@ namespace libLSD.Formats
 				}
 			}
 		}
+
+	    public void Write(BinaryWriter bw)
+	    {
+	        bw.Write(ObjectID);
+            bw.Write(_typeAndFlag);
+            bw.Write(PacketLength);
+            Data.Write(bw);
+	    }
 	}
 
 	#region Packet Data
 
-	public abstract class TODPacketData
+	public abstract class TODPacketData : IWriteable
 	{
 		public enum PacketDataType
 		{
@@ -163,6 +200,8 @@ namespace libLSD.Formats
 		{
 			Flag = flag;
 		}
+
+	    public abstract void Write(BinaryWriter bw);
 	}
 
 	public class TODAttributePacketData : TODPacketData
@@ -193,6 +232,12 @@ namespace libLSD.Formats
 			_mask = br.ReadUInt32();
 			NewValues = br.ReadUInt32();
 		}
+
+	    public override void Write(BinaryWriter bw)
+	    {
+	        bw.Write(_mask);
+	        bw.Write(NewValues);
+	    }
 	}
 
 	public class TODCoordinatePacketData : TODPacketData
@@ -237,6 +282,31 @@ namespace libLSD.Formats
 				TransZ = br.ReadInt32();
 			}
 		}
+
+	    public override void Write(BinaryWriter bw)
+	    {
+	        if (HasRotation)
+	        {
+	            bw.Write(RotX);
+                bw.Write(RotY);
+                bw.Write(RotZ);
+	        }
+
+	        if (HasScale)
+	        {
+	            bw.Write(ScaleX);
+                bw.Write(ScaleY);
+                bw.Write(ScaleZ);
+                bw.Write((short)0);
+	        }
+
+	        if (HasTranslation)
+	        {
+	            bw.Write(TransX);
+	            bw.Write(TransY);
+	            bw.Write(TransZ);
+	        }
+	    }
 	}
 
 	// used for packet types 3 and 4, TMD Data ID, and Parent Object ID
@@ -250,6 +320,12 @@ namespace libLSD.Formats
 			ObjectID = br.ReadUInt16();
 			br.ReadBytes(2); // skip 2 bytes
 		}
+
+	    public override void Write(BinaryWriter bw)
+	    {
+	        bw.Write(ObjectID);
+            bw.Write((short)0);
+	    }
 	}
 
 	public class TODMatrixPacketData : TODPacketData
@@ -277,6 +353,21 @@ namespace libLSD.Formats
 				Translation[i] = new FixedPoint32Bit(br.ReadBytes(4));
 			}
 		}
+
+	    public override void Write(BinaryWriter bw)
+	    {
+	        foreach (var rot in Rotation)
+	        {
+	            rot.Write(bw);
+	        }
+
+            bw.Write((short)0);
+
+	        foreach (var trans in Translation)
+	        {
+	            trans.Write(bw);
+	        }
+	    }
 	}
 
 	public class TODLightSourcePacketData : TODPacketData
@@ -299,6 +390,15 @@ namespace libLSD.Formats
 			Color = br.ReadBytes(3);
 			br.ReadByte(); // skip the last byte
 		}
+
+	    public override void Write(BinaryWriter bw)
+	    {
+	        DirX.Write(bw);
+            DirY.Write(bw);
+            DirZ.Write(bw);
+	        bw.Write(Color);
+            bw.Write((byte)0);
+	    }
 	}
 
 	public class TODCameraPacketData : TODPacketData
@@ -361,6 +461,43 @@ namespace libLSD.Formats
 				}
 			}
 		}
+
+	    public override void Write(BinaryWriter bw)
+	    {
+	        if (CameraType == CameraTypes.PositionAndAngle)
+	        {
+	            if (HasPosAndRef)
+	            {
+	                TransX.Write(bw);
+                    TransY.Write(bw);
+                    TransZ.Write(bw);
+                    RotX.Write(bw);
+                    RotY.Write(bw);
+                    RotZ.Write(bw);
+	            }
+
+	            if (HasZAngle)
+	            {
+	                ZAngle.Write(bw);
+	            }
+	        }
+	        else
+	        {
+	            if (HasRotation)
+	            {
+	                RotX.Write(bw);
+                    RotY.Write(bw);
+                    RotZ.Write(bw);
+	            }
+
+	            if (HasTranslation)
+	            {
+	                TransX.Write(bw);
+                    TransY.Write(bw);
+                    TransZ.Write(bw);
+	            }
+	        }
+	    }
 	}
 
 	public class TODObjectControlPacketData : TODPacketData
@@ -375,6 +512,11 @@ namespace libLSD.Formats
 		
 		public TODObjectControlPacketData(int flag)
 			: base(flag) { }
+
+	    public override void Write(BinaryWriter bw)
+	    {
+	        // intentionally empty
+	    }
 	}
 
 

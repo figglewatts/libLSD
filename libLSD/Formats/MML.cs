@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using libLSD.Exceptions;
+using libLSD.Interfaces;
 
 namespace libLSD.Formats
 {
-	public struct MML
+	public struct MML : IWriteable
 	{
 		public readonly uint ID;
 		public readonly uint NumberOfMOMs;
@@ -40,5 +41,24 @@ namespace libLSD.Formats
 				MOMs[i] = new MOM(br);
 			}
 		}
+
+	    public void Write(BinaryWriter bw)
+	    {
+	        bw.Write(ID);
+	        bw.Write(NumberOfMOMs);
+	        foreach (uint offset in MOMOffsets)
+	        {
+	            bw.Write(offset);
+	        }
+
+	        int i = 0;
+	        foreach (var mom in MOMs)
+	        {
+	            bw.BaseStream.Seek(_mmlTop + MOMOffsets[i], SeekOrigin.Begin);
+                mom.Write(bw);
+
+	            i++;
+	        }
+	    }
 	}
 }

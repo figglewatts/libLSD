@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using libLSD.Exceptions;
+using libLSD.Interfaces;
 
 namespace libLSD.Formats
 {
-	public struct MOS
+	public struct MOS : IWriteable
 	{
 		public readonly uint ID;
 		public readonly uint NumberOfTODs;
@@ -41,5 +42,24 @@ namespace libLSD.Formats
 				TODs[i] = new TOD(br);
 			}
 		}
+
+	    public void Write(BinaryWriter bw)
+	    {
+	        bw.Write(ID);
+            bw.Write(NumberOfTODs);
+	        foreach (uint offset in TODOffsets)
+	        {
+	            bw.Write(offset);
+	        }
+
+	        int i = 0;
+	        foreach (var tod in TODs)
+	        {
+	            bw.BaseStream.Seek(_mosTop + TODOffsets[i], SeekOrigin.Begin);
+                tod.Write(bw);
+
+	            i++;
+	        }
+	    }
 	}
 }

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using libLSD.Exceptions;
+using libLSD.Interfaces;
 
 namespace libLSD.Formats
 {
-	public struct MOM
+	public struct MOM : IWriteable
 	{
 		public readonly uint ID;
 		public readonly uint MOMLength;
@@ -33,5 +34,16 @@ namespace libLSD.Formats
 			br.BaseStream.Seek(_momTop + TMDOffset, SeekOrigin.Begin);
 			TMD = new TMD(br);
 		}
+
+	    public void Write(BinaryWriter bw)
+	    {
+	        bw.Write(ID);
+            bw.Write(MOMLength);
+            bw.Write(TMDOffset);
+            MOS.Write(bw);
+
+	        bw.BaseStream.Seek(_momTop + TMDOffset, SeekOrigin.Begin);
+            TMD.Write(bw);
+	    }
 	}
 }
