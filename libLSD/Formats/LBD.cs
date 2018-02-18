@@ -49,10 +49,14 @@ namespace libLSD.Formats
 	    public void Write(BinaryWriter bw)
 	    {
 	        Header.Write(bw);
-	        foreach (LBDTile tile in TileLayout)
+	        for (int y = 0; y < Header.TileHeight; y++)
 	        {
-	            tile.Write(bw);
+	            for (int x = 0; x < Header.TileWidth; x++)
+	            {
+                    TileLayout[x, y].Write(bw);
+	            }
 	        }
+
 	        foreach (LBDTile tile in ExtraTiles)
 	        {
 	            tile.Write(bw);
@@ -105,7 +109,7 @@ namespace libLSD.Formats
 	    public void Write(BinaryWriter bw)
 	    {
 	        bw.Write(Version);
-	        bw.Write(HasMML);
+	        bw.Write(HasMML ? (ushort)1 : (ushort) 0);
             bw.Write(AddressOffset);
             bw.Write(TilesTMDOffset);
             bw.Write(TilesTMDLength);

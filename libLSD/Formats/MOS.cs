@@ -45,7 +45,9 @@ namespace libLSD.Formats
 
 	    public void Write(BinaryWriter bw)
 	    {
-	        bw.Write(ID);
+	        uint mosTop = (uint) bw.BaseStream.Position;
+
+            bw.Write(ID);
             bw.Write(NumberOfTODs);
 	        foreach (uint offset in TODOffsets)
 	        {
@@ -55,7 +57,7 @@ namespace libLSD.Formats
 	        int i = 0;
 	        foreach (var tod in TODs)
 	        {
-	            bw.BaseStream.Seek(_mosTop + TODOffsets[i], SeekOrigin.Begin);
+	            bw.BaseStream.Seek(mosTop + TODOffsets[i], SeekOrigin.Begin);
                 tod.Write(bw);
 
 	            i++;

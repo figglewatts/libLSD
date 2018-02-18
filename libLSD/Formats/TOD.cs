@@ -18,7 +18,7 @@ namespace libLSD.Formats
 		public TOD(BinaryReader br)
 		{
 			Header = new TODHeader(br);
-			Frames = new TODFrame[Header.NumberOfFrames];
+			Frames = new TODFrame[Header.NumberOfFrames - 1];
 			for (int i = 0; i < Header.NumberOfFrames - 1; i++)
 			{
 				Frames[i] = new TODFrame(br);

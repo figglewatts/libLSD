@@ -37,12 +37,14 @@ namespace libLSD.Formats
 
 	    public void Write(BinaryWriter bw)
 	    {
-	        bw.Write(ID);
+	        uint momTop = (uint)bw.BaseStream.Position;
+
+            bw.Write(ID);
             bw.Write(MOMLength);
             bw.Write(TMDOffset);
             MOS.Write(bw);
 
-	        bw.BaseStream.Seek(_momTop + TMDOffset, SeekOrigin.Begin);
+	        bw.BaseStream.Seek(momTop + TMDOffset, SeekOrigin.Begin);
             TMD.Write(bw);
 	    }
 	}

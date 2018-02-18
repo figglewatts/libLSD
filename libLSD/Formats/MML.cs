@@ -44,7 +44,9 @@ namespace libLSD.Formats
 
 	    public void Write(BinaryWriter bw)
 	    {
-	        bw.Write(ID);
+	        uint mmlTop = (uint) bw.BaseStream.Position;
+
+            bw.Write(ID);
 	        bw.Write(NumberOfMOMs);
 	        foreach (uint offset in MOMOffsets)
 	        {
@@ -54,7 +56,7 @@ namespace libLSD.Formats
 	        int i = 0;
 	        foreach (var mom in MOMs)
 	        {
-	            bw.BaseStream.Seek(_mmlTop + MOMOffsets[i], SeekOrigin.Begin);
+	            bw.BaseStream.Seek(mmlTop + MOMOffsets[i], SeekOrigin.Begin);
                 mom.Write(bw);
 
 	            i++;
