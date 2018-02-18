@@ -4,13 +4,30 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using libLSD.Interfaces;
 
 namespace libLSD.Formats
 {
-    public struct TIX
+    public struct TIX : IWriteable
     {
         public readonly TIXHeader Header;
         public readonly TIXChunk[] Chunks;
+
+        public List<TIM> AllTIMs
+        {
+            get
+            {
+                List<TIM> tims = new List<TIM>();
+                foreach (var chunk in Chunks)
+                {
+                    foreach (var tim in chunk.TIMs)
+                    {
+                        tims.Add(tim);
+                    }
+                }
+                return tims;
+            }
+        }
 
         public TIX(BinaryReader br)
         {
@@ -26,9 +43,23 @@ namespace libLSD.Formats
                 chunk++;
             }
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            Header.Write(bw);
+
+            int chunk = 0;
+            foreach (uint offset in Header.ChunkOffsets)
+            {
+                bw.BaseStream.Seek(offset, SeekOrigin.Begin);
+                Chunks[chunk].Write(bw);
+
+                chunk++;
+            }
+        }
     }
 
-    public struct TIXHeader
+    public struct TIXHeader : IWriteable
     {
         public readonly uint NumberOfChunks;
         public readonly uint[] ChunkOffsets;
@@ -50,9 +81,22 @@ namespace libLSD.Formats
                 ChunkLengths[i] = br.ReadUInt32();
             }
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(NumberOfChunks);
+            foreach (uint offset in ChunkOffsets)
+            {
+                bw.Write(offset);
+            }
+            foreach (uint length in ChunkLengths)
+            {
+                bw.Write(length);
+            }
+        }
     }
 
-    public struct TIXChunk
+    public struct TIXChunk : IWriteable
     {
         public readonly uint NumberOfTIMs;
         public readonly uint[] TIMOffsets;
@@ -76,8 +120,26 @@ namespace libLSD.Formats
             int tim = 0;
             foreach (uint offset in TIMOffsets)
             {
-                br.BaseStream.Seek(_chunkTop + TIMOffsets[tim], SeekOrigin.Begin);
+                br.BaseStream.Seek(_chunkTop + offset, SeekOrigin.Begin);
                 TIMs[tim] = new TIM(br);
+
+                tim++;
+            }
+        }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(NumberOfTIMs);
+            foreach (uint offset in TIMOffsets)
+            {
+                bw.Write(offset);
+            }
+
+            int tim = 0;
+            foreach (uint offset in TIMOffsets)
+            {
+                bw.BaseStream.Seek(_chunkTop + offset, SeekOrigin.Begin);
+                TIMs[tim].Write(bw);
 
                 tim++;
             }

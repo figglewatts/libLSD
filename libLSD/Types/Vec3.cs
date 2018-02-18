@@ -111,9 +111,9 @@ namespace libLSD.Types
 
         public void Write(BinaryWriter bw)
         {
-            bw.Write(X);
-            bw.Write(Y);
-            bw.Write(Z);
+            bw.Write((short)X);
+            bw.Write((short)Y);
+            bw.Write((short)Z);
             bw.Write((short)0);
         }
     }

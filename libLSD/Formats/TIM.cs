@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using libLSD.Exceptions;
+using libLSD.Interfaces;
 using libLSD.Types;
 
 namespace libLSD.Formats
 {
-    public struct TIM
+    public struct TIM : IWriteable
     {
         public readonly TIMHeader Header;
         public readonly TIMColorLookup? ColorLookup;
@@ -26,6 +27,16 @@ namespace libLSD.Formats
             }
 
             PixelData = new TIMPixelData(br);
+        }
+
+        public void Write(BinaryWriter bw)
+        {
+            Header.Write(bw);
+            if (Header.HasCLUT)
+            {
+                ColorLookup?.Write(bw);
+            }
+            PixelData.Write(bw);
         }
 
         public IColor[,] GetImage()
@@ -146,7 +157,7 @@ namespace libLSD.Formats
     /// <summary>
     /// The header of a TIM file, containing its ID and flags
     /// </summary>
-    public struct TIMHeader
+    public struct TIMHeader : IWriteable
     {
         public enum PixelModes
         {
@@ -188,9 +199,15 @@ namespace libLSD.Formats
             if (PixelMode == PixelModes.Mixed)
                 throw new NotSupportedException("Mixed pixel mode in TIM is not supported!");
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(_fileID);
+            bw.Write(_flags);
+        }
     }
 
-    public struct TIMColorLookup
+    public struct TIMColorLookup : IWriteable
     {
         /// <summary>
         /// The length of the CLUT in bytes
@@ -239,9 +256,22 @@ namespace libLSD.Formats
                 Data[i] = new Color16Bit(br);
             }
         }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(CLUTLength);
+            bw.Write(XPosition);
+            bw.Write(YPosition);
+            bw.Write(Width);
+            bw.Write(Height);
+            for (int i = 0; i < Data.Length; i++)
+            {
+                Data[i].Write(bw);
+            }
+        }
     }
 
-    public struct TIMPixelData
+    public struct TIMPixelData : IWriteable
     {
         /// <summary>
         /// The length in bytes of the pixel data
@@ -286,6 +316,19 @@ namespace libLSD.Formats
             for (int i = 0; i < numPixels; i++)
             {
                 Data[i] = br.ReadUInt16();
+            }
+        }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write(PixelDataLength);
+            bw.Write(XPosition);
+            bw.Write(YPosition);
+            bw.Write(Width);
+            bw.Write(Height);
+            for (int i = 0; i < Data.Length; i++)
+            {
+                bw.Write(Data[i]);
             }
         }
     }

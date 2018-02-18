@@ -48,6 +48,8 @@ namespace libLSD.Formats
                 foreach (var prim in obj.Primitives)
                 {
                     prim.Write(bw);
+                    if (bw.BaseStream.Position > 0x21F3)
+                        Console.WriteLine("bp");
                 }
             }
 

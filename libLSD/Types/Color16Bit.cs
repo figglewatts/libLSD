@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using libLSD.Interfaces;
 
 namespace libLSD.Types
 {
-    public struct Color16Bit : IColor
+    public struct Color16Bit : IColor, IWriteable
     {
         public float Red => _red / 31f;
         public float Green => _green / 31f;
@@ -61,6 +62,11 @@ namespace libLSD.Types
             {
                 Alpha = 0;
             }
+        }
+
+        public void Write(BinaryWriter bw)
+        {
+            bw.Write((ushort)_colorData);
         }
     }
 }

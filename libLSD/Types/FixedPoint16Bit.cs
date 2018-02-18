@@ -97,7 +97,9 @@ namespace libLSD.Types
 
         public void Write(BinaryWriter bw)
         {
-            bw.Write(_value);
+            byte[] bytes = BitConverter.GetBytes((ushort) _value);
+            Array.Reverse(bytes);
+            bw.Write(bytes);
         }
     }
 }
