@@ -1,13 +1,5 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Data.OleDb;
 using System.IO;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using libLSD.Exceptions;
 using libLSD.Interfaces;
 using libLSD.Types;

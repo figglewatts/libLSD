@@ -14,6 +14,7 @@ namespace libLSD.Types
         public float Green => _green / 31f;
         public float Blue => _blue / 31f;
         public float Alpha { get; }
+        public bool TransparencyControl => _stp;
 
         private byte _red => (byte)(_colorData & 0b11111);
         private byte _green => (byte)((_colorData >> 5) & 0b11111);
@@ -21,7 +22,7 @@ namespace libLSD.Types
 
         private bool _stp => ((_colorData >> 15) & 0x1) == 1;
 
-        private bool IsBlack => _red == 0 && _green == 0 && _blue == 0;
+        public bool IsBlack => _red == 0 && _green == 0 && _blue == 0;
 
         private readonly uint _colorData;
 
@@ -29,16 +30,12 @@ namespace libLSD.Types
         {
             _colorData = br.ReadUInt16();
             Alpha = 1;
+            if (TransparencyControl)
+            {
+                Alpha = Math.Max(Red, Math.Max(Green, Blue));
+            }
 
-            if (_stp && IsBlack)
-            {
-                Alpha = 1;
-            }
-            else if (_stp && !IsBlack)
-            {
-                Alpha = 0.5f;
-            }
-            else if (!_stp && IsBlack)
+            if (IsBlack)
             {
                 Alpha = 0;
             }
@@ -47,18 +44,13 @@ namespace libLSD.Types
         public Color16Bit(ushort data)
         {
             _colorData = data;
-
             Alpha = 1;
+            if (TransparencyControl)
+            {
+                Alpha = Math.Max(Red, Math.Max(Green, Blue));
+            }
 
-            if (_stp && IsBlack)
-            {
-                Alpha = 1;
-            }
-            else if (_stp && !IsBlack)
-            {
-                Alpha = 0.5f;
-            }
-            else if (!_stp && IsBlack)
+            if (IsBlack)
             {
                 Alpha = 0;
             }

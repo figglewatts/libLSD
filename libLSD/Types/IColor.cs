@@ -12,5 +12,7 @@ namespace libLSD.Types
         float Green { get; }
         float Blue { get; }
         float Alpha { get; }
+        bool TransparencyControl { get; }
+        bool IsBlack { get; }
     }
 }
