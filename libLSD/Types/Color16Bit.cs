@@ -30,12 +30,7 @@ namespace libLSD.Types
         {
             _colorData = br.ReadUInt16();
             Alpha = 1;
-            if (TransparencyControl)
-            {
-                Alpha = Math.Max(Red, Math.Max(Green, Blue));
-            }
-
-            if (IsBlack)
+            if (IsBlack && !TransparencyControl)
             {
                 Alpha = 0;
             }
@@ -45,12 +40,7 @@ namespace libLSD.Types
         {
             _colorData = data;
             Alpha = 1;
-            if (TransparencyControl)
-            {
-                Alpha = Math.Max(Red, Math.Max(Green, Blue));
-            }
-
-            if (IsBlack)
+            if (IsBlack && !TransparencyControl)
             {
                 Alpha = 0;
             }
