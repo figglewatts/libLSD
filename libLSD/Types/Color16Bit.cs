@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using libLSD.Interfaces;
+using libLSD.Util;
 
 namespace libLSD.Types
 {
@@ -13,12 +14,14 @@ namespace libLSD.Types
         public float Red => _red / 31f;
         public float Green => _green / 31f;
         public float Blue => _blue / 31f;
-        public float Alpha { get; }
+        public float Alpha => _alpha / 31f;
         public bool TransparencyControl => _stp;
 
         private byte _red => (byte)(_colorData & 0b11111);
         private byte _green => (byte)((_colorData >> 5) & 0b11111);
         private byte _blue => (byte)((_colorData >> 10) & 0b11111);
+
+        private byte _alpha;
 
         private bool _stp => ((_colorData >> 15) & 0x1) == 1;
 
@@ -29,21 +32,49 @@ namespace libLSD.Types
         public Color16Bit(BinaryReader br)
         {
             _colorData = br.ReadUInt16();
-            Alpha = 1;
-            if (IsBlack && !TransparencyControl)
+            _alpha = 0b11111;
+            if (TransparencyControl)
+            {
+                if (!IsBlack)
+                {
+                    _alpha = Math.Max(_red, Math.Max(_blue, _green));
+                }
+            }
+            else
+            {
+                if (IsBlack)
+                {
+                    _alpha = 0;
+                }
+            }
+            /*if (IsBlack && !TransparencyControl)
             {
                 Alpha = 0;
-            }
+            }*/
         }
 
         public Color16Bit(ushort data)
         {
             _colorData = data;
-            Alpha = 1;
-            if (IsBlack && !TransparencyControl)
+            _alpha = 0b11111;
+            if (TransparencyControl)
+            {
+                if (!IsBlack)
+                {
+                    _alpha = Math.Max(_red, Math.Max(_blue, _green));
+                }
+            }
+            else
+            {
+                if (IsBlack)
+                {
+                    _alpha = 0;
+                }
+            }
+            /*if (IsBlack && !TransparencyControl)
             {
                 Alpha = 0;
-            }
+            }*/
         }
 
         public void Write(BinaryWriter bw)
