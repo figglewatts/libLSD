@@ -81,5 +81,23 @@ namespace libLSD.Types
         {
             bw.Write((ushort)_colorData);
         }
+
+        public bool Equals(Color16Bit other)
+        {
+            return _alpha == other._alpha && _colorData == other._colorData;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Color16Bit other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (_alpha.GetHashCode() * 397) ^ (int) _colorData;
+            }
+        }
     }
 }

@@ -27,5 +27,27 @@ namespace libLSD.Types
             _blue = b;
             Alpha = 1f;
         }
+
+        public bool Equals(Color24Bit other)
+        {
+            return _red == other._red && _green == other._green && _blue == other._blue && Alpha.Equals(other.Alpha);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Color24Bit other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = _red.GetHashCode();
+                hashCode = (hashCode * 397) ^ _green.GetHashCode();
+                hashCode = (hashCode * 397) ^ _blue.GetHashCode();
+                hashCode = (hashCode * 397) ^ Alpha.GetHashCode();
+                return hashCode;
+            }
+        }
     }
 }
