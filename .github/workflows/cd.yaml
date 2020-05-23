@@ -34,10 +34,10 @@ jobs:
         run: nuget pack src/libLSD -Prop Configuration=Release
       - name: NuGet push
         run: nuget push libLSD.${{ env.GIT_TAG }}.nupkg -Source https://api.nuget.org/v3/index.json
-      - uses: nikeee/docfx-action@master
-        name: Build Documentation
-        with:
-          args: docfx_project/docfx.json
+      - name: Install DocFX
+        run: choco install docfx
+      - name: Build documentation
+        run: docfx docfx_project\docfx.json
       - name: Deploy Documentation
         uses: peaceiris/actions-gh-pages@v3
         with:
