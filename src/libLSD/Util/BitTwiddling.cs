@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace libLSD.Util
+﻿namespace libLSD.Util
 {
+    /// <summary>
+    /// Contains utility methods for twiddling bits!
+    /// </summary>
     public static class BitTwiddling
     {
         /// <summary>
-        /// Take bits of <code>(<paramref name="overwrite"/> & <paramref name="mask"/>) &lt;&lt; <paramref name="shift"/></code>
+        /// Take bits of <code>(<paramref name="overwrite"/> <![CDATA[&]]> <paramref name="mask"/>) <![CDATA[<<]]> <paramref name="shift"/></code>
         /// and overwrite the same bits of <paramref name="original"/>, returning the new value.
         /// </summary>
         /// <typeparam name="T">The type to merge.</typeparam>

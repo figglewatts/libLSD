@@ -20,3 +20,16 @@ using (BinaryReader br = new BinaryReader(File.Open("path/to/file.LBD", FileMode
 
 // now you can access the LBD data here...
 ```
+
+You can do this with any of the formats listed below.
+
+## Formats
+LibLSD currently supports the following formats:
+- [**LBD**](api/libLSD.Formats.LBD.yml): Level data.
+- [**MOM**](api/libLSD.Formats.MOM.yml): Interactive objects with animations.
+- [**MML**](api/libLSD.Formats.MML.yml): Containers for multiple MOM files.
+- [**MOS**](api/libLSD.Formats.MOS.yml): Container for TOD animation data.
+- [**TIM**](api/libLSD.Formats.TIM.yml): Texture data.
+- [**TIX**](api/libLSD.Formats.TIX.yml): Archives of multiple textures.
+- [**TMD**](api/libLSD.Formats.TMD.yml): 3D model data.
+- [**TOD**](api/libLSD.Formats.TOD.yml): 3D model animation data.

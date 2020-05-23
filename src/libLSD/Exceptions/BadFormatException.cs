@@ -1,14 +1,10 @@
-﻿﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace libLSD.Exceptions
 {
     /// <summary>
     /// Thrown when a file that was loaded was in an incorrect format,
-    /// i.e. an incorrect magic number in the header
+    /// i.e. an incorrect magic number in the header.
     /// </summary>
     public class BadFormatException : Exception
     {

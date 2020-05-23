@@ -10,12 +10,30 @@ using libLSD.Types;
 
 namespace libLSD.Formats
 {
+    /// <summary>
+    /// A TIM file is a PSX texture image. It essentially stores colour data, supporting a variety of formats.
+    /// </summary>
     public struct TIM : IWriteable
     {
+        /// <summary>
+        /// The header of this TIM file.
+        /// </summary>
         public readonly TIMHeader Header;
+
+        /// <summary>
+        /// The optional colour lookup table of this TIM file.
+        /// </summary>
         public readonly TIMColorLookup? ColorLookup;
+
+        /// <summary>
+        /// The pixel data of this TIM file.
+        /// </summary>
         public readonly TIMPixelData PixelData;
 
+        /// <summary>
+        /// Create a new TIM by reading it from a binary stream.
+        /// </summary>
+        /// <param name="br">The binary stream.</param>
         public TIM(BinaryReader br)
         {
             Header = new TIMHeader(br);
@@ -29,6 +47,10 @@ namespace libLSD.Formats
             PixelData = new TIMPixelData(br);
         }
 
+        /// <summary>
+        /// Write this TIM file to a binary stream.
+        /// </summary>
+        /// <param name="bw">The binary stream.</param>
         public void Write(BinaryWriter bw)
         {
             Header.Write(bw);
@@ -36,9 +58,16 @@ namespace libLSD.Formats
             {
                 ColorLookup?.Write(bw);
             }
+
             PixelData.Write(bw);
         }
 
+        /// <summary>
+        /// Get the raw pixel data of this TIM file.
+        /// </summary>
+        /// <returns>A 2D array of IColor containing raw pixel data.</returns>
+        /// <exception cref="NotSupportedException">If this TIM uses the 'Mixed' pixel mode. I haven't figured out
+        /// how to load it yet.</exception>
         public IColor[,] GetImage()
         {
             switch (Header.PixelMode)
@@ -67,10 +96,13 @@ namespace libLSD.Formats
                 {
                     throw new NotSupportedException("Mixed pixel mode in TIM is not supported!");
                 }
-
             }
         }
 
+        /// <summary>
+        /// Get the pixel data for a TIM using a 4-bit color lookup table.
+        /// </summary>
+        /// <returns>Pixel data.</returns>
         private IColor[,] GetImageCLUT4Bit()
         {
             int imageWidth = PixelData.Width * 4;
@@ -88,9 +120,14 @@ namespace libLSD.Formats
                     image[y, x + j] = ColorLookup?.Data[clutLocation];
                 }
             }
+
             return image;
         }
 
+        /// <summary>
+        /// Get the pixel data for a TIM using an 8-bit color lookup table.
+        /// </summary>
+        /// <returns>Pixel data.</returns>
         private IColor[,] GetImageCLUT8Bit()
         {
             int imageWidth = PixelData.Width * 2;
@@ -107,9 +144,14 @@ namespace libLSD.Formats
                     image[y, x + j] = ColorLookup?.Data[clutLocation];
                 }
             }
+
             return image;
         }
 
+        /// <summary>
+        /// Get the pixel data for a TIM using 15-bit direct color mode.
+        /// </summary>
+        /// <returns>Pixel data.</returns>
         private IColor[,] GetImageDirect15Bit()
         {
             int imageWidth = PixelData.Width;
@@ -121,9 +163,14 @@ namespace libLSD.Formats
                 int y = i / imageWidth;
                 image[y, x] = new Color16Bit(PixelData.Data[i]);
             }
+
             return image;
         }
 
+        /// <summary>
+        /// Get the pixel data for a TIM using 24-bit direct color mode.
+        /// </summary>
+        /// <returns>Pixel data.</returns>
         private IColor[,] GetImageDirect24Bit()
         {
             int imageWidth = (PixelData.Width / 3) * 2;
@@ -147,9 +194,10 @@ namespace libLSD.Formats
                 int g1 = data3 & 0xFF;
                 int b1 = (data3 >> 8) & 0xFF;
 
-                image[y1, x1] = new Color24Bit((byte)r0, (byte)g0, (byte)b0); 
+                image[y1, x1] = new Color24Bit((byte)r0, (byte)g0, (byte)b0);
                 image[y2, x2] = new Color24Bit((byte)r1, (byte)g1, (byte)b1);
             }
+
             return image;
         }
     }
@@ -159,6 +207,9 @@ namespace libLSD.Formats
     /// </summary>
     public struct TIMHeader : IWriteable
     {
+        /// <summary>
+        /// The different pixel data modes a TIM file supports.
+        /// </summary>
         public enum PixelModes
         {
             CLUT4Bit = 0,
@@ -178,6 +229,9 @@ namespace libLSD.Formats
         /// </summary>
         public uint VersionNumber => (_fileID >> 8) & 0xFF;
 
+        /// <summary>
+        /// The pixel data mode this TIM is using.
+        /// </summary>
         public PixelModes PixelMode => (PixelModes)(_flags & 0b111);
 
         /// <summary>
@@ -188,6 +242,13 @@ namespace libLSD.Formats
         private readonly uint _fileID;
         private readonly uint _flags;
 
+        /// <summary>
+        /// Read a TIM header from a binary stream.
+        /// </summary>
+        /// <param name="br">The binary stream.</param>
+        /// <exception cref="BadFormatException">If the TIM did not have the correct ID.</exception>
+        /// <exception cref="NotSupportedException">If the TIM uses mixed pixel mode. I don't know how to load it yet.
+        /// </exception>
         public TIMHeader(BinaryReader br)
         {
             _fileID = br.ReadUInt32();
@@ -195,11 +256,15 @@ namespace libLSD.Formats
 
             if (ID != 0x10)
                 throw new BadFormatException("TIM file did not have correct magic number!");
-            
+
             if (PixelMode == PixelModes.Mixed)
                 throw new NotSupportedException("Mixed pixel mode in TIM is not supported!");
         }
 
+        /// <summary>
+        /// Write this TIM header to a binary stream.
+        /// </summary>
+        /// <param name="bw">The binary stream.</param>
         public void Write(BinaryWriter bw)
         {
             bw.Write(_fileID);
@@ -207,6 +272,9 @@ namespace libLSD.Formats
         }
     }
 
+    /// <summary>
+    /// A TIM colour lookup table, used to store colours in an efficient manner.
+    /// </summary>
     public struct TIMColorLookup : IWriteable
     {
         /// <summary>
@@ -241,6 +309,10 @@ namespace libLSD.Formats
         /// </summary>
         public readonly Color16Bit[] Data;
 
+        /// <summary>
+        /// Read a color lookup table from a binary stream.
+        /// </summary>
+        /// <param name="br">The binary stream.</param>
         public TIMColorLookup(BinaryReader br)
         {
             CLUTLength = br.ReadUInt32();
@@ -257,6 +329,10 @@ namespace libLSD.Formats
             }
         }
 
+        /// <summary>
+        /// Write this color lookup table to a binary stream.
+        /// </summary>
+        /// <param name="bw">The binary stream.</param>
         public void Write(BinaryWriter bw)
         {
             bw.Write(CLUTLength);
@@ -271,6 +347,9 @@ namespace libLSD.Formats
         }
     }
 
+    /// <summary>
+    /// Stores the actual pixel (color) data of the TIM file.
+    /// </summary>
     public struct TIMPixelData : IWriteable
     {
         /// <summary>
@@ -303,6 +382,10 @@ namespace libLSD.Formats
         /// </summary>
         public readonly ushort[] Data;
 
+        /// <summary>
+        /// Read TIM pixel data from a binary stream.
+        /// </summary>
+        /// <param name="br">The binary stream.</param>
         public TIMPixelData(BinaryReader br)
         {
             PixelDataLength = br.ReadUInt32();
@@ -319,6 +402,10 @@ namespace libLSD.Formats
             }
         }
 
+        /// <summary>
+        /// Write this TIM pixel data to a binary stream.
+        /// </summary>
+        /// <param name="bw">The binary stream.</param>
         public void Write(BinaryWriter bw)
         {
             bw.Write(PixelDataLength);

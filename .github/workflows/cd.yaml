@@ -3,7 +3,7 @@ name: CD
 on:
   release:
     types: [created]
-    
+
 jobs:
   buildAndPush:
     runs-on: windows-latest
@@ -21,7 +21,7 @@ jobs:
           VERSION: ${{ env.GIT_TAG }}
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.0.0
-      - name: Setup NuGet  
+      - name: Setup NuGet
         uses: nuget/setup-nuget@v1
         with:
           nuget-api-key: ${{ secrets.NuGetAPIKey }}
@@ -34,3 +34,12 @@ jobs:
         run: nuget pack src/libLSD -Prop Configuration=Release
       - name: NuGet push
         run: nuget push libLSD.${{ env.GIT_TAG }}.nupkg -Source https://api.nuget.org/v3/index.json
+      - uses: nikeee/docfx-action@master
+        name: Build Documentation
+        with:
+          args: docfx_project/docfx.json
+      - name: Deploy Documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docfx_project/_site

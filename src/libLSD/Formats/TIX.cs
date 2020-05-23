@@ -1,18 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using libLSD.Interfaces;
 
 namespace libLSD.Formats
 {
+    /// <summary>
+    /// A TIX file is a collection of TIM texture data, organised into VRAM pages. Each level has TIX files containing
+    /// every texture used in the level, so they can all be loaded into PSX VRAM at once.
+    ///
+    /// A TIX file is essentially a collection of 'chunks' 
+    /// </summary>
     public struct TIX : IWriteable
     {
+        /// <summary>
+        /// The header of this TIX file.
+        /// </summary>
         public readonly TIXHeader Header;
+
+        /// <summary>
+        /// The chunks contained within this TIX file.
+        /// </summary>
         public readonly TIXChunk[] Chunks;
 
+        /// <summary>
+        /// Get a list of every TIM contained within this TIX file, regardless of which chunk they're in.
+        /// </summary>
         public List<TIM> AllTIMs
         {
             get
@@ -25,10 +37,15 @@ namespace libLSD.Formats
                         tims.Add(tim);
                     }
                 }
+
                 return tims;
             }
         }
 
+        /// <summary>
+        /// Read a TIX file from a binary stream.
+        /// </summary>
+        /// <param name="br">The binary stream.</param>
         public TIX(BinaryReader br)
         {
             Header = new TIXHeader(br);
@@ -44,6 +61,10 @@ namespace libLSD.Formats
             }
         }
 
+        /// <summary>
+        /// Write this TIX file to a binary stream.
+        /// </summary>
+        /// <param name="bw">The binary stream.</param>
         public void Write(BinaryWriter bw)
         {
             Header.Write(bw);
@@ -59,12 +80,30 @@ namespace libLSD.Formats
         }
     }
 
+    /// <summary>
+    /// The header of a TIX file.
+    /// </summary>
     public struct TIXHeader : IWriteable
     {
+        /// <summary>
+        /// The number of chunks in this TIX file.
+        /// </summary>
         public readonly uint NumberOfChunks;
+
+        /// <summary>
+        /// The offsets to the chunks, from the top of the TIX file.
+        /// </summary>
         public readonly uint[] ChunkOffsets;
+
+        /// <summary>
+        /// The lengths of the chunks in bytes.
+        /// </summary>
         public readonly uint[] ChunkLengths;
 
+        /// <summary>
+        /// Read a TIX file from a binary stream.
+        /// </summary>
+        /// <param name="br"></param>
         public TIXHeader(BinaryReader br)
         {
             NumberOfChunks = br.ReadUInt32();
@@ -82,6 +121,10 @@ namespace libLSD.Formats
             }
         }
 
+        /// <summary>
+        /// Write this TIX file to a binary stream.
+        /// </summary>
+        /// <param name="bw"></param>
         public void Write(BinaryWriter bw)
         {
             bw.Write(NumberOfChunks);
@@ -89,6 +132,7 @@ namespace libLSD.Formats
             {
                 bw.Write(offset);
             }
+
             foreach (uint length in ChunkLengths)
             {
                 bw.Write(length);
@@ -96,14 +140,32 @@ namespace libLSD.Formats
         }
     }
 
+    /// <summary>
+    /// A TIX chunk, containing a number of TIM textures.
+    /// </summary>
     public struct TIXChunk : IWriteable
     {
+        /// <summary>
+        /// The number of TIM textures contained within this chunk.
+        /// </summary>
         public readonly uint NumberOfTIMs;
+
+        /// <summary>
+        /// The offsets to the TIM textures, from the top of this chunk.
+        /// </summary>
         public readonly uint[] TIMOffsets;
+
+        /// <summary>
+        /// The TIM data.
+        /// </summary>
         public readonly TIM[] TIMs;
 
         private readonly uint _chunkTop;
 
+        /// <summary>
+        /// Create a new TIX chunk by reading it from a binary stream.
+        /// </summary>
+        /// <param name="br">The binary stream.</param>
         public TIXChunk(BinaryReader br)
         {
             _chunkTop = (uint)br.BaseStream.Position;
@@ -127,6 +189,10 @@ namespace libLSD.Formats
             }
         }
 
+        /// <summary>
+        /// Write this TIX chunk to a binary stream.
+        /// </summary>
+        /// <param name="bw">The binary stream.</param>
         public void Write(BinaryWriter bw)
         {
             bw.Write(NumberOfTIMs);

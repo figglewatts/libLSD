@@ -7,47 +7,60 @@ using System.Threading.Tasks;
 using libLSD.Interfaces;
 using libLSD.Types;
 
-namespace libLSD.Formats
+namespace libLSD.Formats.Packets
 {
-    #region Packet interfaces
+#region Packet interfaces
 
-    public interface IPrimitivePacket
+    /// <summary>
+    /// Interface for all TMD packets. They all have vertices.
+    /// </summary>
+    public interface ITMDPrimitivePacket
     {
         int[] Vertices { get; }
     }
 
-    public interface ILitPrimitivePacket
+    /// <summary>
+    /// A lit TMD packet has normals, for lighting information.
+    /// </summary>
+    public interface ITMDLitPrimitivePacket
     {
         int[] Normals { get; }
     }
 
-    public interface IColoredPrimitivePacket
+    /// <summary>
+    /// A colored TMD packet has colors for each vertex.
+    /// </summary>
+    public interface ITMDColoredPrimitivePacket
     {
         Vec3[] Colors { get; }
     }
 
-    public interface ITexturedPrimitivePacket
+    /// <summary>
+    /// A textured TMD packet has texture and color lookup table information, as well as UVs for each vertex.
+    /// </summary>
+    public interface ITMDTexturedPrimitivePacket
     {
         TMDTexture Texture { get; }
         TMDColorLookup ColorLookup { get; }
         int[] UVs { get; }
     }
 
-    #endregion
+#endregion
 
-    #region 3 Vertex Poly with No Light Source Calculation
+#region 3 Vertex Poly with No Light Source Calculation
+
     // Flat, no texture
     // mode=0x21, flag=0x1, ilen=0x3, olen=0x4
-    public class TriFlatUnlit : IPrimitivePacket, IColoredPrimitivePacket, IWriteable
+    public class TMDTriFlatUnlitPrimitivePacket : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, IWriteable
     {
         public byte r, g, b;
         public ushort p0, p1, p2;
 
-        public int[] Vertices => new int[] { p0, p1, p2 };
+        public int[] Vertices => new int[] {p0, p1, p2};
 
-        public Vec3[] Colors => new [] { new Vec3(r / 255f, g / 255f, b / 255f) };
+        public Vec3[] Colors => new[] {new Vec3(r / 255f, g / 255f, b / 255f)};
 
-        public TriFlatUnlit(BinaryReader br)
+        public TMDTriFlatUnlitPrimitivePacket(BinaryReader br)
         {
             r = br.ReadByte();
             g = br.ReadByte();
@@ -74,7 +87,8 @@ namespace libLSD.Formats
 
     // flat, texture
     // mode=0x25, flag=0x1, ilen=0x6, olen=0x7
-    public class TriFlatTexUnlit : IPrimitivePacket, ITexturedPrimitivePacket, IColoredPrimitivePacket, IWriteable
+    public class TMDTriFlatTexUnlitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDTexturedPrimitivePacket, ITMDColoredPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -90,7 +104,7 @@ namespace libLSD.Formats
         public int[] UVs => new int[] {u0, v0, u1, v1, u2, v2};
         public Vec3[] Colors => new[] {new Vec3(r / 255f, g / 255f, b / 255f)};
 
-        public TriFlatTexUnlit(BinaryReader br)
+        public TMDTriFlatTexUnlitPrimitivePacket(BinaryReader br)
         {
             u0 = br.ReadByte();
             v0 = br.ReadByte();
@@ -110,7 +124,7 @@ namespace libLSD.Formats
             p2 = br.ReadUInt16();
             br.ReadUInt16();
         }
-        
+
         public void Write(BinaryWriter bw)
         {
             bw.Write(u0);
@@ -121,21 +135,21 @@ namespace libLSD.Formats
             tsb.Write(bw);
             bw.Write(u2);
             bw.Write(v2);
-            bw.Write((ushort) 0);
+            bw.Write((ushort)0);
             bw.Write(r);
             bw.Write(g);
             bw.Write(b);
-            bw.Write((byte) 0);
+            bw.Write((byte)0);
             bw.Write(p0);
             bw.Write(p1);
             bw.Write(p2);
-            bw.Write((ushort) 0);
+            bw.Write((ushort)0);
         }
     }
 
     // gradation, no texture
     // mode=0x31, flag=0x1, ilen=0x5, olen=0x6
-    public class TriGradUnlit : IPrimitivePacket, IColoredPrimitivePacket, IWriteable
+    public class TMDTriGradUnlitPrimitivePacket : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -144,14 +158,15 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2};
 
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
-            new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
-            new Vec3(r2 / 255f, g2 / 255f, b2 / 255f)
-        };
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
+                new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
+                new Vec3(r2 / 255f, g2 / 255f, b2 / 255f)
+            };
 
-        public TriGradUnlit(BinaryReader br)
+        public TMDTriGradUnlitPrimitivePacket(BinaryReader br)
         {
             r0 = br.ReadByte();
             g0 = br.ReadByte();
@@ -183,7 +198,8 @@ namespace libLSD.Formats
 
     // gradation, texture
     // mode=0x35, flag=0x1, ilen=0x8, mode=0x9
-    public class TriGradTexUnlit : IPrimitivePacket, ITexturedPrimitivePacket, IColoredPrimitivePacket, IWriteable
+    public class TMDTriGradTexUnlitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDTexturedPrimitivePacket, ITMDColoredPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -198,15 +214,17 @@ namespace libLSD.Formats
         public int[] Vertices => new int[] {p0, p1, p2};
         public TMDColorLookup ColorLookup => cba;
         public TMDTexture Texture => tsb;
-        public int[] UVs => new int[] { u0, v0, u1, v1, u2, v2};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
-            new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
-            new Vec3(r2 / 255f, g2 / 255f, b2 / 255f)
-        };
+        public int[] UVs => new int[] {u0, v0, u1, v1, u2, v2};
 
-        public TriGradTexUnlit(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
+                new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
+                new Vec3(r2 / 255f, g2 / 255f, b2 / 255f)
+            };
+
+        public TMDTriGradTexUnlitPrimitivePacket(BinaryReader br)
         {
             u0 = br.ReadByte();
             v0 = br.ReadByte();
@@ -246,20 +264,22 @@ namespace libLSD.Formats
             bw.Write(u2);
             bw.Write(v2);
             bw.Write((ushort)0);
-            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0 });
+            bw.Write(new byte[] {r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0});
             bw.Write(p0);
             bw.Write(p1);
             bw.Write(p2);
             bw.Write((ushort)0);
         }
     }
-    #endregion
 
-    #region 3 Vertex Poly with Light Source Calculation
+#endregion
+
+#region 3 Vertex Poly with Light Source Calculation
 
     // flat, no texture (solid)
     // mode=0x20, flag=0x0, ilen=0x3, olen=0x4
-    public class TriFlatLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
+    public class TMDTriFlatLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, ITMDLitPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort n0;
@@ -267,12 +287,14 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2};
         public int[] Normals => new int[] {n0};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r / 255f, g / 255f, b / 255f)
-        };
 
-        public TriFlatLitPrimitive(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r / 255f, g / 255f, b / 255f)
+            };
+
+        public TMDTriFlatLitPrimitivePacket(BinaryReader br)
         {
             r = br.ReadByte();
             g = br.ReadByte();
@@ -299,7 +321,8 @@ namespace libLSD.Formats
 
     // flat, no texture (grad)
     // mode=0x20, flag=0x4, ilen=0x5, olen=0x6
-    public class TriFlatGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
+    public class TMDTriFlatGradLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, ITMDLitPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -309,14 +332,16 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2};
         public int[] Normals => new int[] {n0};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
-            new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
-            new Vec3(r2 / 255f, g2 / 255f, b2 / 255f)
-        };
 
-        public TriFlatGradLitPrimitive(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
+                new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
+                new Vec3(r2 / 255f, g2 / 255f, b2 / 255f)
+            };
+
+        public TMDTriFlatGradLitPrimitivePacket(BinaryReader br)
         {
             r0 = br.ReadByte();
             g0 = br.ReadByte();
@@ -338,7 +363,7 @@ namespace libLSD.Formats
 
         public void Write(BinaryWriter bw)
         {
-            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0 });
+            bw.Write(new byte[] {r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0});
             bw.Write(n0);
             bw.Write(p0);
             bw.Write(p1);
@@ -348,7 +373,8 @@ namespace libLSD.Formats
 
     // flat, texture
     // mode=0x24, flag=0x0, ilen=0x5, olen=0x7
-    public class TriFlatTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket, IWriteable
+    public class TMDTriFlatTexLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDTexturedPrimitivePacket, ITMDLitPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -364,7 +390,7 @@ namespace libLSD.Formats
         public TMDTexture Texture => tsb;
         public int[] UVs => new int[] {u0, v0, u1, v1, u2, v2};
 
-        public TriFlatTexLitPrimitive(BinaryReader br)
+        public TMDTriFlatTexLitPrimitivePacket(BinaryReader br)
         {
             u0 = br.ReadByte();
             v0 = br.ReadByte();
@@ -401,7 +427,8 @@ namespace libLSD.Formats
 
     // gouraud, no texture (solid)
     // mode=0x30, flag=0x0, ilen=0x4, olen=0x6
-    public class TriShadedLitPrimitive : IPrimitivePacket, ILitPrimitivePacket, IColoredPrimitivePacket, IWriteable
+    public class TMDTriShaderLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDLitPrimitivePacket, ITMDColoredPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort n0, n1, n2;
@@ -409,12 +436,14 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2};
         public int[] Normals => new int[] {n0, n1, n2};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r / 255f, g / 255f, b / 255f)
-        };
 
-        public TriShadedLitPrimitive(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r / 255f, g / 255f, b / 255f)
+            };
+
+        public TMDTriShaderLitPrimitivePacket(BinaryReader br)
         {
             r = br.ReadByte();
             g = br.ReadByte();
@@ -442,7 +471,8 @@ namespace libLSD.Formats
 
     // gouraud, no texture (grad)
     // mode=0x30, flag=0x4, ilen=0x6, olen=0x6
-    public class TriShadedGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
+    public class TMDTriShadedGradLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, ITMDLitPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -452,14 +482,16 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2};
         public int[] Normals => new int[] {n0, n1, n2};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
-            new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
-            new Vec3(r2 / 255f, g2 / 255f, b2 / 255f)
-        };
 
-        public TriShadedGradLitPrimitive(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
+                new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
+                new Vec3(r2 / 255f, g2 / 255f, b2 / 255f)
+            };
+
+        public TMDTriShadedGradLitPrimitivePacket(BinaryReader br)
         {
             r0 = br.ReadByte();
             g0 = br.ReadByte();
@@ -483,7 +515,7 @@ namespace libLSD.Formats
 
         public void Write(BinaryWriter bw)
         {
-            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0 });
+            bw.Write(new byte[] {r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0});
             bw.Write(n0);
             bw.Write(p0);
             bw.Write(n1);
@@ -495,7 +527,8 @@ namespace libLSD.Formats
 
     // gouraud, texture
     // mode=0x34, flag=0x0, ilen=0x6, olen=0x9
-    public class TriShadedTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket, IWriteable
+    public class TMDTriShadedTexLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDTexturedPrimitivePacket, ITMDLitPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -511,7 +544,7 @@ namespace libLSD.Formats
         public TMDTexture Texture => tsb;
         public int[] UVs => new int[] {u0, v0, u1, v1, u2, v2};
 
-        public TriShadedTexLitPrimitive(BinaryReader br)
+        public TMDTriShadedTexLitPrimitivePacket(BinaryReader br)
         {
             u0 = br.ReadByte();
             v0 = br.ReadByte();
@@ -550,24 +583,26 @@ namespace libLSD.Formats
         }
     }
 
-    #endregion
+#endregion
 
-    #region 4 Vertex Poly with No Light Source Calculation
+#region 4 Vertex Poly with No Light Source Calculation
 
     // flat, no texture
     // mode=0x29, flag=0x1, ilen=0x3, olen=0x5
-    public class QuadFlatUnlit : IPrimitivePacket, IColoredPrimitivePacket, IWriteable
+    public class TMDQuadFlatUnlitPrimitivePacket : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort p0, p1, p2, p3;
 
         public int[] Vertices => new int[] {p0, p1, p2, p3};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r / 255f, g / 255f, b / 255f)
-        };
 
-        public QuadFlatUnlit(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r / 255f, g / 255f, b / 255f)
+            };
+
+        public TMDQuadFlatUnlitPrimitivePacket(BinaryReader br)
         {
             r = br.ReadByte();
             g = br.ReadByte();
@@ -591,7 +626,8 @@ namespace libLSD.Formats
 
     // flat, texture
     // mode=0x2D, flag=0x1, ilen=0x7, olen=0x9
-    public class QuadFlatTexUnlit : IPrimitivePacket, ITexturedPrimitivePacket, IColoredPrimitivePacket, IWriteable
+    public class TMDQuadFlatTexUnlitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDTexturedPrimitivePacket, ITMDColoredPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -606,12 +642,14 @@ namespace libLSD.Formats
         public TMDColorLookup ColorLookup => cba;
         public TMDTexture Texture => tsb;
         public int[] UVs => new int[] {u0, v0, u1, v1, u2, v2, u3, v3};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r / 255f, g / 255f, b / 255f)
-        };
 
-        public QuadFlatTexUnlit(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r / 255f, g / 255f, b / 255f)
+            };
+
+        public TMDQuadFlatTexUnlitPrimitivePacket(BinaryReader br)
         {
             u0 = br.ReadByte();
             v0 = br.ReadByte();
@@ -650,7 +688,7 @@ namespace libLSD.Formats
             bw.Write(v3);
             bw.Write((ushort)0);
 
-            bw.Write(new byte[] { r, g, b, 0 });
+            bw.Write(new byte[] {r, g, b, 0});
             bw.Write(p0);
             bw.Write(p1);
             bw.Write(p2);
@@ -660,7 +698,7 @@ namespace libLSD.Formats
 
     // grad, no texture
     // mode=0x39, flag=0x1, ilen=0x6, olen=0x8
-    public class QuadGradUnlit : IPrimitivePacket, IColoredPrimitivePacket, IWriteable
+    public class TMDQuadGradUnlitPrimitivePacket : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -669,15 +707,17 @@ namespace libLSD.Formats
         private readonly ushort p0, p1, p2, p3;
 
         public int[] Vertices => new int[] {p0, p1, p2, p3};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
-            new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
-            new Vec3(r2 / 255f, g2 / 255f, b2 / 255f),
-            new Vec3(r3 / 255f, g3 / 255f, b3 / 255f)
-        };
 
-        public QuadGradUnlit(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
+                new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
+                new Vec3(r2 / 255f, g2 / 255f, b2 / 255f),
+                new Vec3(r3 / 255f, g3 / 255f, b3 / 255f)
+            };
+
+        public TMDQuadGradUnlitPrimitivePacket(BinaryReader br)
         {
             r0 = br.ReadByte();
             g0 = br.ReadByte();
@@ -703,7 +743,7 @@ namespace libLSD.Formats
 
         public void Write(BinaryWriter bw)
         {
-            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0});
+            bw.Write(new byte[] {r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0});
             bw.Write(p0);
             bw.Write(p1);
             bw.Write(p2);
@@ -713,7 +753,8 @@ namespace libLSD.Formats
 
     // grad, texture
     // mode=0x3D, flag=0x1, ilen=0xA, olen=0xC
-    public class QuadGradTexUnlit : IPrimitivePacket, ITexturedPrimitivePacket, IColoredPrimitivePacket, IWriteable
+    public class TMDQuadGradTexUnlitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDTexturedPrimitivePacket, ITMDColoredPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -731,15 +772,17 @@ namespace libLSD.Formats
         public TMDColorLookup ColorLookup => cba;
         public TMDTexture Texture => tsb;
         public int[] UVs => new int[] {u0, v0, u1, v1, u2, v2, u3, v3};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
-            new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
-            new Vec3(r2 / 255f, g2 / 255f, b2 / 255f),
-            new Vec3(r3 / 255f, g3 / 255f, b3 / 255f)
-        };
 
-        public QuadGradTexUnlit(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
+                new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
+                new Vec3(r2 / 255f, g2 / 255f, b2 / 255f),
+                new Vec3(r3 / 255f, g3 / 255f, b3 / 255f)
+            };
+
+        public TMDQuadGradTexUnlitPrimitivePacket(BinaryReader br)
         {
             u0 = br.ReadByte();
             v0 = br.ReadByte();
@@ -790,7 +833,7 @@ namespace libLSD.Formats
             bw.Write(v3);
             bw.Write((ushort)0);
 
-            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0 });
+            bw.Write(new byte[] {r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0});
             bw.Write(p0);
             bw.Write(p1);
             bw.Write(p2);
@@ -798,13 +841,14 @@ namespace libLSD.Formats
         }
     }
 
-    #endregion
+#endregion
 
-    #region 4 Vertex Poly with Light Source Calculation
+#region 4 Vertex Poly with Light Source Calculation
 
     // flat, no texture (solid)
     // mode=0x28, flag=0x0, ilen=0x4, olen=0x5
-    public class QuadFlatLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
+    public class TMDQuadFlatLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, ITMDLitPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort n0;
@@ -813,12 +857,13 @@ namespace libLSD.Formats
         public int[] Vertices => new int[] {p0, p1, p2, p3};
         public int[] Normals => new int[] {n0};
 
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r / 255f, g / 255f, b / 255f)
-        };
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r / 255f, g / 255f, b / 255f)
+            };
 
-        public QuadFlatLitPrimitive(BinaryReader br)
+        public TMDQuadFlatLitPrimitivePacket(BinaryReader br)
         {
             r = br.ReadByte();
             g = br.ReadByte();
@@ -849,7 +894,8 @@ namespace libLSD.Formats
 
     // flat, no texture (grad)
     // mode=0x28, flag=0x4, ilen=0x7, olen=0x8
-    public class QuadFlatGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
+    public class TMDQuadFlatGradLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, ITMDLitPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -860,15 +906,17 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2, p3};
         public int[] Normals => new int[] {n0};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
-            new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
-            new Vec3(r2 / 255f, g2 / 255f, b2 / 255f),
-            new Vec3(r3 / 255f, g3 / 255f, b3 / 255f)
-        };
 
-        public QuadFlatGradLitPrimitive(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
+                new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
+                new Vec3(r2 / 255f, g2 / 255f, b2 / 255f),
+                new Vec3(r3 / 255f, g3 / 255f, b3 / 255f)
+            };
+
+        public TMDQuadFlatGradLitPrimitivePacket(BinaryReader br)
         {
             r0 = br.ReadByte();
             g0 = br.ReadByte();
@@ -896,7 +944,7 @@ namespace libLSD.Formats
 
         public void Write(BinaryWriter bw)
         {
-            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0 });
+            bw.Write(new byte[] {r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0});
             bw.Write(n0);
             bw.Write(p0);
             bw.Write(p1);
@@ -908,7 +956,8 @@ namespace libLSD.Formats
 
     // flat, texture
     // mode=0x2C, flag=0x0, ilen=0x7, olen=0x9
-    public class QuadFlatTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket, IWriteable
+    public class TMDQuadFlatTexLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDTexturedPrimitivePacket, ITMDLitPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -925,7 +974,7 @@ namespace libLSD.Formats
         public TMDTexture Texture => tsb;
         public int[] UVs => new int[] {u0, v0, u1, v1, u2, v2, u3, v3};
 
-        public QuadFlatTexLitPrimitive(BinaryReader br)
+        public TMDQuadFlatTexLitPrimitivePacket(BinaryReader br)
         {
             u0 = br.ReadByte();
             v0 = br.ReadByte();
@@ -972,7 +1021,8 @@ namespace libLSD.Formats
 
     // gouraud, no texture (solid)
     // mode=0x38, flag=0x0, ilen=0x5, olen=0x8
-    public class QuadShadedLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
+    public class TMDQuadShadedLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, ITMDLitPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort n0, n1, n2, n3;
@@ -980,12 +1030,14 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2, p3};
         public int[] Normals => new int[] {n0, n1, n2, n3};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r / 255f, g / 255f, b / 255f)
-        };
 
-        public QuadShadedLitPrimitive(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r / 255f, g / 255f, b / 255f)
+            };
+
+        public TMDQuadShadedLitPrimitivePacket(BinaryReader br)
         {
             r = br.ReadByte();
             g = br.ReadByte();
@@ -1017,7 +1069,8 @@ namespace libLSD.Formats
 
     // gouraud, no texture (grad)
     // mode=0x38, flag=0x4, ilen=0x8, olen=0x8
-    public class QuadShadedGradLitPrimitive : IPrimitivePacket, IColoredPrimitivePacket, ILitPrimitivePacket, IWriteable
+    public class TMDQuadShadedGradLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, ITMDLitPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
@@ -1028,15 +1081,17 @@ namespace libLSD.Formats
 
         public int[] Vertices => new int[] {p0, p1, p2, p3};
         public int[] Normals => new int[] {n0, n1, n2, n3};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
-            new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
-            new Vec3(r2 / 255f, g2 / 255f, b2 / 255f),
-            new Vec3(r3 / 255f, g3 / 255f, b3 / 255f)
-        };
 
-        public QuadShadedGradLitPrimitive(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
+                new Vec3(r1 / 255f, g1 / 255f, b1 / 255f),
+                new Vec3(r2 / 255f, g2 / 255f, b2 / 255f),
+                new Vec3(r3 / 255f, g3 / 255f, b3 / 255f)
+            };
+
+        public TMDQuadShadedGradLitPrimitivePacket(BinaryReader br)
         {
             r0 = br.ReadByte();
             g0 = br.ReadByte();
@@ -1066,7 +1121,7 @@ namespace libLSD.Formats
 
         public void Write(BinaryWriter bw)
         {
-            bw.Write(new byte[] { r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0 });
+            bw.Write(new byte[] {r0, g0, b0, 0, r1, g1, b1, 0, r2, g2, b2, 0, r3, g3, b3, 0});
             bw.Write(n0);
             bw.Write(p0);
             bw.Write(n1);
@@ -1080,7 +1135,8 @@ namespace libLSD.Formats
 
     // gouraud, texture
     // mode=0x3C, flag=0x0, ilen=0x8, olen=0xC
-    public class QuadShadedTexLitPrimitive : IPrimitivePacket, ITexturedPrimitivePacket, ILitPrimitivePacket, IWriteable
+    public class TMDQuadShadedTexLitPrimitivePacket
+        : ITMDPrimitivePacket, ITMDTexturedPrimitivePacket, ITMDLitPrimitivePacket, IWriteable
     {
         private readonly byte u0, v0;
         private readonly TMDColorLookup cba;
@@ -1097,7 +1153,7 @@ namespace libLSD.Formats
         public TMDTexture Texture => tsb;
         public int[] UVs => new int[] {u0, v0, u1, v1, u2, v2, u3, v3};
 
-        public QuadShadedTexLitPrimitive(BinaryReader br)
+        public TMDQuadShadedTexLitPrimitivePacket(BinaryReader br)
         {
             u0 = br.ReadByte();
             v0 = br.ReadByte();
@@ -1147,23 +1203,25 @@ namespace libLSD.Formats
         }
     }
 
-    #endregion
+#endregion
 
-    #region Straight Line
+#region Straight Line
 
     // mode=0x40, flag=0x1, ilen=0x2, olen=0x3
-    public class LineFlat : IPrimitivePacket, IColoredPrimitivePacket, IWriteable
+    public class TMDLineFlatPrimitivePacket : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, IWriteable
     {
         private readonly byte r, g, b;
         private readonly ushort p0, p1;
 
         public int[] Vertices => new int[] {p0, p1};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r / 255f, g / 255f, b / 255f)
-        };
 
-        public LineFlat(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r / 255f, g / 255f, b / 255f)
+            };
+
+        public TMDLineFlatPrimitivePacket(BinaryReader br)
         {
             r = br.ReadByte();
             g = br.ReadByte();
@@ -1182,20 +1240,22 @@ namespace libLSD.Formats
     }
 
     // mode=0x50, flag=0x1, ilen=0x3, olen=0x4
-    public class LineGrad : IPrimitivePacket, IColoredPrimitivePacket, IWriteable
+    public class TMDLineGradPrimitivePacket : ITMDPrimitivePacket, ITMDColoredPrimitivePacket, IWriteable
     {
         private readonly byte r0, g0, b0;
         private readonly byte r1, g1, b1;
         private readonly ushort p0, p1;
 
         public int[] Vertices => new int[] {p0, p1};
-        public Vec3[] Colors => new[]
-        {
-            new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
-            new Vec3(r1 / 255f, g1 / 255f, b1 / 255f)
-        };
 
-        public LineGrad(BinaryReader br)
+        public Vec3[] Colors =>
+            new[]
+            {
+                new Vec3(r0 / 255f, g0 / 255f, b0 / 255f),
+                new Vec3(r1 / 255f, g1 / 255f, b1 / 255f)
+            };
+
+        public TMDLineGradPrimitivePacket(BinaryReader br)
         {
             r0 = br.ReadByte();
             g0 = br.ReadByte();
@@ -1217,5 +1277,5 @@ namespace libLSD.Formats
         }
     }
 
-    #endregion
+#endregion
 }

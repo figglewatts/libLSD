@@ -28,6 +28,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\libLSD.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -46,11 +47,12 @@
     <Compile Include="Formats\MML.cs" />
     <Compile Include="Formats\MOM.cs" />
     <Compile Include="Formats\MOS.cs" />
+    <Compile Include="Formats\Packets\TMDPackets.cs" />
+    <Compile Include="Formats\Packets\TODPackets.cs" />
     <Compile Include="Formats\TIM.cs" />
     <Compile Include="Formats\TIX.cs" />
     <Compile Include="Formats\TMD.cs" />
     <Compile Include="Formats\TMDColorLookup.cs" />
-    <Compile Include="Formats\TMDPackets.cs" />
     <Compile Include="Formats\TMDTexture.cs" />
     <Compile Include="Formats\TOD.cs" />
     <Compile Include="Interfaces\IWriteable.cs" />
