@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>LibLSD </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="LibLSD ">
+    <meta name="generator" content="docfx 2.53.1.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="liblsd">LibLSD</h1>
+
+<p>A C# library for loading LSD: Dream Emulator data files.</p>
+<h2 id="installation">Installation</h2>
+<p>LibLSD is available as a <a href="https://www.nuget.org/packages/libLSD/">NuGet package</a>.</p>
+<h2 id="general-usage">General usage</h2>
+<p>Basically this library contains structs for most of the data file types that can be found in LSD: Dream Emulator.</p>
+<p>All of these structs have a constructor that takes a <code>BinaryReader</code>. If you open a file and pass it to a <code>BinaryReader</code>,
+you can then use that <code>BinaryReader</code> to construct the object.</p>
+<p>For example, here's how you open an LBD file:</p>
+<pre><code class="lang-C#">LBD lbd;
+using (BinaryReader br = new BinaryReader(File.Open(&quot;path/to/file.LBD&quot;, FileMode.Open)))
+{
+    lbd = new LBD(br);
+}
+
+// now you can access the LBD data here...
+</code></pre>
+<p>You can do this with any of the formats listed below.</p>
+<h2 id="formats">Formats</h2>
+<p>LibLSD currently supports the following formats:</p>
+<ul>
+<li><a href="api/libLSD.Formats.LBD.html"><strong>LBD</strong></a>: Level data.</li>
+<li><a href="api/libLSD.Formats.MOM.html"><strong>MOM</strong></a>: Interactive objects with animations.</li>
+<li><a href="api/libLSD.Formats.MML.html"><strong>MML</strong></a>: Containers for multiple MOM files.</li>
+<li><a href="api/libLSD.Formats.MOS.html"><strong>MOS</strong></a>: Container for TOD animation data.</li>
+<li><a href="api/libLSD.Formats.TIM.html"><strong>TIM</strong></a>: Texture data.</li>
+<li><a href="api/libLSD.Formats.TIX.html"><strong>TIX</strong></a>: Archives of multiple textures.</li>
+<li><a href="api/libLSD.Formats.TMD.html"><strong>TMD</strong></a>: 3D model data.</li>
+<li><a href="api/libLSD.Formats.TOD.html"><strong>TOD</strong></a>: 3D model animation data.</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Figglewatts/libLSD/blob/7347c036bc871a01c1451d7a5d1031565db33c39/docfx_project/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

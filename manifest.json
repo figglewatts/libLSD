@@ -1,0 +1,1136 @@
+{
+  "homepages": [],
+  "source_base_path": "D:/a/libLSD/libLSD/docfx_project",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Exceptions.BadFormatException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Exceptions.BadFormatException.html",
+          "hash": "1ft78vyMwqHWUeac2k7cFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Exceptions.UnwriteableException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Exceptions.UnwriteableException.html",
+          "hash": "243mTKBjswj8ckHxyXCzOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Exceptions.html",
+          "hash": "0freWmwja9dXOFR1AMCG3A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.LBD.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.LBD.html",
+          "hash": "DGrRyPtBB8hBns8mBx5Faw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.LBDHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.LBDHeader.html",
+          "hash": "f75u7BlrQumteJMFkiiCsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.LBDTile.TileDirections.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.LBDTile.TileDirections.html",
+          "hash": "/RRq9OByn3rmYEaCHKhoWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.LBDTile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.LBDTile.html",
+          "hash": "ZHHELWRSApN/bpIxw8dNFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.MML.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.MML.html",
+          "hash": "lpMwKULD28gyXdzmXFov7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.MOM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.MOM.html",
+          "hash": "s1oigCBbifE731UWzC/5kg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.MOS.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.MOS.html",
+          "hash": "f5TTME8BYhldINfyeOwVtA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.ITMDColoredPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.ITMDColoredPrimitivePacket.html",
+          "hash": "/ow9vXL1yJ18iclPsTOvxw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.ITMDLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.ITMDLitPrimitivePacket.html",
+          "hash": "RJVYhZU8B22hVs+fE8vDyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.ITMDPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.ITMDPrimitivePacket.html",
+          "hash": "0XeCoJDY+LzttFVc5U65JQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.ITMDTexturedPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.ITMDTexturedPrimitivePacket.html",
+          "hash": "4X7yLsz3jT6XWZQYGrzOFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDLineFlatPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDLineFlatPrimitivePacket.html",
+          "hash": "ZfAUAhoCK+si7F5R8S8t2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDLineGradPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDLineGradPrimitivePacket.html",
+          "hash": "LKps4N/GDp8rF3WmQCrHog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatGradLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatGradLitPrimitivePacket.html",
+          "hash": "/ggT3r9u40yevRkAzd5uvw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatLitPrimitivePacket.html",
+          "hash": "3cmHYtvmUyBv3gPi9FUu0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatTexLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatTexLitPrimitivePacket.html",
+          "hash": "8082N/N46gEhPbFXHsad0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatTexUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatTexUnlitPrimitivePacket.html",
+          "hash": "juFaltdGCCVvI34iPyV1Fw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatUnlitPrimitivePacket.html",
+          "hash": "HSHjr7weg7dxXgpoDC9/9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadGradTexUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadGradTexUnlitPrimitivePacket.html",
+          "hash": "WgpvLHkC52x8K7twETxNLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadGradUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadGradUnlitPrimitivePacket.html",
+          "hash": "NNqyGPb19ST/ppVwERvlrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedGradLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedGradLitPrimitivePacket.html",
+          "hash": "9ynEiDF0AAyBqg2MKxUr3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedLitPrimitivePacket.html",
+          "hash": "3MF/3SDB30dKkC41Xg8LzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedTexLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedTexLitPrimitivePacket.html",
+          "hash": "M8zVkl0LYdjDYlEQ9nDlsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriFlatGradLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriFlatGradLitPrimitivePacket.html",
+          "hash": "jYmcmi8QAVi9bD5TTQIVww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriFlatLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriFlatLitPrimitivePacket.html",
+          "hash": "a5kfAV52Ehkz8HnoCnAEVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriFlatTexLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriFlatTexLitPrimitivePacket.html",
+          "hash": "+udV7ZyTwnBgpeNbaDdMxQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriFlatTexUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriFlatTexUnlitPrimitivePacket.html",
+          "hash": "gJdlkN+C/4/wmmTNl1Ic8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriFlatUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriFlatUnlitPrimitivePacket.html",
+          "hash": "ZvLfiHhZBQWaasA21LtLew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriGradTexUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriGradTexUnlitPrimitivePacket.html",
+          "hash": "3cWbAA+yzQGS7PVt9vFvLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriGradUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriGradUnlitPrimitivePacket.html",
+          "hash": "v1NQYQCiYQ+ON814RwKShA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriShadedGradLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriShadedGradLitPrimitivePacket.html",
+          "hash": "KUIBZC7chVSEmqD09MGcbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriShadedTexLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriShadedTexLitPrimitivePacket.html",
+          "hash": "RSfWTeSi0RMX4CbKIItOZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriShaderLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriShaderLitPrimitivePacket.html",
+          "hash": "2xnHASHn6PE5LwyhNX+ecg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODAttributePacketData.DifferenceMask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODAttributePacketData.DifferenceMask.html",
+          "hash": "WgQetIfYUkxFCGbojv0mYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODAttributePacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODAttributePacketData.html",
+          "hash": "g4XwI+TJSLBBEWNl71+Oag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODCameraPacketData.CameraTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODCameraPacketData.CameraTypes.html",
+          "hash": "Oe6xAez4GpygdpEJPWxLhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODCameraPacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODCameraPacketData.html",
+          "hash": "K3r92Zolhknq0oC1VqyMSw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODCoordinatePacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODCoordinatePacketData.html",
+          "hash": "fU5dfvvSibSAz/zhSRTwdg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODLightSourcePacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODLightSourcePacketData.html",
+          "hash": "KAMdM2DwbmzBa0KRreloOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODMatrixPacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODMatrixPacketData.html",
+          "hash": "rWq0zULxsnbnJfQtmYn9ag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODObjectControlPacketData.ObjectControlType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODObjectControlPacketData.ObjectControlType.html",
+          "hash": "vmhF/B5aS9Amd6dc5vAZ7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODObjectControlPacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODObjectControlPacketData.html",
+          "hash": "O9248v33atyYgaiseAKzww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODObjectIDPacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODObjectIDPacketData.html",
+          "hash": "ums4b4RgWuaxUsCmszur2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODPacketData.PacketDataType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODPacketData.PacketDataType.html",
+          "hash": "JbKsk0CNzJ0CCfG+VKRx3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODPacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODPacketData.html",
+          "hash": "d/A5D7OUW+lJX3U4cSQD5A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.html",
+          "hash": "qxlMvIVwiOKAsxw67JdBfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIM.html",
+          "hash": "+AgqiONOJZ3cfdd+pfbx/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIMColorLookup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIMColorLookup.html",
+          "hash": "ENV0AU6K2qDXel9A6VrWXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIMHeader.PixelModes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIMHeader.PixelModes.html",
+          "hash": "cwoEHj4MX3gdn5R5eGluMA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIMHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIMHeader.html",
+          "hash": "FnH87SxfWen1A9NtoVQV7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIMPixelData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIMPixelData.html",
+          "hash": "XER/Onhdn8PEgDVu8f7gLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIX.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIX.html",
+          "hash": "PVyOzwj7GlAaAab2Kcjong=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIXChunk.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIXChunk.html",
+          "hash": "XsFA18zs7E4RBHO8WmYPdg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIXHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIXHeader.html",
+          "hash": "SLN0LthEuljUNwpqXaNmvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMD.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMD.html",
+          "hash": "a7ntNqoq8cP5ULdEGJjoSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDColorLookup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDColorLookup.html",
+          "hash": "lRHNLu97/EEscNLQWPmQHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDHeader.html",
+          "hash": "9RoJQSMNDUAgVJRSoFoF8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDNormal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDNormal.html",
+          "hash": "k/no38RnFwmfimLomn3ttA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDObject.html",
+          "hash": "TBslOtGkm69npwNkZHF4Ug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDPrimitivePacket.OptionsFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDPrimitivePacket.OptionsFlags.html",
+          "hash": "HzmeyUcBrH0kTeLWHTI0HA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDPrimitivePacket.PrimitiveFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDPrimitivePacket.PrimitiveFlags.html",
+          "hash": "8RF3QjWK9OFJREjobYCkcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDPrimitivePacket.SpriteSizes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDPrimitivePacket.SpriteSizes.html",
+          "hash": "iZBIuiFrNSM+UwXFsgV1Vg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDPrimitivePacket.Types.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDPrimitivePacket.Types.html",
+          "hash": "fMlDvhdEjALil+9lPwEj1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDPrimitivePacket.html",
+          "hash": "9Gu0ijIZok7nlGiA80lHxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDTexture.ColorModes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDTexture.ColorModes.html",
+          "hash": "4992FCfwe4sF3kZlkSiSxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDTexture.TransparencyRates.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDTexture.TransparencyRates.html",
+          "hash": "XexQmk9k+C5hzqpSiLeL5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDTexture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDTexture.html",
+          "hash": "uNjDhwPWyU3WsJvNsiTFjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TOD.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TOD.html",
+          "hash": "xokuQMQNc+F4g7Kr2w5Ixg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TODFrame.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TODFrame.html",
+          "hash": "3lCB98KNP6BKaiDO0x54fw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TODHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TODHeader.html",
+          "hash": "NHCBGOq/E+F9a1YDgIhTeg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TODPacket.PacketTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TODPacket.PacketTypes.html",
+          "hash": "ZbEO3ywqKDtuw6xxndjf6A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TODPacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TODPacket.html",
+          "hash": "bJ7XXycFJndRYBkWfZ2LLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.html",
+          "hash": "YJTPJhHQkKhHkMQDAUUYtg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Interfaces.IWriteable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Interfaces.IWriteable.html",
+          "hash": "w1ORbdaOK/rXRKCNv71tgQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Interfaces.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Interfaces.html",
+          "hash": "Wxe+R0XaRgz6D6l2+JoHRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.Color16Bit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.Color16Bit.html",
+          "hash": "kfSwqSnCWM+bgRlmhCfrYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.Color24Bit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.Color24Bit.html",
+          "hash": "tj4cGwkho+Cs5JEX2hwqyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.FixedPoint16Bit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.FixedPoint16Bit.html",
+          "hash": "DsT/9mkCjvdyJP13I2FCXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.FixedPoint32Bit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.FixedPoint32Bit.html",
+          "hash": "qtm22+ytJFGtJMizE8gqow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.IColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.IColor.html",
+          "hash": "IZN5CRNddI0JCqaCVn2gIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.Vec3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.Vec3.html",
+          "hash": "6Kk7x+J867kkUrOONadiqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.html",
+          "hash": "XSVuhq4D41IoASkEckOjPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Util.BitTwiddling.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Util.BitTwiddling.html",
+          "hash": "3jHnNjthcpQeEwIpf3qejQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Util.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Util.html",
+          "hash": "VeoBvhYQf/aaYddxXC1daA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "unofB+hrsaBVo/WSZKMujA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "pL7oGl8gv7T3Kmpk1ecZtg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "lerdccPHVa77Mw29bXzirA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 1,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 87,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

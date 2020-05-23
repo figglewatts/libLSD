@@ -1,0 +1,523 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Struct FixedPoint16Bit
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Struct FixedPoint16Bit
+   ">
+    <meta name="generator" content="docfx 2.53.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="libLSD.Types.FixedPoint16Bit">
+  
+  
+  <h1 id="libLSD_Types_FixedPoint16Bit" data-uid="libLSD.Types.FixedPoint16Bit" class="text-break">Struct FixedPoint16Bit
+  </h1>
+  <div class="markdown level0 summary"><p>A 16-bit fixed point number as used in PSX hardware.</p>
+<p>In the form:</p>
+<pre><code>    MSB ----------- LSB
+    SIII MMMM MMMM MMMM</code></pre>
+<p>Where S is sign bit, I are integral bits, and M are mantissa bits.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="libLSD.Interfaces.IWriteable.html">IWriteable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.ValueType.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.ValueType.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="libLSD.Types.html">libLSD.Types</a></h6>
+  <h6><strong>Assembly</strong>: libLSD.dll</h6>
+  <h5 id="libLSD_Types_FixedPoint16Bit_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public struct FixedPoint16Bit : IWriteable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="libLSD_Types_FixedPoint16Bit__ctor_" data-uid="libLSD.Types.FixedPoint16Bit.#ctor*"></a>
+  <h4 id="libLSD_Types_FixedPoint16Bit__ctor_System_Byte___" data-uid="libLSD.Types.FixedPoint16Bit.#ctor(System.Byte[])">FixedPoint16Bit(Byte[])</h4>
+  <div class="markdown level1 summary"><p>Create a 16-bit fixed point number from a byte array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FixedPoint16Bit(byte[] data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The byte array.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="libLSD.Exceptions.BadFormatException.html">BadFormatException</a></td>
+        <td><p>If the byte array is not 2 bytes long.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="libLSD_Types_FixedPoint16Bit__ctor_" data-uid="libLSD.Types.FixedPoint16Bit.#ctor*"></a>
+  <h4 id="libLSD_Types_FixedPoint16Bit__ctor_System_Int32_" data-uid="libLSD.Types.FixedPoint16Bit.#ctor(System.Int32)">FixedPoint16Bit(Int32)</h4>
+  <div class="markdown level1 summary"><p>Create a 16-bit fixed point number from a given value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FixedPoint16Bit(int value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="libLSD_Types_FixedPoint16Bit__ctor_" data-uid="libLSD.Types.FixedPoint16Bit.#ctor*"></a>
+  <h4 id="libLSD_Types_FixedPoint16Bit__ctor_System_Int32_System_Int32_System_Boolean_" data-uid="libLSD.Types.FixedPoint16Bit.#ctor(System.Int32,System.Int32,System.Boolean)">FixedPoint16Bit(Int32, Int32, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Create a 16-bit fixed point number from its constituent parts.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FixedPoint16Bit(int integralPart, int decimalPart, bool isNegative = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">integralPart</span></td>
+        <td><p>The integral part.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">decimalPart</span></td>
+        <td><p>The decimal part.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isNegative</span></td>
+        <td><p>Whether this number is negative.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="libLSD_Types_FixedPoint16Bit_DecimalPart_" data-uid="libLSD.Types.FixedPoint16Bit.DecimalPart*"></a>
+  <h4 id="libLSD_Types_FixedPoint16Bit_DecimalPart" data-uid="libLSD.Types.FixedPoint16Bit.DecimalPart">DecimalPart</h4>
+  <div class="markdown level1 summary"><p>The decimal part of the number.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int DecimalPart { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="libLSD_Types_FixedPoint16Bit_IntegralAndDecimalPart_" data-uid="libLSD.Types.FixedPoint16Bit.IntegralAndDecimalPart*"></a>
+  <h4 id="libLSD_Types_FixedPoint16Bit_IntegralAndDecimalPart" data-uid="libLSD.Types.FixedPoint16Bit.IntegralAndDecimalPart">IntegralAndDecimalPart</h4>
+  <div class="markdown level1 summary"><p>Gets the integral and decimal parts of the number together.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int IntegralAndDecimalPart { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="libLSD_Types_FixedPoint16Bit_IntegralPart_" data-uid="libLSD.Types.FixedPoint16Bit.IntegralPart*"></a>
+  <h4 id="libLSD_Types_FixedPoint16Bit_IntegralPart" data-uid="libLSD.Types.FixedPoint16Bit.IntegralPart">IntegralPart</h4>
+  <div class="markdown level1 summary"><p>The integral part of the number.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int IntegralPart { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="libLSD_Types_FixedPoint16Bit_IsNegative_" data-uid="libLSD.Types.FixedPoint16Bit.IsNegative*"></a>
+  <h4 id="libLSD_Types_FixedPoint16Bit_IsNegative" data-uid="libLSD.Types.FixedPoint16Bit.IsNegative">IsNegative</h4>
+  <div class="markdown level1 summary"><p>True if this number is negative, false otherwise.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsNegative { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="libLSD_Types_FixedPoint16Bit_ToString_" data-uid="libLSD.Types.FixedPoint16Bit.ToString*"></a>
+  <h4 id="libLSD_Types_FixedPoint16Bit_ToString" data-uid="libLSD.Types.FixedPoint16Bit.ToString">ToString()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.ValueType.ToString()</span></div>
+  
+  
+  <a id="libLSD_Types_FixedPoint16Bit_Write_" data-uid="libLSD.Types.FixedPoint16Bit.Write*"></a>
+  <h4 id="libLSD_Types_FixedPoint16Bit_Write_System_IO_BinaryWriter_" data-uid="libLSD.Types.FixedPoint16Bit.Write(System.IO.BinaryWriter)">Write(BinaryWriter)</h4>
+  <div class="markdown level1 summary"><p>Write this 16-bit fixed point number to a binary stream.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Write(BinaryWriter bw)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.BinaryWriter</span></td>
+        <td><span class="parametername">bw</span></td>
+        <td><p>The stream.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  
+  
+  <a id="libLSD_Types_FixedPoint16Bit_op_Implicit_" data-uid="libLSD.Types.FixedPoint16Bit.op_Implicit*"></a>
+  <h4 id="libLSD_Types_FixedPoint16Bit_op_Implicit_libLSD_Types_FixedPoint16Bit__System_Single" data-uid="libLSD.Types.FixedPoint16Bit.op_Implicit(libLSD.Types.FixedPoint16Bit)~System.Single">Implicit(FixedPoint16Bit to Single)</h4>
+  <div class="markdown level1 summary"><p>Convert this 16-bit fixed point number to a float.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator float (FixedPoint16Bit p)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="libLSD.Types.FixedPoint16Bit.html">FixedPoint16Bit</a></td>
+        <td><span class="parametername">p</span></td>
+        <td><p>The number.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><p>The float.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="libLSD_Types_FixedPoint16Bit_op_Implicit_" data-uid="libLSD.Types.FixedPoint16Bit.op_Implicit*"></a>
+  <h4 id="libLSD_Types_FixedPoint16Bit_op_Implicit_System_Byte____libLSD_Types_FixedPoint16Bit" data-uid="libLSD.Types.FixedPoint16Bit.op_Implicit(System.Byte[])~libLSD.Types.FixedPoint16Bit">Implicit(Byte[] to FixedPoint16Bit)</h4>
+  <div class="markdown level1 summary"><p>Convert an array of bytes into a 16-bit fixed point number.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator FixedPoint16Bit(byte[] bytes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Byte</span>[]</td>
+        <td><span class="parametername">bytes</span></td>
+        <td><p>The bytes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="libLSD.Types.FixedPoint16Bit.html">FixedPoint16Bit</a></td>
+        <td><p>The fixed point number.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="libLSD.Interfaces.IWriteable.html">IWriteable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
