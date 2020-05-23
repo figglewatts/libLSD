@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -47,10 +47,6 @@ namespace libLSD.Types
                     _alpha = 0;
                 }
             }
-            /*if (IsBlack && !TransparencyControl)
-            {
-                Alpha = 0;
-            }*/
         }
 
         public Color16Bit(ushort data)
@@ -71,10 +67,6 @@ namespace libLSD.Types
                     _alpha = 0;
                 }
             }
-            /*if (IsBlack && !TransparencyControl)
-            {
-                Alpha = 0;
-            }*/
         }
 
         public void Write(BinaryWriter bw)
