@@ -34,7 +34,7 @@ jobs:
       - name: NuGet pack
         run: nuget pack src/libLSD -Prop Configuration=Release
       - name: NuGet push
-        run: nuget push libLSD.${{ env.GIT_TAG }}.nupkg -Source https://api.nuget.org/v3/index.json
+        run: nuget push libLSD.$env:GIT_TAG.nupkg -Source https://api.nuget.org/v3/index.json
       - name: Install DocFX
         run: choco install docfx
       - name: Build documentation
