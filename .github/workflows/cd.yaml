@@ -17,7 +17,7 @@ jobs:
       - name: Inject version number
         uses: cschleiden/replace-tokens@v1.0
         with:
-          files: src/libLSD/Properties/AssemblyInfo.cs
+          files: '["src/libLSD/Properties/AssemblyInfo.cs","src/libLSD/libLSD.nuspec"]'
         env:
           VERSION: ${{ env.GIT_TAG }}
       - name: Add msbuild to PATH
@@ -34,9 +34,8 @@ jobs:
       - name: NuGet pack
         run: nuget pack src/libLSD -Prop Configuration=Release
       - name: NuGet push
-        run: nuget push libLSD.$env:VERSION.nupkg -Source https://api.nuget.org/v3/index.json
-        env:
-          VERSION: ${{ env.GIT_TAG }}
+        run: |
+          nuget push libLSD.${{ env.GIT_TAG }}.nupkg -Source https://api.nuget.org/v3/index.json
       - name: Install DocFX
         run: choco install docfx
       - name: Build documentation

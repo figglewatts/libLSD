@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<package >
-  <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">MIT</license>
-    <projectUrl>https://github.com/Figglewatts/libLSD</projectUrl>
-    <description>$description$</description>
-    <copyright>Copyright 2020</copyright>
-  </metadata>
+<package>
+    <metadata>
+        <id>$id$</id>
+        <version>#{VERSION}#</version>
+        <title>$title$</title>
+        <authors>$author$</authors>
+        <owners>$author$</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <license type="expression">MIT</license>
+        <projectUrl>https://github.com/Figglewatts/libLSD</projectUrl>
+        <description>$description$</description>
+        <copyright>Copyright 2020</copyright>
+    </metadata>
 </package>
