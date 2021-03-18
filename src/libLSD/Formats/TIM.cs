@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using libLSD.Exceptions;
 using libLSD.Interfaces;
 using libLSD.Types;
@@ -41,7 +37,7 @@ namespace libLSD.Formats
             ColorLookup = null;
             if (Header.HasCLUT)
             {
-                ColorLookup = new TIMColorLookup(br);
+                ColorLookup = new TIMColorLookup(br, Header);
             }
 
             PixelData = new TIMPixelData(br);
@@ -102,9 +98,25 @@ namespace libLSD.Formats
         /// <summary>
         /// Get the pixel data for a TIM using a 4-bit color lookup table.
         /// </summary>
+        /// <param name="clutIndex">The index of the CLUT to get data for. Defaults to 0.</param>
         /// <returns>Pixel data.</returns>
-        private IColor[,] GetImageCLUT4Bit()
+        /// <exception cref="InvalidOperationException">If the TIM file does not have a CLUT.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If clutIndex is out of range.</exception>
+        private IColor[,] GetImageCLUT4Bit(int clutIndex = 0)
         {
+            if (!Header.HasCLUT || ColorLookup == null)
+            {
+                throw new InvalidOperationException(
+                    $"Unable to get image via CLUT from TIM with pixel mode: '{Header.PixelMode}'");
+            }
+
+            if (ColorLookup.Value.CLUTLength - 1 < clutIndex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(clutIndex),
+                    $"Unable to get image using CLUT {clutIndex}, image " +
+                    $"only has {ColorLookup.Value.NumberOfCLUTs} CLUTs");
+            }
+
             int imageWidth = PixelData.Width * 4;
             int imageHeight = PixelData.Height;
             IColor[,] image = new IColor[imageHeight, imageWidth];
@@ -117,7 +129,7 @@ namespace libLSD.Formats
                 for (int j = 0; j < 4; j++)
                 {
                     int clutLocation = data >> (4 * j) & 0xF;
-                    image[y, x + j] = ColorLookup?.Data[clutLocation];
+                    image[y, x + j] = ColorLookup?.Data[clutIndex, clutLocation];
                 }
             }
 
@@ -127,9 +139,25 @@ namespace libLSD.Formats
         /// <summary>
         /// Get the pixel data for a TIM using an 8-bit color lookup table.
         /// </summary>
+        /// <param name="clutIndex">The index of the CLUT to get data for. Defaults to 0.</param>
         /// <returns>Pixel data.</returns>
-        private IColor[,] GetImageCLUT8Bit()
+        /// <exception cref="InvalidOperationException">If the TIM file does not have a CLUT.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If clutIndex is out of range.</exception>
+        private IColor[,] GetImageCLUT8Bit(int clutIndex = 0)
         {
+            if (!Header.HasCLUT || ColorLookup == null)
+            {
+                throw new InvalidOperationException(
+                    $"Unable to get image via CLUT from TIM with pixel mode: '{Header.PixelMode}'");
+            }
+
+            if (ColorLookup.Value.CLUTLength - 1 < clutIndex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(clutIndex),
+                    $"Unable to get image using CLUT {clutIndex}, image " +
+                    $"only has {ColorLookup.Value.NumberOfCLUTs} CLUTs");
+            }
+
             int imageWidth = PixelData.Width * 2;
             int imageHeight = PixelData.Height;
             IColor[,] image = new IColor[imageHeight, imageWidth];
@@ -141,7 +169,7 @@ namespace libLSD.Formats
                 for (int j = 0; j < 2; j++)
                 {
                     int clutLocation = data >> (8 * j) & 0xFF;
-                    image[y, x + j] = ColorLookup?.Data[clutLocation];
+                    image[y, x + j] = ColorLookup?.Data[clutIndex, clutLocation];
                 }
             }
 
@@ -278,7 +306,7 @@ namespace libLSD.Formats
     public struct TIMColorLookup : IWriteable
     {
         /// <summary>
-        /// The length of the CLUT in bytes
+        /// The length of the CLUT in bytes (including header information).
         /// </summary>
         public readonly uint CLUTLength;
 
@@ -299,33 +327,53 @@ namespace libLSD.Formats
 
         /// <summary>
         /// The height (in pixels) of the CLUT section.
-        /// Since a CLUT is 1 pixel high, then this number also doubles
-        /// as the number of CLUTs in the TIM file
         /// </summary>
         public readonly ushort Height;
 
         /// <summary>
         /// The contents of the CLUT
         /// </summary>
-        public readonly Color16Bit[] Data;
+        public readonly Color16Bit[,] Data;
+
+        /// <summary>
+        /// The number of CLUTs in this CLUT section.
+        /// </summary>
+        public int NumberOfCLUTs => ((int)CLUTLength - CLUT_HEADER_SIZE_BYTES) / _singleCLUTSizeBytes;
+
+        // the size of a single CLUT varies based on whether we're in 4-bit or 8-bit CLUT mode
+        private int _singleCLUTSizeBytes => _header.PixelMode == TIMHeader.PixelModes.CLUT4Bit ? 32 : 512;
+
+        // the length of the header of a CLUT section (includes length, x,y pos, and width/height
+        private const int CLUT_HEADER_SIZE_BYTES = 12;
+
+        // the header of the TIM
+        private TIMHeader _header;
 
         /// <summary>
         /// Read a color lookup table from a binary stream.
         /// </summary>
         /// <param name="br">The binary stream.</param>
-        public TIMColorLookup(BinaryReader br)
+        /// <param name="header">The header of the TIM.</param>
+        public TIMColorLookup(BinaryReader br, TIMHeader header)
         {
+            _header = header;
+
             CLUTLength = br.ReadUInt32();
             XPosition = br.ReadUInt16();
             YPosition = br.ReadUInt16();
             Width = br.ReadUInt16();
             Height = br.ReadUInt16();
 
-            int numColors = Width * Height;
-            Data = new Color16Bit[numColors];
-            for (int i = 0; i < Data.Length; i++)
+            int singleClutLength = _header.PixelMode == TIMHeader.PixelModes.CLUT4Bit ? 16 : 256;
+            int singleClutLengthBytes = singleClutLength * 2;
+            int numCluts = ((int)CLUTLength - CLUT_HEADER_SIZE_BYTES) / singleClutLengthBytes;
+            Data = new Color16Bit[numCluts, singleClutLength];
+            for (int i = 0; i < numCluts; i++)
             {
-                Data[i] = new Color16Bit(br);
+                for (int j = 0; j < singleClutLength; j++)
+                {
+                    Data[i, j] = new Color16Bit(br);
+                }
             }
         }
 
@@ -340,9 +388,14 @@ namespace libLSD.Formats
             bw.Write(YPosition);
             bw.Write(Width);
             bw.Write(Height);
-            for (int i = 0; i < Data.Length; i++)
+            int singleClutLength = _header.PixelMode == TIMHeader.PixelModes.CLUT4Bit ? 32 : 512;
+            int numCluts = ((int)CLUTLength - CLUT_HEADER_SIZE_BYTES) / singleClutLength;
+            for (int i = 0; i < numCluts; i++)
             {
-                Data[i].Write(bw);
+                for (int j = 0; j < singleClutLength; j++)
+                {
+                    Data[i, j].Write(bw);
+                }
             }
         }
     }
