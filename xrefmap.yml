@@ -2977,12 +2977,12 @@ references:
   commentId: T:libLSD.Formats.TIMColorLookup
   fullName: libLSD.Formats.TIMColorLookup
   nameWithType: TIMColorLookup
-- uid: libLSD.Formats.TIMColorLookup.#ctor(System.IO.BinaryReader)
-  name: TIMColorLookup(BinaryReader)
-  href: api/libLSD.Formats.TIMColorLookup.html#libLSD_Formats_TIMColorLookup__ctor_System_IO_BinaryReader_
-  commentId: M:libLSD.Formats.TIMColorLookup.#ctor(System.IO.BinaryReader)
-  fullName: libLSD.Formats.TIMColorLookup.TIMColorLookup(System.IO.BinaryReader)
-  nameWithType: TIMColorLookup.TIMColorLookup(BinaryReader)
+- uid: libLSD.Formats.TIMColorLookup.#ctor(System.IO.BinaryReader,libLSD.Formats.TIMHeader)
+  name: TIMColorLookup(BinaryReader, TIMHeader)
+  href: api/libLSD.Formats.TIMColorLookup.html#libLSD_Formats_TIMColorLookup__ctor_System_IO_BinaryReader_libLSD_Formats_TIMHeader_
+  commentId: M:libLSD.Formats.TIMColorLookup.#ctor(System.IO.BinaryReader,libLSD.Formats.TIMHeader)
+  fullName: libLSD.Formats.TIMColorLookup.TIMColorLookup(System.IO.BinaryReader, libLSD.Formats.TIMHeader)
+  nameWithType: TIMColorLookup.TIMColorLookup(BinaryReader, TIMHeader)
 - uid: libLSD.Formats.TIMColorLookup.#ctor*
   name: TIMColorLookup
   href: api/libLSD.Formats.TIMColorLookup.html#libLSD_Formats_TIMColorLookup__ctor_
@@ -3007,6 +3007,18 @@ references:
   commentId: F:libLSD.Formats.TIMColorLookup.Height
   fullName: libLSD.Formats.TIMColorLookup.Height
   nameWithType: TIMColorLookup.Height
+- uid: libLSD.Formats.TIMColorLookup.NumberOfCLUTs
+  name: NumberOfCLUTs
+  href: api/libLSD.Formats.TIMColorLookup.html#libLSD_Formats_TIMColorLookup_NumberOfCLUTs
+  commentId: P:libLSD.Formats.TIMColorLookup.NumberOfCLUTs
+  fullName: libLSD.Formats.TIMColorLookup.NumberOfCLUTs
+  nameWithType: TIMColorLookup.NumberOfCLUTs
+- uid: libLSD.Formats.TIMColorLookup.NumberOfCLUTs*
+  name: NumberOfCLUTs
+  href: api/libLSD.Formats.TIMColorLookup.html#libLSD_Formats_TIMColorLookup_NumberOfCLUTs_
+  commentId: Overload:libLSD.Formats.TIMColorLookup.NumberOfCLUTs
+  fullName: libLSD.Formats.TIMColorLookup.NumberOfCLUTs
+  nameWithType: TIMColorLookup.NumberOfCLUTs
 - uid: libLSD.Formats.TIMColorLookup.Width
   name: Width
   href: api/libLSD.Formats.TIMColorLookup.html#libLSD_Formats_TIMColorLookup_Width
