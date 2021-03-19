@@ -61,21 +61,24 @@ namespace libLSD.Formats
         /// <summary>
         /// Get the raw pixel data of this TIM file.
         /// </summary>
+        /// <param name="clutIndex">The index of the CLUT to get data for. Defaults to 0.
+        /// Not used if TIM does not have CLUT.</param>
         /// <returns>A 2D array of IColor containing raw pixel data.</returns>
         /// <exception cref="NotSupportedException">If this TIM uses the 'Mixed' pixel mode. I haven't figured out
         /// how to load it yet.</exception>
-        public IColor[,] GetImage()
+        /// <exception cref="ArgumentOutOfRangeException">If clutIndex is out of range.</exception>
+        public IColor[,] GetImage(int clutIndex = 0)
         {
             switch (Header.PixelMode)
             {
                 case TIMHeader.PixelModes.CLUT4Bit:
                 {
-                    return GetImageCLUT4Bit();
+                    return GetImageCLUT4Bit(clutIndex);
                 }
 
                 case TIMHeader.PixelModes.CLUT8Bit:
                 {
-                    return GetImageCLUT8Bit();
+                    return GetImageCLUT8Bit(clutIndex);
                 }
 
                 case TIMHeader.PixelModes.Direct15Bit:
@@ -102,7 +105,7 @@ namespace libLSD.Formats
         /// <returns>Pixel data.</returns>
         /// <exception cref="InvalidOperationException">If the TIM file does not have a CLUT.</exception>
         /// <exception cref="ArgumentOutOfRangeException">If clutIndex is out of range.</exception>
-        private IColor[,] GetImageCLUT4Bit(int clutIndex = 0)
+        public IColor[,] GetImageCLUT4Bit(int clutIndex = 0)
         {
             if (!Header.HasCLUT || ColorLookup == null)
             {
@@ -143,7 +146,7 @@ namespace libLSD.Formats
         /// <returns>Pixel data.</returns>
         /// <exception cref="InvalidOperationException">If the TIM file does not have a CLUT.</exception>
         /// <exception cref="ArgumentOutOfRangeException">If clutIndex is out of range.</exception>
-        private IColor[,] GetImageCLUT8Bit(int clutIndex = 0)
+        public IColor[,] GetImageCLUT8Bit(int clutIndex = 0)
         {
             if (!Header.HasCLUT || ColorLookup == null)
             {
@@ -180,7 +183,7 @@ namespace libLSD.Formats
         /// Get the pixel data for a TIM using 15-bit direct color mode.
         /// </summary>
         /// <returns>Pixel data.</returns>
-        private IColor[,] GetImageDirect15Bit()
+        public IColor[,] GetImageDirect15Bit()
         {
             int imageWidth = PixelData.Width;
             int imageHeight = PixelData.Height;
@@ -199,7 +202,7 @@ namespace libLSD.Formats
         /// Get the pixel data for a TIM using 24-bit direct color mode.
         /// </summary>
         /// <returns>Pixel data.</returns>
-        private IColor[,] GetImageDirect24Bit()
+        public IColor[,] GetImageDirect24Bit()
         {
             int imageWidth = (PixelData.Width / 3) * 2;
             int imageHeight = PixelData.Height;
