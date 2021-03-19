@@ -2935,18 +2935,66 @@ references:
   commentId: F:libLSD.Formats.TIM.ColorLookup
   fullName: libLSD.Formats.TIM.ColorLookup
   nameWithType: TIM.ColorLookup
-- uid: libLSD.Formats.TIM.GetImage
-  name: GetImage()
-  href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_GetImage
-  commentId: M:libLSD.Formats.TIM.GetImage
-  fullName: libLSD.Formats.TIM.GetImage()
-  nameWithType: TIM.GetImage()
+- uid: libLSD.Formats.TIM.GetImage(System.Int32)
+  name: GetImage(Int32)
+  href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_GetImage_System_Int32_
+  commentId: M:libLSD.Formats.TIM.GetImage(System.Int32)
+  fullName: libLSD.Formats.TIM.GetImage(System.Int32)
+  nameWithType: TIM.GetImage(Int32)
 - uid: libLSD.Formats.TIM.GetImage*
   name: GetImage
   href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_GetImage_
   commentId: Overload:libLSD.Formats.TIM.GetImage
   fullName: libLSD.Formats.TIM.GetImage
   nameWithType: TIM.GetImage
+- uid: libLSD.Formats.TIM.GetImageCLUT4Bit(System.Int32)
+  name: GetImageCLUT4Bit(Int32)
+  href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_GetImageCLUT4Bit_System_Int32_
+  commentId: M:libLSD.Formats.TIM.GetImageCLUT4Bit(System.Int32)
+  fullName: libLSD.Formats.TIM.GetImageCLUT4Bit(System.Int32)
+  nameWithType: TIM.GetImageCLUT4Bit(Int32)
+- uid: libLSD.Formats.TIM.GetImageCLUT4Bit*
+  name: GetImageCLUT4Bit
+  href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_GetImageCLUT4Bit_
+  commentId: Overload:libLSD.Formats.TIM.GetImageCLUT4Bit
+  fullName: libLSD.Formats.TIM.GetImageCLUT4Bit
+  nameWithType: TIM.GetImageCLUT4Bit
+- uid: libLSD.Formats.TIM.GetImageCLUT8Bit(System.Int32)
+  name: GetImageCLUT8Bit(Int32)
+  href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_GetImageCLUT8Bit_System_Int32_
+  commentId: M:libLSD.Formats.TIM.GetImageCLUT8Bit(System.Int32)
+  fullName: libLSD.Formats.TIM.GetImageCLUT8Bit(System.Int32)
+  nameWithType: TIM.GetImageCLUT8Bit(Int32)
+- uid: libLSD.Formats.TIM.GetImageCLUT8Bit*
+  name: GetImageCLUT8Bit
+  href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_GetImageCLUT8Bit_
+  commentId: Overload:libLSD.Formats.TIM.GetImageCLUT8Bit
+  fullName: libLSD.Formats.TIM.GetImageCLUT8Bit
+  nameWithType: TIM.GetImageCLUT8Bit
+- uid: libLSD.Formats.TIM.GetImageDirect15Bit
+  name: GetImageDirect15Bit()
+  href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_GetImageDirect15Bit
+  commentId: M:libLSD.Formats.TIM.GetImageDirect15Bit
+  fullName: libLSD.Formats.TIM.GetImageDirect15Bit()
+  nameWithType: TIM.GetImageDirect15Bit()
+- uid: libLSD.Formats.TIM.GetImageDirect15Bit*
+  name: GetImageDirect15Bit
+  href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_GetImageDirect15Bit_
+  commentId: Overload:libLSD.Formats.TIM.GetImageDirect15Bit
+  fullName: libLSD.Formats.TIM.GetImageDirect15Bit
+  nameWithType: TIM.GetImageDirect15Bit
+- uid: libLSD.Formats.TIM.GetImageDirect24Bit
+  name: GetImageDirect24Bit()
+  href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_GetImageDirect24Bit
+  commentId: M:libLSD.Formats.TIM.GetImageDirect24Bit
+  fullName: libLSD.Formats.TIM.GetImageDirect24Bit()
+  nameWithType: TIM.GetImageDirect24Bit()
+- uid: libLSD.Formats.TIM.GetImageDirect24Bit*
+  name: GetImageDirect24Bit
+  href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_GetImageDirect24Bit_
+  commentId: Overload:libLSD.Formats.TIM.GetImageDirect24Bit
+  fullName: libLSD.Formats.TIM.GetImageDirect24Bit
+  nameWithType: TIM.GetImageDirect24Bit
 - uid: libLSD.Formats.TIM.Header
   name: Header
   href: api/libLSD.Formats.TIM.html#libLSD_Formats_TIM_Header

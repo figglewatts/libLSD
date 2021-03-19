@@ -220,14 +220,33 @@
   
   
   <a id="libLSD_Formats_TIM_GetImage_" data-uid="libLSD.Formats.TIM.GetImage*"></a>
-  <h4 id="libLSD_Formats_TIM_GetImage" data-uid="libLSD.Formats.TIM.GetImage">GetImage()</h4>
+  <h4 id="libLSD_Formats_TIM_GetImage_System_Int32_" data-uid="libLSD.Formats.TIM.GetImage(System.Int32)">GetImage(Int32)</h4>
   <div class="markdown level1 summary"><p>Get the raw pixel data of this TIM file.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IColor[, ] GetImage()</code></pre>
+    <pre><code class="lang-csharp hljs">public IColor[, ] GetImage(int clutIndex = 0)</code></pre>
   </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">clutIndex</span></td>
+        <td><p>The index of the CLUT to get data for. Defaults to 0.
+Not used if TIM does not have CLUT.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -257,6 +276,197 @@
         <td><span class="xref">System.NotSupportedException</span></td>
         <td><p>If this TIM uses the 'Mixed' pixel mode. I haven't figured out
 how to load it yet.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>If clutIndex is out of range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="libLSD_Formats_TIM_GetImageCLUT4Bit_" data-uid="libLSD.Formats.TIM.GetImageCLUT4Bit*"></a>
+  <h4 id="libLSD_Formats_TIM_GetImageCLUT4Bit_System_Int32_" data-uid="libLSD.Formats.TIM.GetImageCLUT4Bit(System.Int32)">GetImageCLUT4Bit(Int32)</h4>
+  <div class="markdown level1 summary"><p>Get the pixel data for a TIM using a 4-bit color lookup table.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IColor[, ] GetImageCLUT4Bit(int clutIndex = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">clutIndex</span></td>
+        <td><p>The index of the CLUT to get data for. Defaults to 0.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="libLSD.Types.IColor.html">IColor</a>[,]</td>
+        <td><p>Pixel data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>If the TIM file does not have a CLUT.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>If clutIndex is out of range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="libLSD_Formats_TIM_GetImageCLUT8Bit_" data-uid="libLSD.Formats.TIM.GetImageCLUT8Bit*"></a>
+  <h4 id="libLSD_Formats_TIM_GetImageCLUT8Bit_System_Int32_" data-uid="libLSD.Formats.TIM.GetImageCLUT8Bit(System.Int32)">GetImageCLUT8Bit(Int32)</h4>
+  <div class="markdown level1 summary"><p>Get the pixel data for a TIM using an 8-bit color lookup table.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IColor[, ] GetImageCLUT8Bit(int clutIndex = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">clutIndex</span></td>
+        <td><p>The index of the CLUT to get data for. Defaults to 0.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="libLSD.Types.IColor.html">IColor</a>[,]</td>
+        <td><p>Pixel data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>If the TIM file does not have a CLUT.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>If clutIndex is out of range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="libLSD_Formats_TIM_GetImageDirect15Bit_" data-uid="libLSD.Formats.TIM.GetImageDirect15Bit*"></a>
+  <h4 id="libLSD_Formats_TIM_GetImageDirect15Bit" data-uid="libLSD.Formats.TIM.GetImageDirect15Bit">GetImageDirect15Bit()</h4>
+  <div class="markdown level1 summary"><p>Get the pixel data for a TIM using 15-bit direct color mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IColor[, ] GetImageDirect15Bit()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="libLSD.Types.IColor.html">IColor</a>[,]</td>
+        <td><p>Pixel data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="libLSD_Formats_TIM_GetImageDirect24Bit_" data-uid="libLSD.Formats.TIM.GetImageDirect24Bit*"></a>
+  <h4 id="libLSD_Formats_TIM_GetImageDirect24Bit" data-uid="libLSD.Formats.TIM.GetImageDirect24Bit">GetImageDirect24Bit()</h4>
+  <div class="markdown level1 summary"><p>Get the pixel data for a TIM using 24-bit direct color mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IColor[, ] GetImageDirect24Bit()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="libLSD.Types.IColor.html">IColor</a>[,]</td>
+        <td><p>Pixel data.</p>
 </td>
       </tr>
     </tbody>
