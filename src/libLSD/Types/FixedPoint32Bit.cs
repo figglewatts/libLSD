@@ -24,7 +24,7 @@ namespace libLSD.Types
         public long IntegralPart
         {
             get => (this._value & INTEGRAL_MASK) >> DECIMAL_BITS;
-            set => this._value = BitTwiddling.Merge<long>(_value, value, INTEGRAL_MASK, DECIMAL_BITS);
+            set => this._value = BitTwiddling.Merge(_value, value, INTEGRAL_MASK, DECIMAL_BITS);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace libLSD.Types
         public long DecimalPart
         {
             get => (this._value & DECIMAL_MASK);
-            set => this._value = BitTwiddling.Merge<long>(_value, value, DECIMAL_MASK);
+            set => this._value = BitTwiddling.Merge(_value, value, DECIMAL_MASK);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace libLSD.Types
             get => (this._value & SIGN_MASK) >> (int)(DECIMAL_BITS + INTEGRAL_BITS) == 1;
             set =>
                 this._value =
-                    BitTwiddling.Merge<long>(_value, value ? 1 : 0, SIGN_MASK, (int)(DECIMAL_BITS + INTEGRAL_BITS));
+                    BitTwiddling.Merge(_value, value ? 1 : 0, SIGN_MASK, (int)(DECIMAL_BITS + INTEGRAL_BITS));
         }
 
         /// <summary>

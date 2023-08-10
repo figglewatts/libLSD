@@ -264,7 +264,7 @@ namespace libLSD.Formats
         /// <summary>
         /// The types of primitive packet available.
         /// </summary>
-        public enum Types
+        public enum Types : byte
         {
             POLYGON = 0b1,
             LINE = 0b10,
@@ -275,7 +275,7 @@ namespace libLSD.Formats
         /// Settings for this primitive packet.
         /// </summary>
         [Flags]
-        public enum PrimitiveFlags
+        public enum PrimitiveFlags : byte
         {
             Lighting = 1,    // set if light source calculation not carried out
             DoubleSided = 2, // set if poly is double sided
@@ -286,7 +286,7 @@ namespace libLSD.Formats
         /// Rendering options for this primitive packet.
         /// </summary>
         [Flags]
-        public enum OptionsFlags
+        public enum OptionsFlags : byte
         {
             BrightnessCalculated = 1, // brightness calculation (off draws tex as-is)
             AlphaBlended = 2,         // translucency processing
@@ -298,7 +298,7 @@ namespace libLSD.Formats
         /// <summary>
         /// Sprite sizes, for sprite primitive packets.
         /// </summary>
-        public enum SpriteSizes
+        public enum SpriteSizes : byte
         {
             FREE_SIZE = 0,
             ONE = 1,
@@ -312,7 +312,7 @@ namespace libLSD.Formats
         public Types Type
         {
             get => (Types)((_mode & TYPE_MASK) >> 5);
-            protected set => this._mode = BitTwiddling.Merge<byte>(_mode, value, TYPE_MASK, 5);
+            protected set => this._mode = BitTwiddling.Merge(_mode, (byte)value, TYPE_MASK, 5);
         }
 
         /// <summary>
@@ -321,7 +321,7 @@ namespace libLSD.Formats
         public OptionsFlags Options
         {
             get => (OptionsFlags)(_mode & OPTIONS_MASK);
-            protected set => this._mode = BitTwiddling.Merge<byte>(_mode, value, OPTIONS_MASK);
+            protected set => this._mode = BitTwiddling.Merge(_mode, (byte)value, OPTIONS_MASK);
         }
 
         /// <summary>
@@ -330,7 +330,7 @@ namespace libLSD.Formats
         public PrimitiveFlags Flags
         {
             get => (PrimitiveFlags)(_flag & FLAGS_MASK);
-            protected set => this._flag = BitTwiddling.Merge<byte>(_flag, value, FLAGS_MASK);
+            protected set => this._flag = BitTwiddling.Merge(_flag, (byte)value, FLAGS_MASK);
         }
 
         /// <summary>
@@ -339,7 +339,7 @@ namespace libLSD.Formats
         public SpriteSizes SpriteSize
         {
             get => (SpriteSizes)((_mode & SPRITE_SIZE_MASK) >> 3);
-            protected set => this._mode = BitTwiddling.Merge<byte>(_mode, value, SPRITE_SIZE_MASK, 3);
+            protected set => this._mode = BitTwiddling.Merge(_mode, (byte)value, SPRITE_SIZE_MASK, 3);
         }
 
         /// <summary>

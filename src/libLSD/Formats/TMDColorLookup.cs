@@ -15,7 +15,7 @@ namespace libLSD.Formats
         public int XPosition
         {
             get => _cba & CLX_MASK;
-            private set => _cba = BitTwiddling.Merge<ushort>(_cba, value, CLX_MASK);
+            private set => _cba = BitTwiddling.Merge(_cba, (ushort)value, CLX_MASK);
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace libLSD.Formats
         public int YPosition
         {
             get => (_cba & CLY_MASK) >> 6;
-            private set => _cba = BitTwiddling.Merge<ushort>(_cba, value, CLY_MASK, 6);
+            private set => _cba = BitTwiddling.Merge(_cba, (ushort)value, CLY_MASK, 6);
         }
 
         private const ushort CLX_MASK = 0b111111;

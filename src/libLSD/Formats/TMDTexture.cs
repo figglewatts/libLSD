@@ -12,7 +12,7 @@ namespace libLSD.Formats
         /// <summary>
         /// Algorithms describing how to apply transparency.
         /// </summary>
-        public enum TransparencyRates
+        public enum TransparencyRates : ushort
         {
             RATE_50BACK_PLUS_50POLY = 0,    // 50% back + 50% poly
             RATE_100BACK_PLUS_100POLY = 1,  // 100% back + 100% poly
@@ -23,7 +23,7 @@ namespace libLSD.Formats
         /// <summary>
         /// Color modes for textures.
         /// </summary>
-        public enum ColorModes
+        public enum ColorModes : ushort
         {
             FOURBIT = 0,
             EIGHTBIT = 1,
@@ -36,7 +36,7 @@ namespace libLSD.Formats
         public int TexturePageNumber
         {
             get => _tsb & TPAGE_MASK;
-            private set => _tsb = BitTwiddling.Merge<ushort>(_tsb, value, TPAGE_MASK);
+            private set => _tsb = BitTwiddling.Merge(_tsb, (ushort)value, TPAGE_MASK);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace libLSD.Formats
         public TransparencyRates AlphaBlendRate
         {
             get => (TransparencyRates)((_tsb & ABR_MASK) >> 5);
-            private set => _tsb = BitTwiddling.Merge<ushort>(_tsb, value, ABR_MASK, 5);
+            private set => _tsb = BitTwiddling.Merge(_tsb, (ushort)value, ABR_MASK, 5);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace libLSD.Formats
         public ColorModes ColorMode
         {
             get => (ColorModes)((_tsb & TPF_MASK) >> 7);
-            private set => _tsb = BitTwiddling.Merge<ushort>(_tsb, value, TPF_MASK, 7);
+            private set => _tsb = BitTwiddling.Merge(_tsb, (ushort)value, TPF_MASK, 7);
         }
 
         private const ushort TPAGE_MASK = 0b11111;
