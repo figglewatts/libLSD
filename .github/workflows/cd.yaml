@@ -1,47 +1,65 @@
-name: CD
+name: Deploy to NuGet
+
+permissions:
+  contents: write
 
 on:
-  release:
-    types: [created]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version Number'
+        required: true
 
 jobs:
   buildAndPush:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
         name: Checkout Code
-      - name: Extract tag name
-        run: |
-          git tag --sort=-creatordate | head -n 1
-          echo "GIT_TAG=$(git tag --sort=-creatordate | head -n 1)" >> $env:GITHUB_ENV
-      - name: Inject version number
-        uses: cschleiden/replace-tokens@v1.0
+        
+      - uses: actions/setup-dotnet@v3
         with:
-          files: '["src/libLSD/Properties/AssemblyInfo.cs","src/libLSD/libLSD.nuspec"]'
-        env:
-          VERSION: ${{ env.GIT_TAG }}
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.0.2
-      - name: Setup NuGet
-        uses: nuget/setup-nuget@v1
-        with:
-          nuget-api-key: ${{ secrets.NuGetAPIKey }}
-          nuget-version: '5.x'
-      - name: Restore NuGet packages
-        run: nuget restore
-      - name: Build solution
-        run: msbuild libLSD.sln /p:Configuration=Release
-      - name: NuGet pack
-        run: nuget pack src/libLSD -Prop Configuration=Release
-      - name: NuGet push
+          dotnet-version: '7.x'
+          
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Run Tests
+        run: dotnet test --no-restore --verbosity normal
+      
+      - name: Build and Pack
         run: |
-          nuget push libLSD.${{ env.GIT_TAG }}.nupkg -Source https://api.nuget.org/v3/index.json
+          dotnet build --configuration Release
+          dotnet pack --configuration Release --no-build -p:Version=${{ github.event.inputs.version }} -o out
+
+      - name: Push to NuGet
+        run: dotnet nuget push out/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+
       - name: Install DocFX
-        run: choco install docfx
+        run: dotnet tool install --global docfx
+      
       - name: Build documentation
         run: docfx docfx_project\docfx.json
+      
       - name: Deploy Documentation
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docfx_project/_site
+          
+      - name: Set up Git user
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Create Tag
+        run: |
+          tag="${{ github.event.inputs.version }}"
+          if ! git rev-parse $tag >/dev/null 2>&1; then
+            git tag $tag
+            git push origin $tag
+          else
+            echo "Tag $tag already exists!"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
