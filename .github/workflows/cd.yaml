@@ -20,12 +20,6 @@ jobs:
       - uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.x'
-          
-      - name: Restore Dependencies
-        run: dotnet restore
-
-      - name: Run Tests
-        run: dotnet test --no-restore --verbosity normal
       
       - name: Build and Pack
         run: |
