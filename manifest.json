@@ -4,9 +4,1196 @@
   "xrefmap": "xrefmap.yml",
   "files": [
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.BaseMidiEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.BaseMidiEventData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.ControlChangeEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.ControlChangeEventData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.MetaEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.MetaEventData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.MidiChannelMessageEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.MidiChannelMessageEventData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.MidiEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.MidiEvent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.MidiEventDataFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.MidiEventDataFactory.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.NoteEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.NoteEventData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.PitchWheelEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.PitchWheelEventData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.ProgramChangeEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.ProgramChangeEventData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.SetTempoMetaEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.SetTempoMetaEventData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.TrackEndMetaEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.TrackEndMetaEventData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.VariableLength.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.VariableLength.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.Midi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.Midi.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.SEQSequence.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.SEQSequence.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Sequence.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Sequence.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Soundbank.AdsrEnvelope.RateMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Soundbank.AdsrEnvelope.RateMode.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Soundbank.AdsrEnvelope.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Soundbank.AdsrEnvelope.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Soundbank.ProgramAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Soundbank.ProgramAttribute.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Soundbank.ToneAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Soundbank.ToneAttribute.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Soundbank.VABProgram.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Soundbank.VABProgram.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Soundbank.VABSoundbank.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Soundbank.VABSoundbank.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Soundbank.VABTone.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Soundbank.VABTone.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Audio.Soundbank.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Audio.Soundbank.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Exceptions.BadFormatException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Exceptions.BadFormatException.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Exceptions.UnwriteableException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Exceptions.UnwriteableException.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Exceptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.LBD.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.LBD.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.LBDHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.LBDHeader.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.LBDTile.TileDirections.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.LBDTile.TileDirections.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.LBDTile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.LBDTile.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.MML.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.MML.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.MOM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.MOM.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.MOS.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.MOS.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.ITMDColoredPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.ITMDColoredPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.ITMDLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.ITMDLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.ITMDPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.ITMDPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.ITMDTexturedPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.ITMDTexturedPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDLineFlatPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDLineFlatPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDLineGradPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDLineGradPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatGradLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatGradLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatTexLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatTexLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatTexUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatTexUnlitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadFlatUnlitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadGradTexUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadGradTexUnlitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadGradUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadGradUnlitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedGradLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedGradLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedTexLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDQuadShadedTexLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriFlatGradLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriFlatGradLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriFlatLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriFlatLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriFlatTexLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriFlatTexLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriFlatTexUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriFlatTexUnlitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriFlatUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriFlatUnlitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriGradTexUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriGradTexUnlitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriGradUnlitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriGradUnlitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriShadedGradLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriShadedGradLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriShadedTexLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriShadedTexLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TMDTriShaderLitPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TMDTriShaderLitPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODAttributePacketData.DifferenceMask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODAttributePacketData.DifferenceMask.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODAttributePacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODAttributePacketData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODCameraPacketData.CameraTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODCameraPacketData.CameraTypes.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODCameraPacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODCameraPacketData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODCoordinatePacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODCoordinatePacketData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODLightSourcePacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODLightSourcePacketData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODMatrixPacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODMatrixPacketData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODObjectControlPacketData.ObjectControlType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODObjectControlPacketData.ObjectControlType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODObjectControlPacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODObjectControlPacketData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODObjectIDPacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODObjectIDPacketData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODPacketData.PacketDataType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODPacketData.PacketDataType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.TODPacketData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.TODPacketData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.Packets.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.Packets.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.SEQ.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.SEQ.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.SEQHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.SEQHeader.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIM.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIM.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIMColorLookup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIMColorLookup.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIMHeader.PixelModes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIMHeader.PixelModes.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIMHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIMHeader.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIMPixelData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIMPixelData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIX.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIX.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIXChunk.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIXChunk.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TIXHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TIXHeader.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMD.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMD.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDColorLookup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDColorLookup.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDHeader.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDNormal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDNormal.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDObject.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDPrimitivePacket.OptionsFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDPrimitivePacket.OptionsFlags.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDPrimitivePacket.PrimitiveFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDPrimitivePacket.PrimitiveFlags.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDPrimitivePacket.SpriteSizes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDPrimitivePacket.SpriteSizes.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDPrimitivePacket.Types.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDPrimitivePacket.Types.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDPrimitivePacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDPrimitivePacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDTexture.ColorModes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDTexture.ColorModes.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDTexture.TransparencyRates.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDTexture.TransparencyRates.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TMDTexture.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TMDTexture.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TOD.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TOD.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TODFrame.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TODFrame.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TODHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TODHeader.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TODPacket.PacketTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TODPacket.PacketTypes.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.TODPacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.TODPacket.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.VAB.VABHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.VAB.VABHeader.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.VAB.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.VAB.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.VAG.VagBlock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.VAG.VagBlock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.VAG.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.VAG.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Formats.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Formats.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Interfaces.IWriteable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Interfaces.IWriteable.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Interfaces.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Interfaces.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.Color16Bit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.Color16Bit.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.Color24Bit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.Color24Bit.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.FixedPoint16Bit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.FixedPoint16Bit.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.FixedPoint32Bit.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.FixedPoint32Bit.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.IColor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.IColor.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.Vec3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.Vec3.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Types.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Types.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Util.AdpcmNibble.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Util.AdpcmNibble.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Util.AdpcmUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Util.AdpcmUtil.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Util.BitTwiddling.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Util.BitTwiddling.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/libLSD.Util.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/libLSD.Util.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        }
+      },
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "index.md",
       "output": {
@@ -17,9 +1204,6 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
