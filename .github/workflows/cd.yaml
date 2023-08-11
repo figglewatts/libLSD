@@ -2,6 +2,8 @@ name: Deploy to NuGet
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 on:
   workflow_dispatch:
