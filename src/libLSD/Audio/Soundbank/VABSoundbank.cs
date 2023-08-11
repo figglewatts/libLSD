@@ -1,13 +1,16 @@
-﻿using EZSynth.Sampler;
+﻿using System;
+using EZSynth.Sampler;
 using EZSynth.Soundbank;
 using EZSynth.Synthesizer;
 using libLSD.Formats;
 
-namespace AdpcmCs.Render
+namespace libLSD.Audio.Soundbank
 {
     public class VABSoundbank : ISoundbank
     {
         public VAB Vab;
+
+        protected int _sampleRate;
 
         public VABSoundbank(VAB vab)
         {
@@ -30,15 +33,7 @@ namespace AdpcmCs.Render
                 Pan = panToFloat(tone.Attributes.Pan),
                 Pitch = tone.Attributes.PitchShift / 200f, // 2 semitones
                 Velocity = velocity,
-
-                // TODO: implement proper ADSR
-                VolumeEnvelope = new EnvelopeADSR
-                {
-                    AttackTime = 0,
-                    DecayTime = 0,
-                    SustainLevel = 1,
-                    ReleaseTime = 0.5f
-                }
+                VolumeEnvelope = vabAdsrToEnvelopeADSR(tone.Attributes.Adsr)
             };
 
             return (sampler, voiceParams);
@@ -46,7 +41,22 @@ namespace AdpcmCs.Render
 
         public void SetSampleRate(int sampleRateHz)
         {
-            
+            _sampleRate = sampleRateHz;
+        }
+        
+        protected EnvelopeADSR vabAdsrToEnvelopeADSR(AdsrEnvelope envelope)
+        {
+            var attackCycles = 1 << Math.Max(0, envelope.AttackShift - 11);
+            var decayCycles = 1 << Math.Max(0, envelope.DecayShift - 11);
+            var releaseCycles = 1 << Math.Max(0, envelope.ReleaseShift - 11);
+
+            return new EnvelopeADSR
+            {
+                AttackTime = attackCycles / (float)_sampleRate,
+                DecayTime = decayCycles / (float)_sampleRate,
+                SustainLevel = 1,
+                ReleaseTime = releaseCycles / (float)_sampleRate
+            };
         }
 
         protected float panToFloat(byte pan)
