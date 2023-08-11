@@ -2,7 +2,6 @@
 
 ![Nuget Version](https://img.shields.io/nuget/v/libLSD)
 ![License](https://img.shields.io/github/license/figglewatts/libLSD)
-![Build status](https://img.shields.io/github/workflow/status/figglewatts/libLSD/CD)
 
 A C# library for loading LSD: Dream Emulator data files.
 
