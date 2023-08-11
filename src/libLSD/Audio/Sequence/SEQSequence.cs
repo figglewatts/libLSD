@@ -24,18 +24,28 @@ namespace libLSD.Audio.Sequence
 
         public double GetLengthSeconds(double secondsPerTick)
         {
-            return _sequenceData.Keys.Last() * secondsPerTick;
+            double length = 0;
+            secondsPerTick = microSecondsPerQuarterNoteToSecondsPerBeat(500000) * Resolution;
+            
+            foreach (var kvp in _sequenceData)
+            {
+                int deltaTime = kvp.Key;
+                var events = kvp.Value;
+
+                bool hasTempo = events.Count(e => e is SetTempoEvent) > 0;
+                if (hasTempo && events.Last(e => e is SetTempoEvent) is SetTempoEvent tempoEvent)
+                {
+                    secondsPerTick = tempoEvent.SecondsPerBeat * Resolution;
+                }
+
+                length += secondsPerTick * deltaTime;
+            }
+            return length;
         }
 
         public IEnumerable<BaseSequenceEvent> GetEvents(int tickNumber)
         {
             _events.Clear();
-            
-            // add dummy tempo event at first tick
-            if (tickNumber == 0)
-            {
-                _events.Add(new SetTempoEvent { SecondsPerBeat = microSecondsPerQuarterNoteToSecondsPerBeat(Seq.Header.Tempo)});
-            }
 
             // get events for sequence for this tick
             if (_sequenceData.TryGetValue(tickNumber, out List<BaseSequenceEvent> value))
@@ -110,10 +120,20 @@ namespace libLSD.Audio.Sequence
                         toAdd = null;
                         break;
                 }
-                tickNumber += seqEvent.Event.DeltaTime;
 
+                // add tempo event at first tick to represent file tempo
+                if (tickNumber == 0)
+                {
+                    addToResult(tickNumber, new SetTempoEvent
+                    {
+                        SecondsPerBeat = microSecondsPerQuarterNoteToSecondsPerBeat(Seq.Header.Tempo)
+                    });
+                }
+                
                 if (toAdd == null) continue;
                 addToResult(tickNumber, toAdd);
+                
+                tickNumber += seqEvent.Event.DeltaTime;
             }
 
             return result;
