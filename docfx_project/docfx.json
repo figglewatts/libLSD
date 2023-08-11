@@ -5,7 +5,7 @@
         {
           "cwd": "../",
           "files": [
-            "src/libLSD/bin/Release/libLSD.dll"
+            "src/libLSD/bin/Release/netstandard2.0/libLSD.dll"
           ]
         }
       ],
