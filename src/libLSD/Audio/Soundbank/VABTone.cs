@@ -1,7 +1,9 @@
-﻿using libLSD.Formats;
+﻿using System;
+using libLSD.Formats;
 
 namespace libLSD.Audio.Soundbank
 {
+    [Serializable]
     public class VABTone
     {
         public ToneAttribute Attributes;

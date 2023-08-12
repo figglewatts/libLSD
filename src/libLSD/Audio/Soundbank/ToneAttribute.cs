@@ -1,7 +1,9 @@
+using System;
 using System.IO;
 
 namespace libLSD.Audio.Soundbank
 {
+    [Serializable]
     public struct ToneAttribute
     {
         public byte Priority; // 0-15

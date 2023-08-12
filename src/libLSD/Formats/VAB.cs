@@ -17,6 +17,7 @@ namespace libLSD.Formats
     ///
     /// A program can contain up to 16 tones. A tone is a sample along with data about how to play it.
     /// </summary>
+    [Serializable]
     public class VAB
     {
         public VABHeader Header;
@@ -95,6 +96,7 @@ namespace libLSD.Formats
             }
         }
         
+        [Serializable]
         public class VABHeader
         {
             public uint Magic;

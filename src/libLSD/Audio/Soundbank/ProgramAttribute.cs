@@ -1,7 +1,9 @@
+using System;
 using System.IO;
 
 namespace libLSD.Audio.Soundbank
 {
+    [Serializable]
     public struct ProgramAttribute
     {
         public byte ToneCount; // number of ToneAttributes in this program

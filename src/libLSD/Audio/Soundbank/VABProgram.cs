@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace libLSD.Audio.Soundbank
 {
+    [Serializable]
     public class VABProgram
     {
         public ProgramAttribute Attributes;

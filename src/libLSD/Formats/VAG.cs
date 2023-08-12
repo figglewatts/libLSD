@@ -6,9 +6,10 @@ using libLSD.Util;
 
 namespace libLSD.Formats
 {
+    [Serializable]
     public class VAG
     {
-        public short[] SampleData { get; protected set; }
+        public short[] SampleData;
         
         protected VagBlock[] _blocks;
 
