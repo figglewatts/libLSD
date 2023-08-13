@@ -22,10 +22,8 @@ namespace libLSD.Formats
     {
         public VABHeader Header;
         public List<VABProgram> Programs;
-
-        public List<VAG> Samples => _vags.ToList();
-
-        protected readonly VAG[] _vags;
+        public List<VAG> Samples;
+        
         protected readonly int[] _vagOffsets;
         protected readonly ProgramAttribute[] _programTable;
         protected readonly ToneAttribute[] _toneTable;
@@ -56,11 +54,11 @@ namespace libLSD.Formats
                 _vagOffsets[i] = rawOffset;
             }
 
-            _vags = new VAG[Header.VagCount];
+            Samples = new List<VAG>(Header.VagCount);
             for (int i = 0; i < _vagOffsets.Length; i++)
             {
                 vagBr.BaseStream.Seek(_vagOffsets[i], SeekOrigin.Begin);
-                _vags[i] = new VAG(vagBr);
+                Samples[i] = new VAG(vagBr);
             }
             
             setupData();
@@ -87,7 +85,7 @@ namespace libLSD.Formats
                     vabProgram.Tones.Add(new VABTone
                     {
                         Attributes = toneAttributes,
-                        Sample = _vags[toneAttributes.VagId - 1]
+                        Sample = Samples[toneAttributes.VagId - 1]
                     });
                 }
                 Programs.Add(vabProgram);
