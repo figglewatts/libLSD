@@ -58,7 +58,7 @@ namespace libLSD.Formats
             for (int i = 0; i < _vagOffsets.Length; i++)
             {
                 vagBr.BaseStream.Seek(_vagOffsets[i], SeekOrigin.Begin);
-                Samples[i] = new VAG(vagBr);
+                Samples.Add(new VAG(vagBr));
             }
             
             setupData();
