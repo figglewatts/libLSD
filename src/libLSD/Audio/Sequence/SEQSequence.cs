@@ -25,21 +25,24 @@ namespace libLSD.Audio.Sequence
         public double GetLengthSeconds(double secondsPerTick)
         {
             double length = 0;
-            secondsPerTick = microSecondsPerQuarterNoteToSecondsPerBeat(500000) * Resolution;
-            
+            secondsPerTick = microSecondsPerQuarterNoteToSecondsPerBeat(500000) / Resolution;
+
+            int lastTick = 0;
             foreach (var kvp in _sequenceData)
             {
-                int deltaTime = kvp.Key;
+                int tickNum = kvp.Key;
                 var events = kvp.Value;
 
                 bool hasTempo = events.Count(e => e is SetTempoEvent) > 0;
                 if (hasTempo && events.Last(e => e is SetTempoEvent) is SetTempoEvent tempoEvent)
                 {
-                    secondsPerTick = tempoEvent.SecondsPerBeat * Resolution;
+                    secondsPerTick = tempoEvent.SecondsPerBeat / Resolution;
                 }
 
-                length += secondsPerTick * deltaTime;
+                length += secondsPerTick * (tickNum - lastTick);
+                lastTick = tickNum;
             }
+            if (length == 0) length = 0.1;
             return length;
         }
 
