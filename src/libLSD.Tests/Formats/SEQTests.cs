@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using libLSD.Audio.Sequence;
+using libLSD.Audio.Soundbank;
 using libLSD.Formats;
 using NUnit.Framework;
 
@@ -30,5 +31,22 @@ public class SEQTests
                 Console.WriteLine(sequence.GetLengthSeconds(0));
             }
         }
+    }
+    
+    [TestCase]
+    public void TestSEQWithFont()
+    {
+        string data = "BGB.SEQ";
+        using BinaryReader seqBr = new BinaryReader(TestUtil.OpenTestData(data));
+        SEQ seq = new SEQ(seqBr);
+        SEQSequence sequence = new SEQSequence(seq);
+
+        string font = "AMBIENT";
+        using BinaryReader vhBr = new BinaryReader(TestUtil.OpenTestData($"{font}.VH"));
+        using BinaryReader vbBr = new BinaryReader(TestUtil.OpenTestData($"{font}.VB"));
+        VAB vab = new VAB(vhBr, vbBr);
+        VABSoundbank soundbank = new VABSoundbank(vab);
+        
+        Console.WriteLine("breakpoint");
     }
 }

@@ -77,8 +77,17 @@ namespace libLSD.Audio.Sequence
             }
 
             int tickNumber = 0;
+            
+            // add tempo event at first tick to represent file tempo
+            addToResult(0, new SetTempoEvent
+            {
+                SecondsPerBeat = microSecondsPerQuarterNoteToSecondsPerBeat(Seq.Header.Tempo)
+            });
+            
             foreach (BaseMidiEventData seqEvent in seq.TrackData)
             {
+                tickNumber += seqEvent.Event.DeltaTime;
+                
                 BaseSequenceEvent toAdd;
                 switch (seqEvent)
                 {
@@ -124,19 +133,8 @@ namespace libLSD.Audio.Sequence
                         break;
                 }
 
-                // add tempo event at first tick to represent file tempo
-                if (tickNumber == 0)
-                {
-                    addToResult(tickNumber, new SetTempoEvent
-                    {
-                        SecondsPerBeat = microSecondsPerQuarterNoteToSecondsPerBeat(Seq.Header.Tempo)
-                    });
-                }
-                
                 if (toAdd == null) continue;
                 addToResult(tickNumber, toAdd);
-                
-                tickNumber += seqEvent.Event.DeltaTime;
             }
 
             return result;

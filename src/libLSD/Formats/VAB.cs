@@ -88,9 +88,10 @@ namespace libLSD.Formats
                         Sample = Samples[toneAttributes.VagId - 1]
                     });
                 }
+                
                 Programs.Add(vabProgram);
 
-                toneBase += MAX_TONES;
+                if (program.ToneCount != 0) toneBase += MAX_TONES;
             }
         }
         
