@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using libLSD.Interfaces;
+using libLSD.Util;
 
 namespace libLSD.Formats
 {
@@ -14,6 +16,7 @@ namespace libLSD.Formats
     /// - Chunk tile layout
     /// - Chunk interactive objects in an MML file (this contains MOM files).
     /// </summary>
+    [Serializable]
     public struct LBD : IWriteable
     {
         /// <summary>
@@ -24,7 +27,7 @@ namespace libLSD.Formats
         /// <summary>
         /// The tile layout of this chunk.
         /// </summary>
-        public readonly LBDTile[,] TileLayout;
+        public readonly Serializable2DArray<LBDTile> TileLayout;
 
         /// <summary>
         /// The array of extra tiles.
@@ -49,7 +52,7 @@ namespace libLSD.Formats
         {
             Header = new LBDHeader(br);
 
-            TileLayout = new LBDTile[Header.TileWidth, Header.TileHeight];
+            TileLayout = new Serializable2DArray<LBDTile>(Header.TileWidth, Header.TileHeight);
             for (int y = 0; y < Header.TileHeight; y++)
             {
                 for (int x = 0; x < Header.TileWidth; x++)
@@ -109,6 +112,7 @@ namespace libLSD.Formats
     /// <summary>
     /// The header of an LBD file, containing various pieces of metadata about the file.
     /// </summary>
+    [Serializable]
     public struct LBDHeader : IWriteable
     {
         /// <summary>
@@ -222,6 +226,7 @@ namespace libLSD.Formats
     /// A single tile in an LBD chunk. References a TMD object in the tiles TMD and has a bunch of metadata describing
     /// rotation, height, and extra tiles.
     /// </summary>
+    [Serializable]
     public struct LBDTile : IWriteable
     {
         /// <summary>
@@ -243,13 +248,17 @@ namespace libLSD.Formats
         /// <summary>
         /// An unknown flag that is either 0 or 1.
         /// </summary>
-        public readonly byte UnknownFlag;
+        public readonly bool SolidTile;
 
         /// <summary>
         /// The object number of this tile in the tiles TMD file.
         /// </summary>
         public readonly ushort TileType;
 
+        public int Footstep => FootstepSoundAndCollision & 0x7F;
+        
+        public bool Collision => (FootstepSoundAndCollision >> 7) > 0;
+        
         /// <summary>
         /// Unknown value hypothesized to be to do with footstep sound and collisions. Potentially a bitfield.
         /// </summary>
@@ -286,7 +295,7 @@ namespace libLSD.Formats
         public LBDTile(BinaryReader br, uint addressOffset, int extraTilesTop)
         {
             DrawTile = br.ReadByte() == 1;
-            UnknownFlag = br.ReadByte();
+            SolidTile = br.ReadByte() == 1;
             TileType = br.ReadUInt16();
             FootstepSoundAndCollision = br.ReadByte();
             TileDirection = (TileDirections)br.ReadByte();
@@ -310,7 +319,7 @@ namespace libLSD.Formats
         public void Write(BinaryWriter bw)
         {
             bw.Write(DrawTile);
-            bw.Write(UnknownFlag);
+            bw.Write(SolidTile);
             bw.Write(TileType);
             bw.Write(FootstepSoundAndCollision);
             bw.Write((byte)TileDirection);
